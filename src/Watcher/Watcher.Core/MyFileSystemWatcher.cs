@@ -9,6 +9,7 @@ using System.Threading;
 using Ylvis.DataManipulation.Compression;
 using Ylvis.DataManipulation.Compression.Compressors;
 using Ylvis.Extensions;
+using Ylvis.Extensions.Helpers;
 
 namespace Watcher.WindowsService
 {
@@ -16,7 +17,8 @@ namespace Watcher.WindowsService
     {
         static ConcurrentDictionary<string, FileSystemEventArgs> fileList = new ConcurrentDictionary<string, FileSystemEventArgs>();
         static BackgroundWorker worker = new BackgroundWorker();
-
+        static Compressor zipCompressor = new Compressor(CompressMethod.Zip);
+        static Compressor sevenZipCompressor = new Compressor(CompressMethod.SevenZip);
 
         public MyFileSystemWatcher(string inDirectoryPath)
             : base(inDirectoryPath)
@@ -37,9 +39,9 @@ namespace Watcher.WindowsService
             //NotifyFilter = NotifyFilters.FileName | NotifyFilters.Size; // The default also has NotifyFilters.LastWrite
             NotifyFilter = NotifyFilters.FileName | NotifyFilters.Size | NotifyFilters.LastWrite;
             EnableRaisingEvents = true;
-            //Created += Watcher_Created;
             Changed += Watcher_Changed;
             Deleted += Watcher_Deleted;
+            //Created += Watcher_Created;
             //Renamed += Watcher_Renamed;
 
             var files = Directory.GetFiles(inDirectoryPath);
@@ -50,8 +52,6 @@ namespace Watcher.WindowsService
                 fileList[fileName] = arg;
             }
 
-            
-            
             BackgroundWorkerRun();
         }
 
@@ -59,22 +59,22 @@ namespace Watcher.WindowsService
         {
             worker.DoWork += worker_DoWork;
             worker.ProgressChanged += worker_ProgressChanged;
-            worker.RunWorkerCompleted += worker_RunWorkerCompleted;
             //This must be set to true in order to be able to cancel the worker
             worker.WorkerSupportsCancellation = true;
             //This must be set to true in order to report progress
             worker.WorkerReportsProgress = true;
             worker.RunWorkerAsync();
+            //worker.RunWorkerCompleted += worker_RunWorkerCompleted;
         }
 
-        static void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            SimpleLog.Write("Job completed");
-        }
+        //static void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        //{
+        //    SimpleLog.Write("Job completed");
+        //}
 
         static void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            SimpleLog.Write(e.UserState.ToString());
+            SimpleLog.WriteLine(e.UserState.ToString());
         }
 
         static void worker_DoWork(object sender, DoWorkEventArgs e)
@@ -89,7 +89,7 @@ namespace Watcher.WindowsService
             int i = 1;
             foreach (FileSystemEventArgs s in copy)
             {
-                if (IsFileLocked(s.FullPath))
+                if (FileHlp.IsFileLocked(s.FullPath))
                     continue;
 
                 FileSystemEventArgs x = null;
@@ -108,6 +108,12 @@ namespace Watcher.WindowsService
                 
             }
 
+            if (copy.Any())
+            {
+                SimpleLog.WriteLine("7zip total time : " + sevenZipCompressor.GetTotalCompressorTime());
+                SimpleLog.WriteLine("Zip total time : " + zipCompressor.GetTotalCompressorTime());
+            }
+
             Thread.Sleep(5 * 1000);
             worker_DoWork(null, e);
         }
@@ -120,10 +126,9 @@ namespace Watcher.WindowsService
             string targetPath = inArgs.FullPath;
             string outputPath = @"D:\compressed\" + name;
 
-            var zipCompressor = new Compressor(outputPath + ".zip", CompressMethod.Zip);
-            var sevenZipCompressor = new Compressor(outputPath + ".7z", CompressMethod.SevenZip);
-            SimpleLog.WriteLine(zipCompressor.CompressFiles(targetPath));
-            SimpleLog.WriteLine(sevenZipCompressor.CompressFiles(targetPath));
+            
+            SimpleLog.WriteLine(zipCompressor.CompressFiles(outputPath + ".zip", targetPath));
+            SimpleLog.WriteLine(sevenZipCompressor.CompressFiles(outputPath + ".7z", targetPath));
         }
 
         public void Watcher_Created(object source, FileSystemEventArgs inArgs)
@@ -153,30 +158,5 @@ namespace Watcher.WindowsService
         //    fileList.Remove(inArgs.OldFullPath);
         //    fileList.Add(inArgs.FullPath);
         //}
-
-        public static bool IsFileLocked(string fullPath)
-        {
-            FileInfo fInfo = new FileInfo(fullPath); 
-
-            FileStream stream = null;
-            try
-            {
-                stream = fInfo.Open(FileMode.Open, FileAccess.ReadWrite, FileShare.None);
-            }
-            catch (IOException)
-            {
-                return true;
-            }
-            finally
-            {
-                if (stream != null)
-                    stream.Close();
-            }
-            return false;
-        }
-
-        
-
-        
     }
 }

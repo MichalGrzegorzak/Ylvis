@@ -12,8 +12,11 @@ namespace Ylvis.Extensions
             LogFileName = "Example";
             LogFileExtension = ".log";
         }
+        static SimpleLog()
+        {
+        }
 
-        public StreamWriter Writer { get; set; }
+        protected StreamWriter Writer { get; set; }
 
         public string LogPath { get; set; }
 
@@ -56,7 +59,7 @@ namespace Ylvis.Extensions
         public static void Write(String inLogMessage)
         {
             SimpleLog.Instance.WriteToLog(inLogMessage);
-            Console.WriteLine(inLogMessage);
+            Console.Write(inLogMessage);
         }
     }
 }

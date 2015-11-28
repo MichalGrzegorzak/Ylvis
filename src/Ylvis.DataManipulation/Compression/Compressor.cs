@@ -10,43 +10,43 @@ namespace Ylvis.DataManipulation.Compression
 {
     public class Compressor
     {
-        private string outputPath = null;
+        //private string outputPath = null;
         private int compressorLevel = 9;
         private CompressMethod method = CompressMethod.Zip;
         private TimeSpan totalTimeSpan = new TimeSpan();
 
-        public Compressor(string outputPath, CompressMethod method = CompressMethod.Zip, int level = 9)
+        public Compressor(CompressMethod method = CompressMethod.Zip, int level = 9)
         {
             this.method = method;
             this.compressorLevel = level;
-            this.outputPath = AddExtensionIfMissing(outputPath, method);
         }
 
         //TODO
         //add CompressDirectory
 
-        public string CompressFiles(params string[] targetFiles)
+        public string CompressFiles(string outputPath, params string[] targetFiles)
         {
             Stopwatch st = new Stopwatch();
             st.Start();
 
-            ChooseCompression(targetFiles);
+            ChooseCompression(outputPath, targetFiles);
 
             st.Stop();
-            totalTimeSpan.Add(st.Elapsed);
+            totalTimeSpan = totalTimeSpan.Add(st.Elapsed);
 
             return "Finished " + method + " in " + st.Elapsed.ElapsedToString();
-            //var seconds = st.Elapsed.TotalSeconds;
-            //if (seconds > 100)
-            //    return header + st.Elapsed.TotalMinutes.Round() + " min";
-            //else if(seconds > 10)
-            //    return header + st.Elapsed.TotalSeconds.Round() + " sec";
-            //else
-            //    return header + st.Elapsed.TotalMilliseconds.Round() + " milisec";
         }
 
-        private void ChooseCompression(params string[] targetFiles)
+        public string GetTotalCompressorTime()
         {
+            return totalTimeSpan.ElapsedToString();
+        }
+
+        private void ChooseCompression(string outputPath, params string[] targetFiles)
+        {
+            //if ext. missing will add it here
+            outputPath = AddExtensionIfMissing(outputPath, method);
+
             switch (method)
             {
                 case CompressMethod.SevenZip:
