@@ -1,0 +1,104 @@
+<div class="quotations">
+
+	<h2 class="title"><span class="beige">Notowania ci¹g³e - GPW</span></h2>
+
+<table id="tab1097" class="sortable table-blue">
+	
+	<thead><tr>
+		<th class="a1">Nazwa</th>
+		<th>Skrót</th>
+		<th>Czas</th>
+
+		<th>Ost.</th>
+		<th>Tko</th>
+		<th>Zm. %</th>
+		<th>Otw.</th>
+		<th>Maks.</th>
+		<th>Min.</th>
+
+		<th>Odniesienie</th>
+		<th>Wolumen</th>
+		<th>Obroty</th>
+	</tr></thead>
+	<tbody>abc
+	
+	
+	
+	<tr class="a" id="PLNFI0400015">
+		<td class="nazwa"><a href="javascript:void(0);" onClick="showmenu(event, '1097', 'PLNFI0400015', '1666', true, true, true, false, false);" onMouseout="delayhidemenu();">04PRO</a></td>
+
+		<td class="tls">04N       </td>
+		<td class="czas">16:20<span style="display: none">16:20:02</span></td>
+		<td class="c">1,96</td>
+		<td class="tko">--</td>
+		<td class="zmiana ix-dn">-0,51</td>
+		<td class="o">1,93</td>
+
+		<td class="h">1,96</td>
+		<td class="l">1,92</td>
+		<td class="odniesienie">1,97</td>
+		<td class="v">910</td>
+		<td class="obrot">3 526</td>
+	</tr>
+
+	
+	
+	<tr class="" id="PLNFI0500012">
+		<td class="nazwa"><a href="javascript:void(0);" onClick="showmenu(event, '1097', 'PLNFI0500012', '1667', true, true, true, false, false);" onMouseout="delayhidemenu();">05VICT</a></td>
+		<td class="tls">05N       </td>
+		<td class="czas">16:21<span style="display: none">16:21:14</span></td>
+		<td class="c">1,06</td>
+		<td class="tko">--</td>
+
+		<td class="zmiana ix-dn">-1,85</td>
+		<td class="o">1,08</td>
+		<td class="h">1,15</td>
+		<td class="l">1,05</td>
+		<td class="odniesienie">1,08</td>
+		<td class="v">189 891</td>
+
+		<td class="obrot">413 534</td>
+	</tr>
+	
+	
+	<tr class="a" id="PLNFI0600010">
+		<td class="nazwa"><a href="javascript:void(0);" onClick="showmenu(event, '1097', 'PLNFI0600010', '1662', true, true, true, false, false);" onMouseout="delayhidemenu();">06MAGNA</a></td>
+		<td class="tls">06N       </td>
+		<td class="czas">16:20<span style="display: none">16:20:48</span></td>
+
+		<td class="c">1,43</td>
+		<td class="tko">--</td>
+		<td class="zmiana ix-up">+1,42</td>
+		<td class="o">1,41</td>
+		<td class="h">1,50</td>
+		<td class="l">1,40</td>
+
+		<td class="odniesienie">1,41</td>
+		<td class="v">348 374</td>
+		<td class="obrot">1 002 557</td>
+	</tr>
+	
+	
+	<tr class="a l" id="PLZYWIC00016">
+		<td class="nazwa"><a href="javascript:void(0);" onClick="showmenu(event, '1097', 'PLZYWIC00016', '1274', true, true, true, false, false);" onMouseout="delayhidemenu();">ZYWIEC</a></td>
+		<td class="tls">ZWC       </td>
+		<td class="czas">16:21<span style="display: none">16:21:45</span></td>
+		<td class="c">540,00</td>
+		<td class="tko">--</td>
+
+		<td class="zmiana ix-up">+5,37</td>
+		<td class="o">519,50</td>
+		<td class="h">540,00</td>
+		<td class="l">519,50</td>
+		<td class="odniesienie">512,50</td>
+		<td class="v">244</td>
+
+		<td class="obrot">263 275</td>
+	</tr>
+	
+	
+	
+	</tbody>
+</table>abc
+
+</div>

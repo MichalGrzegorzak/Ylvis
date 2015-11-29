@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Stock.Core" namespace="Stock.Core.Domain">
+    <class lazy="false" name="TransactionGroup" table="TransactionGroup" >
+      <id name="ID" type="System.Int32" column="Id">
+          <generator class="identity"/>
+      </id>
+
+      <bag name="Transactions" table="Transactions" inverse="true" lazy="false">
+        <key column="GroupId"/>
+        <one-to-many class="Transaction"/>
+      </bag>
+
+      <property name="Income" column="Income" type="System.Decimal" not-null="false"  />
+      <property name="Closed" column="Closed" type="System.Boolean" not-null="true" />
+
+      <property name="CompanyId" column="CompanyId" type="System.String" not-null="true" length="3" />
+      <many-to-one name="Company" column="CompanyId" class="Company" insert="false" update="false"/>
+      
+ </class>
+</hibernate-mapping>
+

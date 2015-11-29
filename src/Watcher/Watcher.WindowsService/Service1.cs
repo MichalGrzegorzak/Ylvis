@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.ServiceProcess;
-using Ylvis.Extensions;
+using Ylvis.Utils.Helpers;
 
 namespace Watcher.WindowsService
 {

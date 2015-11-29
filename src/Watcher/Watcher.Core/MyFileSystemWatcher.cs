@@ -8,8 +8,7 @@ using System.Reflection;
 using System.Threading;
 using Ylvis.DataManipulation.Compression;
 using Ylvis.DataManipulation.Compression.Compressors;
-using Ylvis.Extensions;
-using Ylvis.Extensions.Helpers;
+using Ylvis.Utils.Helpers;
 
 namespace Watcher.WindowsService
 {
@@ -110,8 +109,8 @@ namespace Watcher.WindowsService
 
             if (copy.Any())
             {
-                SimpleLog.WriteLine("7zip total time : " + sevenZipCompressor.GetTotalCompressorTime());
-                SimpleLog.WriteLine("Zip total time : " + zipCompressor.GetTotalCompressorTime());
+                SimpleLog.WriteLine("7-zip total time : " + sevenZipCompressor.GetTotalCompressorTime());
+                //SimpleLog.WriteLine("Zip total time : " + zipCompressor.GetTotalCompressorTime());
             }
 
             Thread.Sleep(5 * 1000);
@@ -125,9 +124,8 @@ namespace Watcher.WindowsService
 
             string targetPath = inArgs.FullPath;
             string outputPath = @"D:\compressed\" + name;
-
             
-            SimpleLog.WriteLine(zipCompressor.CompressFiles(outputPath + ".zip", targetPath));
+            //SimpleLog.WriteLine(zipCompressor.CompressFiles(outputPath + ".zip", targetPath));
             SimpleLog.WriteLine(sevenZipCompressor.CompressFiles(outputPath + ".7z", targetPath));
         }
 

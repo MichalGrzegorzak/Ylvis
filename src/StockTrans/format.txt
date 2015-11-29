@@ -1,0 +1,14 @@
+Udane logowanie : 27-01-2009, 21:21
+Nieudane logowanie : 24-01-2009, 13:22 MICHA£ GRZEGORZAK
+PROD. MAKL 00566752     Szczegó³y transakcji 
+Data transakcji26-01-2009
+Data sesji zlecenia26-01-2009
+Godzina transakcji10:13
+Numer zlecenia18740107
+Nazwa papieruKROSNO
+Kod papieruPLKROSN00015
+Rodzaj transakcjiSPRZEDA¯
+Liczba3 929
+Kurs transakcji0,5400 PLN
+Prowizja8,27 PLN
+Wartoœæ transakcji2 121,66 PLN

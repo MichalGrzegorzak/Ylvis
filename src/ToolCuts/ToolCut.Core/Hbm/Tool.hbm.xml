@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="ToolCut.Core" namespace="ToolCut.Core.Domain">
+  <class lazy="false" name="Tool" table="Tool" >
+      <id name="ID" type="System.Guid" column="Id">
+          <generator class="guid"/>
+      </id>
+
+      <property name="Name" column="Name" type="System.String" not-null="true" length="50"/>
+      <property name="Diameter" column="Diameter" type="System.Decimal" />
+      <property name="Sfm" column="Sfm" type="System.Int32" />
+
+      <property name="Milling2" column="Milling2" type="System.Decimal" />
+      <property name="Milling4" column="Milling4" type="System.Decimal" />
+      <property name="Milling6" column="Milling6" type="System.Decimal" />
+      <property name="CrbDrill" column="CrbDrill" type="System.Decimal" />
+      <property name="HssDrill" column="HssDrill" type="System.Decimal" />
+      <property name="Reamer" column="Reamer" type="System.Decimal" />
+
+      <many-to-one name="Rgh" column="rgh_id" cascade="save-update" />
+      <many-to-one name="SemiFin" column="semiFin_id" cascade="save-update" />
+      <many-to-one name="Fin" column="fin_id" cascade="save-update" />
+      <many-to-one name="FineFin" column="fineFin_id" cascade="save-update" />
+
+      <property name="Flut" column="Flut" type="System.Int32" />
+  </class>
+</hibernate-mapping>

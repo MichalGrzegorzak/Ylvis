@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a837625f-88fc-4d81-bd7b-24b4365de8f9" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8731/Stock.Service/TestService1/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="9a922465-a228-4a05-bfda-0ddb77103334" SourceId="1" SourceUrl="http://localhost:8731/Stock.Service/TestService1/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="ba5f0447-a25b-496b-83b9-b38c0249bf7f" SourceId="1" SourceUrl="http://localhost:8731/Stock.Service/TestService1/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="018a585b-c88f-4939-b926-b600396cddd7" SourceId="1" SourceUrl="http://localhost:8731/Stock.Service/TestService1/mex" />
+    <MetadataFile FileName="Stock.Service.xsd" MetadataType="Schema" ID="61e9e19d-d2fd-45b2-8fba-638717272518" SourceId="1" SourceUrl="http://localhost:8731/Stock.Service/TestService1/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

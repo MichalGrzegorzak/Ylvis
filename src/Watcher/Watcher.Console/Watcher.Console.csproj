@@ -52,9 +52,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Ylvis.Extensions\Ylvis.Extensions.csproj">
-      <Project>{224b2a16-0109-43bc-a2ce-16ecf5dba6e3}</Project>
-      <Name>Ylvis.Extensions</Name>
+    <ProjectReference Include="..\..\Ylvis.Utils\Ylvis.Utils.csproj">
+      <Project>{224B2A16-0109-43BC-A2CE-16ECF5DBA6E3}</Project>
+      <Name>Ylvis.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\Watcher.Core\Watcher.Core.csproj">
       <Project>{cc499cc5-ff09-45d0-876f-e6a5dc4edda7}</Project>

@@ -1,5 +1,5 @@
 ﻿using Watcher.WindowsService;
-using Ylvis.Extensions;
+using Ylvis.Utils.Helpers;
 
 namespace Watcher.Console
 {

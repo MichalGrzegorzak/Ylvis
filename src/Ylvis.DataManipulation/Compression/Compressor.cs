@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 using SevenZip;
 using Ylvis.DataManipulation.Compression.Compressors;
-using Ylvis.Extensions.Extensions;
+using Ylvis.Utils.Extensions;
 
 namespace Ylvis.DataManipulation.Compression
 {

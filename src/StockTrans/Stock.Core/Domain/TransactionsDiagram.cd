@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Stock.Core.Domain.Company">
+    <Position X="6" Y="1" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAQAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\Company.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Stock.Core.Domain.TransactionGroup">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>EAGgAAAAGAIAAAIRAEgAIAoEAAgCCIEAQBEABgCAAAI=</HashCode>
+      <FileName>Domain\TransactionGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Stock.Core.Domain.Transaction">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AhIAAGAEAQAAAAAhBAAAAACAAABACIQDQABgAAAACAI=</HashCode>
+      <FileName>Domain\Transaction.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TransactionGroup" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
