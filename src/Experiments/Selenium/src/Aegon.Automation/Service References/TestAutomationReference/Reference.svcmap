@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1216d140-cfa9-40cb-9e35-64c06aee5aa7" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://aegon.possible.com/Wcf/TestAutomation.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="TestAutomation.disco" MetadataType="Disco" ID="028715d2-b2f8-48c6-ab72-9e832ce6ebc3" SourceId="1" SourceUrl="http://aegon.possible.com/Wcf/TestAutomation.svc?disco" />
+    <MetadataFile FileName="TestAutomation.wsdl" MetadataType="Wsdl" ID="85df8de0-b9de-4b3c-81dd-78444c9f6806" SourceId="1" SourceUrl="http://aegon.possible.com/Wcf/TestAutomation.svc?wsdl" />
+    <MetadataFile FileName="TestAutomation.xsd" MetadataType="Schema" ID="e53885b7-7167-4520-9df0-bd0b6a739fc3" SourceId="1" SourceUrl="http://aegon.possible.com/Wcf/TestAutomation.svc?xsd=xsd0" />
+    <MetadataFile FileName="TestAutomation1.xsd" MetadataType="Schema" ID="5630d694-fc1e-4f3e-9645-cd735084f67b" SourceId="1" SourceUrl="http://aegon.possible.com/Wcf/TestAutomation.svc?xsd=xsd1" />
+    <MetadataFile FileName="TestAutomation2.xsd" MetadataType="Schema" ID="65281079-cf4d-4966-86b6-f947908fcd1c" SourceId="1" SourceUrl="http://aegon.possible.com/Wcf/TestAutomation.svc?xsd=xsd2" />
+    <MetadataFile FileName="TestAutomation3.xsd" MetadataType="Schema" ID="adabfbe0-3e96-48a7-9ed3-55703e1519ba" SourceId="1" SourceUrl="http://aegon.possible.com/Wcf/TestAutomation.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

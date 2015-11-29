@@ -1,0 +1,541 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="livetemplates.csharp.usevar">False</setting>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Default">
+      <Item value="Framework" priority="19" />
+      <Item value="ApplicationIdentity" priority="0" />
+      <Item value="null" priority="14" />
+      <Item value="private" priority="11" />
+      <Item value="void" priority="17" />
+      <Item value="else" priority="6" />
+      <Item value="public" priority="34" />
+      <Item value="event" priority="2" />
+      <Item value="EventArgs" priority="0" />
+      <Item value="Delegate" priority="0" />
+      <Item value="Action" priority="0" />
+      <Item value="if" priority="30" />
+      <Item value="HavePasswords" priority="1" />
+      <Item value="go" priority="0" />
+      <Item value="new" priority="23" />
+      <Item value="Credentials" priority="3" />
+      <Item value="Ie" priority="4" />
+      <Item value="try" priority="2" />
+      <Item value="override" priority="2" />
+      <Item value="Login" priority="1" />
+      <Item value="Logout" priority="0" />
+      <Item value="int" priority="21" />
+      <Item value="Sleep" priority="0" />
+      <Item value="acc" priority="8" />
+      <Item value="AccountMonitor" priority="0" />
+      <Item value="monitor" priority="0" />
+      <Item value="accountToSync" priority="0" />
+      <Item value="throw" priority="2" />
+      <Item value="Exception" priority="2" />
+      <Item value="account" priority="1" />
+      <Item value="tr" priority="0" />
+      <Item value="mailTo" priority="0" />
+      <Item value="GmailSender" priority="2" />
+      <Item value="Base64FormattingOptions" priority="1" />
+      <Item value="base" priority="1" />
+      <Item value="From" priority="0" />
+      <Item value="To" priority="0" />
+      <Item value="CreateMessage" priority="0" />
+      <Item value="Send" priority="0" />
+      <Item value="reader" priority="0" />
+      <Item value="GmailReader" priority="0" />
+      <Item value="GmailWatcher" priority="2" />
+      <Item value="sender" priority="1" />
+      <Item value="watcher" priority="1" />
+      <Item value="string" priority="35" />
+      <Item value="client" priority="2" />
+      <Item value="true" priority="10" />
+      <Item value="Assert" priority="1" />
+      <Item value="s" priority="2" />
+      <Item value="Signal" priority="7" />
+      <Item value="return" priority="12" />
+      <Item value="mails" priority="0" />
+      <Item value="result" priority="6" />
+      <Item value="mailBody" priority="2" />
+      <Item value="Extensions" priority="0" />
+      <Item value="this" priority="5" />
+      <Item value="input" priority="3" />
+      <Item value="begin" priority="0" />
+      <Item value="idx" priority="2" />
+      <Item value="params" priority="0" />
+      <Item value="foreach" priority="3" />
+      <Item value="IndexOutOfRangeException" priority="0" />
+      <Item value="edx" priority="1" />
+      <Item value="break" priority="1" />
+      <Item value="Position" priority="16" />
+      <Item value="direction" priority="9" />
+      <Item value="switch" priority="0" />
+      <Item value="res" priority="1" />
+      <Item value="AccountId" priority="0" />
+      <Item value="Pass" priority="0" />
+      <Item value="login" priority="0" />
+      <Item value="pass" priority="0" />
+      <Item value="syg" priority="0" />
+      <Item value="mainPos" priority="3" />
+      <Item value="lastPosition" priority="2" />
+      <Item value="log" priority="3" />
+      <Item value="static" priority="8" />
+      <Item value="last" priority="3" />
+      <Item value="m" priority="1" />
+      <Item value="GetDetails" priority="1" />
+      <Item value="toPosition" priority="0" />
+      <Item value="TimeSpan" priority="1" />
+      <Item value="bool" priority="9" />
+      <Item value="FirstSignal" priority="0" />
+      <Item value="false" priority="10" />
+      <Item value="virtual" priority="1" />
+      <Item value="GetCurrentPosition" priority="0" />
+      <Item value="propg" priority="0" />
+      <Item value="protected" priority="2" />
+      <Item value="LastPosition" priority="0" />
+      <Item value="Gmail" priority="0" />
+      <Item value="txbSignal" priority="0" />
+      <Item value="message" priority="5" />
+      <Item value="direct" priority="0" />
+      <Item value="size" priority="1" />
+      <Item value="Form" priority="1" />
+      <Item value="frmAppender" priority="1" />
+      <Item value="rtbLog" priority="1" />
+      <Item value="LogManager" priority="4" />
+      <Item value="typeof" priority="2" />
+      <Item value="delegate" priority="2" />
+      <Item value="label1" priority="2" />
+      <Item value="logControl1" priority="0" />
+      <Item value="Trace" priority="1" />
+      <Item value="readonly" priority="1" />
+      <Item value="ILoginPassForm" priority="0" />
+      <Item value="Tracer" priority="0" />
+      <Item value="value" priority="1" />
+      <Item value="newPosition" priority="1" />
+      <Item value="pos" priority="8" />
+      <Item value="volume" priority="0" />
+      <Item value="current" priority="2" />
+      <Item value="ConfigFile" priority="0" />
+      <Item value="ILog" priority="0" />
+      <Item value="eventArgs" priority="3" />
+      <Item value="OnFieldAccessAspect" priority="0" />
+      <Item value="Serializable" priority="0" />
+      <Item value="e" priority="0" />
+      <Item value="enum" priority="1" />
+      <Item value="Direction" priority="0" />
+      <Item value="DateTime" priority="2" />
+      <Item value="ConcurrencyMode" priority="2" />
+      <Item value="ProtectionLevel" priority="0" />
+      <Item value="host" priority="2" />
+      <Item value="class" priority="0" />
+      <Item value="List" priority="0" />
+      <Item value="Account" priority="1" />
+      <Item value="IQuestion" priority="0" />
+      <Item value="Form1" priority="1" />
+      <Item value="decision" priority="0" />
+      <Item value="ThreadStaticAttribute" priority="0" />
+      <Item value="Thread" priority="2" />
+      <Item value="ThreadStart" priority="0" />
+      <Item value="CancelLastSignal" priority="0" />
+      <Item value="LastSignalCancelled" priority="0" />
+      <Item value="T" priority="1" />
+      <Item value="where" priority="0" />
+      <Item value="item" priority="0" />
+      <Item value="forma" priority="0" />
+      <Item value="form" priority="0" />
+      <Item value="AlarmServer" priority="0" />
+      <Item value="server" priority="0" />
+      <Item value="text" priority="0" />
+      <Item value="t" priority="1" />
+      <Item value="MethodInvoker" priority="0" />
+      <Item value="UpdateLabel" priority="0" />
+      <Item value="Id" priority="0" />
+      <Item value="id" priority="2" />
+      <Item value="IList" priority="0" />
+      <Item value="Accounts" priority="0" />
+      <Item value="AccountUserCtrl" priority="1" />
+      <Item value="ctrl" priority="3" />
+      <Item value="panel1" priority="0" />
+      <Item value="c" priority="1" />
+      <Item value="Core" priority="0" />
+      <Item value="position" priority="1" />
+      <Item value="UpdateAccount" priority="0" />
+      <Item value="accounts1" priority="0" />
+      <Item value="accounts" priority="1" />
+      <Item value="Cor" priority="1" />
+      <Item value="_clients" priority="5" />
+      <Item value="using" priority="1" />
+      <Item value="BossaSpider" priority="1" />
+      <Item value="spider" priority="1" />
+      <Item value="a" priority="1" />
+      <Item value="currect" priority="0" />
+      <Item value="p" priority="0" />
+      <Item value="LastPos" priority="0" />
+      <Item value="ApartmentState" priority="0" />
+      <Item value="cred" priority="0" />
+      <Item value="continue" priority="0" />
+      <Item value="EnableOrdering" priority="0" />
+      <Item value="dir" priority="0" />
+      <Item value="_timer" priority="2" />
+      <Item value="Monitor" priority="2" />
+      <Item value="object" priority="1" />
+      <Item value="_decisionLock" priority="1" />
+      <Item value="FrameNotFoundException" priority="0" />
+      <Item value="posOnMain" priority="0" />
+      <Item value="Size" priority="0" />
+      <Item value="System" priority="0" />
+      <Item value="Windows" priority="0" />
+      <Item value="Threading" priority="0" />
+      <Item value="Windows.Forms" priority="0" />
+      <Item value="InvokeRequired" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@Core.Framework">
+      <Item value="Inst" priority="12" />
+      <Item value="CallTrace" priority="9" />
+      <Item value="Trace" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Core.Framework">
+      <Item value="DecisionMade" priority="0" />
+      <Item value="MainAccount" priority="0" />
+      <Item value="TestAccount" priority="0" />
+      <Item value="GetAccountSettings" priority="0" />
+      <Item value="HavePasswords" priority="0" />
+      <Item value="DefaultConfiguration" priority="1" />
+      <Item value="Monitor" priority="0" />
+      <Item value="AddAccountToSync" priority="0" />
+      <Item value="MailSignal" priority="1" />
+      <Item value="MailFrom" priority="0" />
+      <Item value="EnableOrdering" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Action">
+      <Item value="Invoke" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.List`1">
+      <Item value="Add" priority="1" />
+      <Item value="Count" priority="1" />
+      <Item value="Remove" priority="0" />
+      <Item value="Last" priority="0" />
+      <Item value="ForEach" priority="1" />
+      <Item value="Find" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Core.Accounts.AccountBase">
+      <Item value="Position" priority="4" />
+      <Item value="Logout" priority="4" />
+      <Item value="Credentials" priority="1" />
+      <Item value="GetCurrentPosition" priority="5" />
+      <Item value="Login" priority="2" />
+      <Item value="ChangeAccount" priority="0" />
+      <Item value="TestOnly" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:WatiN.Core.IE">
+      <Item value="GoToNoWait" priority="1" />
+      <Item value="Html" priority="0" />
+      <Item value="WaitForComplete" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:WatiN.Core.TableCollection">
+      <Item value="Count" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:WatTest.Controls.IAccountUserCtrl">
+      <Item value="RefreshPosition" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.String">
+      <Item value="StartsWith" priority="0" />
+      <Item value="Length" priority="1" />
+      <Item value="IndexOf" priority="3" />
+      <Item value="Substring" priority="4" />
+      <Item value="Contains" priority="0" />
+      <Item value="Remove" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:WatiN.Core.TableRow">
+      <Item value="TableCells" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:WatiN.Core.TableCellCollection">
+      <Item value="Count" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Net.Mail.MailMessage">
+      <Item value="To" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Core.Gmail.GmailSender">
+      <Item value="SendTestEmail" priority="0" />
+      <Item value="SendTest4K" priority="1" />
+      <Item value="SendTest3Sand1K" priority="0" />
+      <Item value="SendTest3Kand1K" priority="0" />
+      <Item value="SendTest4S" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Core.Watcher.GmailWatcher">
+      <Item value="GetSignal" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Net.Mail.SmtpClient">
+      <Item value="EnableSsl" priority="0" />
+      <Item value="DeliveryMethod" priority="0" />
+      <Item value="Timeout" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@NUnit.Framework.Assert">
+      <Item value="IsTrue" priority="1" />
+      <Item value="IsNull" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@Core.Model.Signal">
+      <Item value="Zero" priority="0" />
+      <Item value="Long" priority="0" />
+      <Item value="Short" priority="1" />
+      <Item value="Flat" priority="1" />
+      <Item value="Empty" priority="0" />
+      <Item value="None" priority="2" />
+      <Item value="L" priority="1" />
+      <Item value="S" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:log4net.ILog">
+      <Item value="Fatal" priority="0" />
+      <Item value="Warn" priority="0" />
+      <Item value="Debug" priority="5" />
+      <Item value="Info" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Threading.Thread">
+      <Item value="Sleep" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Commons.Credentials">
+      <Item value="Login" priority="5" />
+      <Item value="Pass" priority="3" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Core.Position">
+      <Item value="Direction" priority="6" />
+      <Item value="Size" priority="8" />
+      <Item value="EntryDate" priority="3" />
+      <Item value="EntryPoint" priority="1" />
+      <Item value="ToString" priority="5" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.DateTime">
+      <Item value="AddMinutes" priority="0" />
+      <Item value="Subtract" priority="0" />
+      <Item value="ToShortTimeString" priority="1" />
+      <Item value="ToLongTimeString" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.TextBox">
+      <Item value="Text" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.String">
+      <Item value="Format" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.Form">
+      <Item value="Show" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.RichTextBox">
+      <Item value="Text" priority="1" />
+      <Item value="Lines" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@log4net.LogManager">
+      <Item value="GetLogger" priority="4" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Core.Appenders.HandleLogMessage">
+      <Item value="Invoke" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@Core.Appenders.GuiAppender">
+      <Item value="ShowLogMessage" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.Label">
+      <Item value="Text" priority="3" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@Core.Appenders.GuiTraceAppender">
+      <Item value="ShowLogMessage" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Core.TraceHandler">
+      <Item value="BeginInvoke" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.DateTime">
+      <Item value="Now" priority="3" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:PostSharp.Laos.MethodExecutionEventArgs">
+      <Item value="GetReadOnlyArgumentArray" priority="0" />
+      <Item value="Exception" priority="1" />
+      <Item value="Instance" priority="0" />
+      <Item value="Method" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Object">
+      <Item value="ToString" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:PostSharp.Laos.FieldAccessEventArgs">
+      <Item value="FieldInfo" priority="0" />
+      <Item value="ExposedFieldValue" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Reflection.FieldInfo">
+      <Item value="Name" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Threading.ThreadExceptionEventArgs">
+      <Item value="Exception" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Exception">
+      <Item value="Message" priority="0" />
+      <Item value="GetType" priority="0" />
+      <Item value="StackTrace" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.ServiceModel.SessionMode">
+      <Item value="Allowed" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.ServiceModel.ConcurrencyMode">
+      <Item value="Reentrant" priority="1" />
+      <Item value="Single" priority="1" />
+      <Item value="Multiple" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:AlarmServerClient">
+      <Item value="GetAccounts" priority="0" />
+      <Item value="CancelLastSignal" priority="0" />
+      <Item value="NewPosition" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:AServiceContract.IAlarmCallback">
+      <Item value="NewSignal" priority="1" />
+      <Item value="UpdateAccount" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:AService.AlarmServer">
+      <Item value="forma" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:AService.Form1">
+      <Item value="InvokeRequired" priority="0" />
+      <Item value="BeginInvoke" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Threading.Thread">
+      <Item value="Start" priority="1" />
+      <Item value="SetApartmentState" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:AServiceClient.Form1">
+      <Item value="DesignMode" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:AServiceContract.Account">
+      <Item value="Id" priority="1" />
+      <Item value="Pos" priority="1" />
+      <Item value="cred" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:AServiceClient.AccountUserCtrl">
+      <Item value="Bind" priority="1" />
+      <Item value="Id" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.FlowLayoutPanel">
+      <Item value="Controls" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.Control+ControlCollection">
+      <Item value="Add" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@AServiceClient.Cor">
+      <Item value="UpdateAccount" priority="0" />
+      <Item value="CallUpdateAccount" priority="0" />
+      <Item value="Client" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:AServiceClient.UpdateAccountHandler">
+      <Item value="Invoke" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:AServiceClient.Controls.Accounts">
+      <Item value="SubscribeToAccountUpdates" priority="0" />
+      <Item value="Initialize" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:AServiceContract.Position">
+      <Item value="Size" priority="1" />
+      <Item value="Direct" priority="3" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:AService.BossaSpider">
+      <Item value="ChangePositionTo" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Threading.ApartmentState">
+      <Item value="STA" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:AServiceContract.Credentials">
+      <Item value="AccountId" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@AService.BossaSpider">
+      <Item value="EnableOrdering" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Timers.Timer">
+      <Item value="Interval" priority="0" />
+      <Item value="Elapsed" priority="0" />
+      <Item value="Start" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Threading.Monitor">
+      <Item value="Enter" priority="0" />
+      <Item value="TryEnter" priority="1" />
+      <Item value="Pulse" priority="0" />
+      <Item value="Wait" priority="2" />
+      <Item value="Exit" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.TimeSpan">
+      <Item value="FromSeconds" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Threading.AutoResetEvent">
+      <Item value="Set" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Reflection.MethodBase">
+      <Item value="Invoke" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:PostSharp.Laos.MethodInvocationEventArgs">
+      <Item value="Instance" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:WatTest.Controls.LogControl">
+      <Item value="Invoke" priority="0" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="7B47327C-1A82-472B-94B5-32D6525F6861/d:Controls/f:AccountUserCtrl.cs" caret="655" fromTop="29" />
+      <File id="5414F257-8D01-47B5-92CB-0BC0F6F54B08/f:Program.cs" caret="445" fromTop="17" />
+      <File id="033635B0-CE06-461F-9DFE-95D02ADDF8E1/f:Credentials.cs" caret="140" fromTop="7" />
+      <File id="7B47327C-1A82-472B-94B5-32D6525F6861/f:App.config" caret="291" fromTop="9" />
+      <File id="5414F257-8D01-47B5-92CB-0BC0F6F54B08/f:App.config" caret="910" fromTop="20" />
+      <File id="7B47327C-1A82-472B-94B5-32D6525F6861/f:Form1.cs" caret="658" fromTop="10" />
+      <File id="5414F257-8D01-47B5-92CB-0BC0F6F54B08/f:AlarmServer.cs" caret="6050" fromTop="13" />
+      <File id="033635B0-CE06-461F-9DFE-95D02ADDF8E1/f:IAlarmServer.cs" caret="379" fromTop="14" />
+      <File id="0175ABED-ABFE-4105-A571-FE06DFEAFA3F/d:UI/f:OkCancelForm.cs" caret="641" fromTop="11" />
+      <File id="7B47327C-1A82-472B-94B5-32D6525F6861/f:AlarmCallback.cs" caret="1051" fromTop="20" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:AccountMonitor/f:MonitorBase.cs" caret="2163" fromTop="17" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:AccountMonitor/f:MonitorGmail.cs" caret="451" fromTop="5" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:Gmail/f:GmailWatcher.cs" caret="830" fromTop="15" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:Gmail/f:GmailReader.cs" caret="1794" fromTop="17" />
+      <File id="C85A0E68-9A96-45D3-9643-6439976E2131/d:Properties/f:AssemblyInfo.cs" caret="0" fromTop="0" />
+      <File id="C85A0E68-9A96-45D3-9643-6439976E2131/d:Properties/f:Settings.cs" caret="0" fromTop="0" />
+      <File id="C85A0E68-9A96-45D3-9643-6439976E2131/f:Log4net.config" caret="91" fromTop="3" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:Model/f:Position.cs" caret="683" fromTop="16" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:Aspects/f:HandleFrameNotFound.cs" caret="291" fromTop="12" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:Gmail/f:GmailSender.cs" caret="1810" fromTop="13" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/f:Framework.cs" caret="637" fromTop="13" />
+      <File id="5414F257-8D01-47B5-92CB-0BC0F6F54B08/f:Form1.cs" caret="1458" fromTop="14" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:Aspects/f:GuiThreadAttribute.cs" caret="369" fromTop="14" />
+      <File id="C85A0E68-9A96-45D3-9643-6439976E2131/d:Controls/f:LogControl.cs" caret="779" fromTop="21" />
+      <File id="5414F257-8D01-47B5-92CB-0BC0F6F54B08/f:BossaSpider.cs" caret="2428" fromTop="10" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:Account/f:BossaAccount.cs" caret="3678" fromTop="13" />
+      <File id="C85A0E68-9A96-45D3-9643-6439976E2131/d:Forms/f:MainForm.cs" caret="3806" fromTop="93" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:Gmail/f:GmailReader.cs" caret="3084" fromTop="9" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:Gmail/f:GmailReader.cs" caret="3305" fromTop="17" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:Gmail/f:GmailReader.cs" caret="348" fromTop="6" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:Gmail/f:GmailReader.cs" caret="3246" fromTop="10" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:Gmail/f:GmailReader.cs" caret="1794" fromTop="17" />
+      <File id="C85A0E68-9A96-45D3-9643-6439976E2131/d:Forms/f:MainForm.cs" caret="5165" fromTop="18" />
+      <File id="C85A0E68-9A96-45D3-9643-6439976E2131/d:Forms/f:MainForm.cs" caret="5193" fromTop="16" />
+      <File id="C85A0E68-9A96-45D3-9643-6439976E2131/f:Log4net.config" caret="91" fromTop="3" />
+      <File id="C85A0E68-9A96-45D3-9643-6439976E2131/d:Forms/f:MainForm.cs" caret="4851" fromTop="11" />
+      <File id="C85A0E68-9A96-45D3-9643-6439976E2131/d:Forms/f:MainForm.cs" caret="2945" fromTop="12" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:Model/f:Position.cs" caret="692" fromTop="26" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:Model/f:Position.cs" caret="683" fromTop="16" />
+      <File id="C85A0E68-9A96-45D3-9643-6439976E2131/d:Forms/f:MainForm.cs" caret="3702" fromTop="5" />
+      <File id="C85A0E68-9A96-45D3-9643-6439976E2131/d:Forms/f:MainForm.cs" caret="4824" fromTop="15" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:Aspects/f:HandleFrameNotFound.cs" caret="277" fromTop="12" />
+      <File id="C85A0E68-9A96-45D3-9643-6439976E2131/d:Controls/f:LogControl.cs" caret="779" fromTop="21" />
+      <File id="C85A0E68-9A96-45D3-9643-6439976E2131/d:Forms/f:MainForm.cs" caret="6772" fromTop="13" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:Account/f:BossaAccount.cs" caret="761" fromTop="10" />
+      <File id="89375FC0-699D-419D-B57D-4223AF2C31BE/d:Account/f:BossaAccount.cs" caret="1225" fromTop="22" />
+      <File id="C85A0E68-9A96-45D3-9643-6439976E2131/d:Forms/f:MainForm.cs" caret="4444" fromTop="11" />
+    </RecentEdits>
+  </RecentFiles>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerMSTest>
+    <UseTestRunConfigFromMetadataFile>False</UseTestRunConfigFromMetadataFile>
+  </UnitTestRunnerMSTest>
+</Configuration>

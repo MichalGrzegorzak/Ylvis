@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="TestAutomation" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://aegon.possible.com/Wcf/TestAutomation.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://aegon.possible.com/Wcf/TestAutomation.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://aegon.possible.com/Wcf/TestAutomation.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Aegon.Public.Website.Business.Features.TestAutomation" />
+      <xsd:import schemaLocation="http://aegon.possible.com/Wcf/TestAutomation.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ITestAutomation_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="ITestAutomation_Ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestAutomation_PrepareSandboxTestPage_InputMessage">
+    <wsdl:part name="parameters" element="tns:PrepareSandboxTestPage" />
+  </wsdl:message>
+  <wsdl:message name="ITestAutomation_PrepareSandboxTestPage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PrepareSandboxTestPageResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestAutomation_EditHomePageData_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditHomePageData" />
+  </wsdl:message>
+  <wsdl:message name="ITestAutomation_EditHomePageData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditHomePageDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestAutomation_GetDescendantPages_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDescendantPages" />
+  </wsdl:message>
+  <wsdl:message name="ITestAutomation_GetDescendantPages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDescendantPagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestAutomation_GetPageTypeId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageTypeId" />
+  </wsdl:message>
+  <wsdl:message name="ITestAutomation_GetPageTypeId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageTypeIdResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ITestAutomation">
+    <wsdl:operation name="Ping">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestAutomation/Ping" message="tns:ITestAutomation_Ping_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestAutomation/PingResponse" message="tns:ITestAutomation_Ping_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PrepareSandboxTestPage">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestAutomation/PrepareSandboxTestPage" message="tns:ITestAutomation_PrepareSandboxTestPage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestAutomation/PrepareSandboxTestPageResponse" message="tns:ITestAutomation_PrepareSandboxTestPage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditHomePageData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestAutomation/EditHomePageData" message="tns:ITestAutomation_EditHomePageData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestAutomation/EditHomePageDataResponse" message="tns:ITestAutomation_EditHomePageData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDescendantPages">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestAutomation/GetDescendantPages" message="tns:ITestAutomation_GetDescendantPages_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestAutomation/GetDescendantPagesResponse" message="tns:ITestAutomation_GetDescendantPages_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPageTypeId">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestAutomation/GetPageTypeId" message="tns:ITestAutomation_GetPageTypeId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestAutomation/GetPageTypeIdResponse" message="tns:ITestAutomation_GetPageTypeId_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TestAutomationEndpoint" type="tns:ITestAutomation">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://tempuri.org/ITestAutomation/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrepareSandboxTestPage">
+      <soap:operation soapAction="http://tempuri.org/ITestAutomation/PrepareSandboxTestPage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditHomePageData">
+      <soap:operation soapAction="http://tempuri.org/ITestAutomation/EditHomePageData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDescendantPages">
+      <soap:operation soapAction="http://tempuri.org/ITestAutomation/GetDescendantPages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPageTypeId">
+      <soap:operation soapAction="http://tempuri.org/ITestAutomation/GetPageTypeId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TestAutomation">
+    <wsdl:port name="TestAutomationEndpoint" binding="tns:TestAutomationEndpoint">
+      <soap:address location="http://aegon.possible.com/Wcf/TestAutomation.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

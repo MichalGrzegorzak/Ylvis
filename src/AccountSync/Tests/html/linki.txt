@@ -1,0 +1,16 @@
+glowne okno
+https://www.bossa.pl/servlet/wyciagfw
+
+zlecenia
+https://www.bossa.pl/servlet/submenu?sub=1
+
+https://www.bossa.pl/servlet/zlec?FormID=P2
+
+
+wykres
+https://www.bossa.pl/servlet/bossa?type=8
+
+not
+https://www.bossa.pl/servlet/quotation
+
+

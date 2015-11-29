@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Aegon.Public.Website.Business.Features.TestAutomation" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Aegon.Public.Website.Business.Features.TestAutomation" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://aegon.possible.com/Wcf/TestAutomation.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:simpleType name="SandboxEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BRI" />
+      <xs:enumeration value="Facelift" />
+      <xs:enumeration value="Corporate" />
+      <xs:enumeration value="TLB" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SandboxEnum" nillable="true" type="tns:SandboxEnum" />
+  <xs:complexType name="SandboxPageData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FriendlyURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Guid" type="ser:guid" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="ParentID" type="xs:int" />
+      <xs:element minOccurs="0" name="StaticLinkURL" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SandboxPageData" nillable="true" type="tns:SandboxPageData" />
+  <xs:complexType name="ArrayOfSandboxPageData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SandboxPageData" nillable="true" type="tns:SandboxPageData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSandboxPageData" nillable="true" type="tns:ArrayOfSandboxPageData" />
+</xs:schema>

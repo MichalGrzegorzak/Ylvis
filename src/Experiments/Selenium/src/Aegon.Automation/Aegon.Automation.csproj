@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C581E8A5-868C-4307-BC84-FC9DB020C2CB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Aegon</RootNamespace>
+    <AssemblyName>AegonAutomation</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\Solution Files\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'QA3|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\QA3\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'QA4|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\QA4\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="JSErrorCollector">
+      <HintPath>Lib\JSErrorCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\Solution Files\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TechTalk.SpecFlow">
+      <HintPath>..\Solution Files\packages\SpecFlow.1.9.0\lib\net35\TechTalk.SpecFlow.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver, Version=2.43.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Solution Files\packages\Selenium.WebDriver.2.43.1\lib\net40\WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Support, Version=2.43.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Solution Files\packages\Selenium.Support.2.43.1\lib\net40\WebDriver.Support.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\Base.cs" />
+    <Compile Include="Base\BaseFeatureSteps.cs" />
+    <Compile Include="Base\BasePage.cs" />
+    <Compile Include="Base\RedirectBehavior.cs" />
+    <Compile Include="Base\TestRunner\ITest.cs" />
+    <Compile Include="Base\TestRunner\ITestResult.cs" />
+    <Compile Include="Base\TestRunner\PageTypeDictionary.cs" />
+    <Compile Include="Base\TestRunner\TestDescriptorAttribute.cs" />
+    <Compile Include="Base\TestRunner\TestRunnerEngine.cs" />
+    <Compile Include="Base\WebBrowser.cs" />
+    <Compile Include="Base\ISandboxEnvironment.cs" />
+    <Compile Include="Base\UrlContextFeatureSteps.cs" />
+    <Compile Include="Base\SandboxEnvironment.cs" />
+    <Compile Include="Extensions\WebElementExtensions.cs" />
+    <Compile Include="Features\Reflection\AssemblyReflector.cs" />
+    <Compile Include="Helpers\AutomationHelper.cs" />
+    <Compile Include="Helpers\CmsHelper.cs" />
+    <Compile Include="Helpers\WebElementHelper.cs" />
+    <Compile Include="Helpers\ObjectFactory.cs" />
+    <Compile Include="Page\BriCalendarPage.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Page\BriContentPage.cs" />
+    <Compile Include="Page\BriOfficeOverviewPage.cs" />
+    <Compile Include="Page\BriHomePage.cs" />
+    <Compile Include="Page\BriOverviewPage.cs" />
+    <Compile Include="Page\BriPage.cs" />
+    <Compile Include="Page\CookieConsentModule.cs" />
+    <Compile Include="Page\BriSidebarContentPage.cs" />
+    <Compile Include="Page\BriNewsitemPage.cs" />
+    <Compile Include="Page\FormContainerPage.cs" />
+    <Compile Include="Page\FundOverviewPage.cs" />
+    <Compile Include="Page\FundPage.cs" />
+    <Compile Include="Page\GlossaryPage.cs" />
+    <Compile Include="Page\RssFeedPage.cs" />
+    <Compile Include="Service References\TestAutomationReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Page\BriLandingPage.cs" />
+    <Compile Include="Page\SectionPage.cs" />
+    <Compile Include="BrowserAndEnvironmentSetting.cs" />
+    <Compile Include="Page\ContactUsFormPage.cs" />
+    <Compile Include="Page\OfficeOverviewPage.cs" />
+    <Compile Include="Page\AegonHomePage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Page\CustomErrorPage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Page\MasterPage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Page\QuarterlyResultsPage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Page\SearchResultPage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test\Aegon.com\Features\QuarterlyResults.feature.cs">
+      <DependentUpon>QuarterlyResults.feature</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Test\Aegon.com\Steps\QuarterlyResultsTestSteps.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\Common\Features\Accessibility1.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Accessibility.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Common\Features\_SiteWarmup.feature.cs" />
+    <Compile Include="Test\General\DummyTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\General\JsErrorTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\General\SampleTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\General\StaticLinksCheckerTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\General\TranslationsTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <TransformOnBuild>true</TransformOnBuild>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App.QA3.config">
+      <DependentUpon>App.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App.QA4.config">
+      <DependentUpon>App.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GenerateReport.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\ChromeJSErrorCollector.crx" />
+    <None Include="Lib\firebug-1.12.6-fx.xpi" />
+    <None Include="Lib\JSErrorCollector.xpi" />
+    <None Include="Lib\yslow-3.1.8-fx.xpi" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TestAutomationReference\Aegon.TestAutomationReference.SandboxPageData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestAutomationReference\TestAutomation.wsdl" />
+    <None Include="Service References\TestAutomationReference\TestAutomation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TestAutomationReference\TestAutomation1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TestAutomationReference\TestAutomation2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TestAutomationReference\TestAutomation3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="specflow.exe.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Test\Aegon.com\Features\QuarterlyResults.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>QuarterlyResults.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Common\Features\Accessibility.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Accessibility1.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Test\Common\Features\_SiteWarmup.feature" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="TestCaseData\CmsEditing\simple.html" />
+    <Content Include="TestCaseData\JavaScript\error1.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestCaseData\oEmbed\youtubeWithCaption.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Service References\TestAutomationReference\configuration91.svcinfo" />
+    <None Include="Service References\TestAutomationReference\configuration.svcinfo" />
+    <None Include="Service References\TestAutomationReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\TestAutomationReference\TestAutomation.disco" />
+    <Content Include="Lib\chromedriver.exe" />
+    <Content Include="Lib\IEDriverServer.exe" />
+    <Content Include="Lib\JSErrorCollector.dll" />
+    <Content Include="TestCaseData\DynamicContent\lightbox.html">
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestCaseData\DynamicContent\quote.html">
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestCaseData\ga\external_link_event_title.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestCaseData\ga\external_link_title.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestCaseData\ga\download_jpeg_event.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestCaseData\ga\download_zip_event.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestCaseData\ga\external_link_event.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestCaseData\ga\mailto_event.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestCaseData\ga\external_link.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestCaseData\ga\mailto.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestCaseData\ga\download_zip.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestCaseData\ga\download_jpeg.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestCaseData\oEmbed\facebook.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestCaseData\oEmbed\flickr.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestCaseData\oEmbed\googlemap.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestCaseData\oEmbed\twitter.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestCaseData\oEmbed\youtube.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\TestAutomationReference\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>CD "$(SolutionDir)packages\Pickles.CommandLine.0.13.0\tools"
+CALL Pickles --feature-directory="$(ProjectDir)\Test" --output-directory="c:\shared\aegon\automation\_temp\DocumentationAndReports"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SlowCheetahTargets>$([System.IO.Path]::GetFullPath( $(MSBuildProjectDirectory)\..\Solution Files\packages\SlowCheetah.2.5.10.6\tools\SlowCheetah.Transforms.targets ))</SlowCheetahTargets>
+  </PropertyGroup>
+  <Import Project="$(SlowCheetahTargets)" Condition="Exists('$(SlowCheetahTargets)')" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.   
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

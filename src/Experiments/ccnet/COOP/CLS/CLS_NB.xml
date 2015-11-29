@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<project name="CO-OP CLS NB">
+  <workingDirectory>C:\GIT_Working_Directory\COOP\CLS\COOP_NB</workingDirectory>
+  <artifactDirectory>c:\CCNet_Artefacts_Directory\COOP\CLS\COOP_NB</artifactDirectory>
+  <webURL>http://vmp-ccnet.fcuk.local/server/local/project/CO-OP%20CLS%20NB/ViewProjectReport.aspx</webURL>
+  <category>Nightly Build</category>
+  
+  <labeller type="assemblyVersionLabeller">
+	<major>1</major>
+	<minor>0</minor>
+	<incrementOnFailure>false</incrementOnFailure>
+  </labeller>
+  
+  <publishers>
+    <xmllogger logDir="buildlogs" />
+    <artifactcleanup cleanUpMethod="KeepLastXBuilds" cleanUpValue="50" />
+      <rss items="50" />
+  </publishers>
+  
+  <triggers>
+		<scheduleTrigger time="23:30:00" buildCondition="ForceBuild">
+			<weekDays>
+				<weekDay>Monday</weekDay>
+				<weekDay>Tuesday</weekDay>
+				<weekDay>Wednesday</weekDay>
+				<weekDay>Thursday</weekDay>
+				<weekDay>Sunday</weekDay>
+			</weekDays>
+		</scheduleTrigger>
+  </triggers>
+  
+  <sourcecontrol type="git">
+    <executable>C:\Program Files (x86)\Git\bin\git.exe</executable>
+    <repository>git@bitbucket.org:fortunecookie/coop.cls.git</repository>
+    <branch>release-candidate</branch>
+    <workingDirectory>C:\GIT_Working_Directory\COOP\CLS\COOP_NB</workingDirectory>
+    <timeout units="seconds">600</timeout>
+  </sourcecontrol>
+  
+  <tasks>
+	
+	<!-- Generate assembly information -->
+	<msbuild>
+		  <executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+		  <workingDirectory>C:\GIT_Working_Directory\COOP\CLS\COOP_NB</workingDirectory>
+		  <projectFile>SolutionFiles\GenerateAssemblyInfo.proj</projectFile>
+		  <buildArgs>/v:diag  /p:Configuration=QA</buildArgs>
+		  <targets>CreateAssemblyInfo</targets>
+		  <timeout>9000</timeout>
+		  <logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+	</msbuild>
+	
+	  <!-- build web application -->
+	  <msbuild>
+		<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+		<workingDirectory>C:\GIT_Working_Directory\COOP\CLS\COOP_NB</workingDirectory>
+		<projectFile>SolutionFiles\Coop.CLS.sln</projectFile>
+		<buildArgs>/noconsolelogger /v:diag /p:Configuration=QA</buildArgs>
+		<targets>Build</targets>
+		<timeout>900</timeout>
+		<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+	  </msbuild>
+	  	  
+	  <!-- deployment package  -->
+		<exec>
+			<executable>cmd.exe</executable>
+			<buildArgs>/c "if exist C:\GIT_Working_Directory\COOP\CLS\COOP_NB\Package\DEV del C:\GIT_Working_Directory\COOP\CLS\COOP_NB\Package\*.* /Q /F"</buildArgs>
+		</exec>
+		<msbuild>
+			<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+			<projectFile>CLS.Web\CLS.Web.csproj</projectFile>
+			<buildArgs>/noconsolelogger /v:diag /t:Package /p:PackageLocation="C:\GIT_Working_Directory\COOP\CLS\COOP_NB\Package\CLS.Web.zip" /p:Configuration=QA</buildArgs>
+			<targets>Package</targets>
+			<timeout>900</timeout>
+			<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+		</msbuild> 
+	
+		<exec>
+			<executable>C:\GIT_Working_Directory\COOP\CLS\COOP_NB\Package\CLS.Web.deploy.cmd</executable>
+			<buildArgs>/y /m:172.21.2.86 -enableRule:AppOffline</buildArgs>
+			<buildTimeoutSeconds>6000</buildTimeoutSeconds>
+		</exec>
+		
+		<exec>
+			<executable>C:\GIT_Working_Directory\COOP\CLS\COOP_NB\Package\CLS.Web.deploy.cmd</executable>
+			<buildArgs>/y /m:172.21.2.87 -enableRule:AppOffline</buildArgs>
+			<buildTimeoutSeconds>6000</buildTimeoutSeconds>
+		</exec>
+	</tasks>
+</project>

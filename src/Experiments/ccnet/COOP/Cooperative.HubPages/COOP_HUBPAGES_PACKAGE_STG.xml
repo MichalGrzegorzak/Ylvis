@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<project name="CO-OP Hub Pages - Create UAT Package">
+  <workingDirectory>C:\GIT_Working_Directory\COOP\HUBPAGES\COOP_HUBPAGES_PACKAGE_STG</workingDirectory>
+  <artifactDirectory>C:\CCNet_Artefacts_Directory\COOP\HUBPAGES\COOP_HUBPAGES_PACKAGE_STG</artifactDirectory>
+  <webURL>http://vmp-ccnet.fcuk.local/server/local/project/CO-OP%20HUBPAGES%20PACKAGE%20STG/ViewProjectReport.aspx</webURL>
+  <category>Package</category>
+  
+  <labeller type="assemblyVersionLabeller">
+	<major>1</major>
+	<minor>0</minor>
+	<incrementOnFailure>false</incrementOnFailure>
+  </labeller>
+  
+  <publishers>
+    <xmllogger logDir="buildlogs" />
+    <artifactcleanup cleanUpMethod="KeepLastXBuilds" cleanUpValue="50" />
+      <rss items="50" />
+  </publishers>
+  
+  <sourcecontrol type="git">
+    <executable>C:\Program Files (x86)\Git\bin\git.exe</executable>
+    <repository>git@bitbucket.org:fortunecookie/cooperative.hubpages.git</repository>
+    <branch>development</branch>
+    <workingDirectory>C:\GIT_Working_Directory\COOP\HUBPAGES\COOP_HUBPAGES_PACKAGE_STG</workingDirectory>
+    <timeout units="seconds">600</timeout>
+  </sourcecontrol>
+  
+  <tasks>
+	
+	<!-- Generate assembly information -->
+	<msbuild>
+		  <executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+		  <workingDirectory>C:\GIT_Working_Directory\COOP\HUBPAGES\COOP_HUBPAGES_PACKAGE_STG</workingDirectory>
+		  <projectFile>Solution Files\GenerateAssemblyInfo.proj</projectFile>
+		  <buildArgs>/v:diag  /p:Configuration=Staging</buildArgs>
+		  <targets>CreateAssemblyInfo</targets>
+		  <timeout>9000</timeout>
+		  <logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+	</msbuild>
+	
+	  <!-- build web application -->
+	  <msbuild>
+		<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+		<workingDirectory>C:\GIT_Working_Directory\COOP\HUBPAGES\COOP_HUBPAGES_PACKAGE_STG</workingDirectory>
+		<projectFile>Solution Files\Cooperative.HubPages.sln</projectFile>
+		<buildArgs>/noconsolelogger /v:diag  /p:Configuration=Staging</buildArgs>
+		<targets>Build</targets>
+		<timeout>900</timeout>
+		<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+	  </msbuild>
+	  	  
+	  <!-- deployment package  -->
+		<exec>
+			<executable>cmd.exe</executable>
+			<buildArgs>/c "if exist C:\GIT_Working_Directory\COOP\HUBPAGES\COOP_HUBPAGES_PACKAGE_STG\Package\Staging del C:\GIT_Working_Directory\COOP\HUBPAGES\COOP_HUBPAGES_PACKAGE_STG\Package\*.* /Q /F"</buildArgs>
+		</exec>
+		<msbuild>
+			<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+			<projectFile>Cooperative.HubPages.Web\Cooperative.HubPages.Web.csproj</projectFile>
+			<dynamicValues>
+				<replacementValue property="buildArgs">
+				<format>/noconsolelogger /v:diag /t:Package /p:PackageLocation="C:\BuildPackages\COOP\HUBPAGES\COOP_HUBPAGES-STG-{0}\COOP_HUBPAGES-STG-{0}.zip" /p:Configuration=Staging</format>
+					<parameters>
+						<namedValue name="$CCNetLabel" value="Default" />
+					</parameters>
+				</replacementValue>
+			</dynamicValues>
+			<targets>Package</targets>
+			<timeout>900</timeout>
+			<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+		</msbuild>
+					
+	</tasks>
+</project>

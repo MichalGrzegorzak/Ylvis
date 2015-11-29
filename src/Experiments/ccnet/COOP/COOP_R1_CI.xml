@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<project name="CO-OP Funeralcare R1">
+  <workingDirectory>c:\SVN_Working_Directory\COOP_FNC\COOP_R1_CI</workingDirectory>
+  <artifactDirectory>c:\CCNet_Artefacts_Directory\COOP_FNC\COOP_R1_CI</artifactDirectory>
+  <webURL>http://vmp-ccnet.fcuk.local/server/local/project/CO-OP%20Funeralcare%20R1/ViewProjectReport.aspx</webURL>
+  <category>Continuous Integration</category>
+  
+  <labeller type="assemblyVersionLabeller">
+		<major>1</major>
+		<minor>0</minor>
+		<build>0</build>
+		<incrementOnFailure>false</incrementOnFailure>
+  </labeller>
+  
+  <publishers>
+    <xmllogger logDir="buildlogs" />
+    <artifactcleanup cleanUpMethod="KeepLastXBuilds" cleanUpValue="50" />
+      <rss items="50" />
+  </publishers>
+  
+  <triggers>
+    <intervalTrigger seconds="60" name="continuous" />
+  </triggers>
+  
+  <sourcecontrol type="svn">
+    <trunkUrl>svn://vm-svn.fcdev.local/funeralcare/branches/branch_R1_Warranty</trunkUrl>
+    <username>dev.tools</username>
+    <password>KL129377</password>
+    <workingDirectory>c:\SVN_Working_Directory\COOP_FNC\COOP_R1_CI</workingDirectory>
+    <executable>C:\Program Files\CollabNet\Subversion Client\svn.exe</executable>
+  </sourcecontrol>
+  
+  <tasks>
+	
+	  <!-- build web application -->
+	  <msbuild>
+		<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+		<workingDirectory>c:\SVN_Working_Directory\COOP_FNC\COOP_R1_CI</workingDirectory>
+		<projectFile>SolutionFiles\Funeralcare.Web.sln</projectFile>
+		<buildArgs>/noconsolelogger /v:diag /p:ReferencePath="C:\SVN_Working_Directory\COOP_FNC\COOP_R1_CI\Lib\Funeralcare.Web.Lib" /p:Configuration=DEV</buildArgs>
+		<targets>Build</targets>
+		<timeout>900</timeout>
+		<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+	  </msbuild>
+	  	  
+		
+	  <!-- StyleCop -->
+		<msbuild>
+			<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+			<projectFile>SolutionFiles\CI-StyleCop.proj</projectFile>
+			<buildArgs>/noconsolelogger /v:diag /p:SolutionRoot="c:\SVN_Working_Directory\COOP_FNC\COOP_R1_CI" /p:ArtifactDirectory="C:\CCNet_Artefacts_Directory\COOP_FNC\COOP_R1_CI\buildlogs"</buildArgs>
+			<targets>StyleCop</targets>
+			<timeout>900</timeout>
+			<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+		</msbuild>
+
+		<!-- generate a FxCop report 
+		<exec>
+			<executable>c:\SVN_Working_Directory\COOP_FNC\COOP_R1_CI\SolutionFiles\Microsoft_Fxcop_10.0\fxcopcmd.exe</executable>
+			<buildArgs>/f:c:\SVN_Working_Directory\COOP_FNC\COOP_R1_CI\Funeralcare.Web.Mvc\bin\Funeralcare.*.dll 
+			/ignoregeneratedcode /o:C:\SVN_Working_Directory\COOP_FNC\COOP_R1_CI\ccnet-fxcop.xml 
+			/i:C:\SVN_Working_Directory\COOP_FNC\COOP_R1_CI\SolutionFiles\FortuneCookie.FxCop 
+			/d:C:\SVN_Working_Directory\COOP_FNC\COOP_R1_CI\SolutionFiles\packages  
+			/p:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Silverlight\v5.0\mscorlib.dll" 
+			/d:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Silverlight\v4.0" 
+			/d:"C:\Program Files (x86)\Microsoft SDKs\Silverlight\v4.0\Libraries\Client"</buildArgs>
+		</exec>
+	   -->
+		<!-- Unit tests -->
+	  	<nunit>
+			<path>C:\Program Files (x86)\NUnit 2.6.2\bin\nunit-console.exe</path>
+			<assemblies>
+				<assembly>C:\SVN_Working_Directory\COOP_FNC\COOP_R1_CI\Funeralcare.Web.Mvc.Tests\bin\Funeralcare.Web.Tests.dll</assembly>
+			</assemblies>
+			<!-- 
+			<excludedCategories>
+				<excludedCategory>[TODO: INTEGRATION TESTS CATEGORY]</excludedCategory>
+			</excludedCategories>
+			-->
+		</nunit>
+	
+	  <!-- deployment package  -->
+		<exec>
+			<executable>cmd.exe</executable>
+			<buildArgs>/c "if exist C:\SVN_Working_Directory\COOP_FNC\COOP_R1_CI\Package\DEV del C:\SVN_Working_Directory\COOP_FNC\COOP_R1_CI\Package\*.* /Q /F"</buildArgs>
+		</exec>
+		<msbuild>
+			<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+			<projectFile>Funeralcare.Web.Mvc\Funeralcare.Web.csproj</projectFile>
+			<buildArgs>/noconsolelogger /v:diag /t:Package /p:PackageLocation="C:\SVN_Working_Directory\COOP_FNC\COOP_R1_CI\Package\Funeralcare.Web.zip" /p:Configuration=DEV</buildArgs>
+			<targets>Package</targets>
+			<timeout>900</timeout>
+			<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+		</msbuild> 
+	  
+	  <!--  Deploy to DEV  
+		<exec>
+			<executable>C:\SVN_Working_Directory\COOP_FNC\COOP_R1_CI\Package\Funeralcare.Web.deploy.cmd</executable>
+			<buildArgs>/y /m:vmp-dev-fnc.fcuk.local -enableRule:AppOffline</buildArgs>
+			<buildTimeoutSeconds>6000</buildTimeoutSeconds>
+		</exec>
+		-->
+		
+		<!-- merge the results -->
+		<merge>
+			<files>
+				<file>C:\SVN_Working_Directory\COOP_FNC\COOP_R1_CI\ccnet-fxcop.xml </file>
+				<file>C:\CCNet_Artefacts_Directory\COOP_FNC\COOP_R1_CI\buildlogs\stylecop-results.xml</file>
+			</files>
+		</merge>
+	</tasks>
+</project>
