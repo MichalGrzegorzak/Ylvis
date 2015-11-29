@@ -48,14 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\DictionaryExtension.cs" />
-    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\Enumerators\DictionaryExtension.cs" />
+    <Compile Include="Extensions\Enumerators\EnumerableExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\GeneralExtensions.cs" />
     <Compile Include="Extensions\GetValueOrDefault.cs" />
-    <Compile Include="Extensions\IEnumerbale.cs" />
-    <Compile Include="Extensions\IsNull.cs" />
-    <Compile Include="Extensions\ListExtension.cs" />
+    <Compile Include="Extensions\Enumerators\IEnumerableExtension.cs" />
+    <Compile Include="Helpers\IsNull.cs" />
+    <Compile Include="Extensions\Enumerators\ListExtension.cs" />
     <Compile Include="Extensions\MathExtensions.cs" />
     <Compile Include="Extensions\ObjectExtension.cs" />
     <Compile Include="Extensions\PropertyInfoExtensions.cs" />
@@ -91,16 +91,19 @@
     <Compile Include="Features\Validation\Iban.cs" />
     <Compile Include="Features\Validation\IbanValidator.cs" />
     <Compile Include="Features\Validation\NumericValidator.cs" />
-    <Compile Include="Helpers\BackgroundWorkedHlp.cs" />
-    <Compile Include="Helpers\Enums\Enum.cs" />
-    <Compile Include="Helpers\FileHlp.cs" />
+    <Compile Include="Features\Threading\BackgroundWorkedHlp.cs" />
+    <Compile Include="Helpers\Enum.cs" />
+    <Compile Include="Features\Io\FileHlp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Helpers\SimpleLog.cs" />
+    <Compile Include="Features\Logging\SimpleLog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\Enums\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
