@@ -6,18 +6,22 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using Watcher.Core.Settings;
 using Ylvis.DataManipulation.Compression;
 using Ylvis.DataManipulation.Compression.Compressors;
+using Ylvis.Utils.Extensions;
 using Ylvis.Utils.Helpers;
 
 namespace Watcher.WindowsService
 {
     public class MyFileSystemWatcher : FileSystemWatcher
     {
-        static ConcurrentDictionary<string, FileSystemEventArgs> fileList = new ConcurrentDictionary<string, FileSystemEventArgs>();
-        static BackgroundWorker worker = new BackgroundWorker();
-        static Compressor zipCompressor = new Compressor(CompressMethod.Zip);
-        static Compressor sevenZipCompressor = new Compressor(CompressMethod.SevenZip);
+        private static ConcurrentDictionary<string, FileSystemEventArgs> fileList =
+            new ConcurrentDictionary<string, FileSystemEventArgs>();
+
+        private static BackgroundWorker worker = new BackgroundWorker();
+        private static Compressor zipCompressor = new Compressor(CompressMethod.Zip);
+        private static Compressor sevenZipCompressor = new Compressor(CompressMethod.SevenZip);
 
         public MyFileSystemWatcher(string inDirectoryPath)
             : base(inDirectoryPath)
@@ -33,7 +37,8 @@ namespace Watcher.WindowsService
 
         private void Init(string inDirectoryPath)
         {
-            IncludeSubdirectories = true;
+            IncludeSubdirectories = AppSettings.Inst.MonitorSubdirectories;
+
             // Eliminate duplicates when timestamp doesn't change
             //NotifyFilter = NotifyFilters.FileName | NotifyFilters.Size; // The default also has NotifyFilters.LastWrite
             NotifyFilter = NotifyFilters.FileName | NotifyFilters.Size | NotifyFilters.LastWrite;
@@ -43,6 +48,13 @@ namespace Watcher.WindowsService
             //Created += Watcher_Created;
             //Renamed += Watcher_Renamed;
 
+            AddFilesThatAreAlreadyInFolder(inDirectoryPath);
+
+            BackgroundWorkerRun();
+        }
+
+        private void AddFilesThatAreAlreadyInFolder(string inDirectoryPath)
+        {
             var files = Directory.GetFiles(inDirectoryPath);
             foreach (string file in files)
             {
@@ -50,8 +62,6 @@ namespace Watcher.WindowsService
                 var arg = new FileSystemEventArgs(WatcherChangeTypes.All, inDirectoryPath, fileName);
                 fileList[fileName] = arg;
             }
-
-            BackgroundWorkerRun();
         }
 
         private void BackgroundWorkerRun()
@@ -66,22 +76,17 @@ namespace Watcher.WindowsService
             //worker.RunWorkerCompleted += worker_RunWorkerCompleted;
         }
 
-        //static void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        //{
-        //    SimpleLog.Write("Job completed");
-        //}
-
-        static void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private static void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             SimpleLog.WriteLine(e.UserState.ToString());
         }
 
-        static void worker_DoWork(object sender, DoWorkEventArgs e)
+        private static void worker_DoWork(object sender, DoWorkEventArgs e)
         {
             var copy = new List<FileSystemEventArgs>(fileList.Values.ToList());
             foreach (FileSystemEventArgs s in copy)
             {
-                SimpleLog.WriteLine("Found: " + s.Name);
+                SimpleLog.WriteLine("Worker found: " + s.Name);
             }
 
             int sum = copy.Count;
@@ -95,6 +100,8 @@ namespace Watcher.WindowsService
                 if (!worker.CancellationPending)
                 {
                     ZipFile(s);
+                    FileHlp.Delete(s.FullPath);
+
                     worker.ReportProgress(1, i + " of " + sum);
                     fileList.TryRemove(s.Name, out x);
                     i++;
@@ -104,7 +111,7 @@ namespace Watcher.WindowsService
                     e.Cancel = true;
                     return;
                 }
-                
+
             }
 
             if (copy.Any())
@@ -113,7 +120,7 @@ namespace Watcher.WindowsService
                 //SimpleLog.WriteLine("Zip total time : " + zipCompressor.GetTotalCompressorTime());
             }
 
-            Thread.Sleep(5 * 1000);
+            Thread.Sleep(5*1000);
             worker_DoWork(null, e);
         }
 
@@ -123,27 +130,41 @@ namespace Watcher.WindowsService
             SimpleLog.WriteLine("Zipping: " + name);
 
             string targetPath = inArgs.FullPath;
-            string outputPath = @"D:\compressed\" + name;
-            
+            string outputPath = System.IO.Path.Combine(AppSettings.Inst.OutputFolder, name);
+            outputPath = outputPath.EnsureFullPath(AppSettings.Inst.MonitorFolder);
+
             //SimpleLog.WriteLine(zipCompressor.CompressFiles(outputPath + ".zip", targetPath));
-            SimpleLog.WriteLine(sevenZipCompressor.CompressFiles(outputPath + ".7z", targetPath));
+            SimpleLog.WriteLine(
+                sevenZipCompressor.CompressFiles(outputPath + ".7z", targetPath));
         }
 
-        public void Watcher_Created(object source, FileSystemEventArgs inArgs)
+        public bool ShouldIgnoreThisEvent(FileSystemEventArgs inArgs)
         {
-            SimpleLog.WriteLine("File created or added: " + inArgs.FullPath);
-            
-            fileList[inArgs.Name] = inArgs;
+            bool isDir = Directory.Exists(inArgs.FullPath);
+            if (isDir
+                || inArgs.FullPath.Contains(AppSettings.Inst.LogsFolder)
+                || inArgs.FullPath.Contains(AppSettings.Inst.OutputFolder.TrimEnd('\\')) )
+            {
+                SimpleLog.WriteLine("IGNORED: " + inArgs.FullPath);
+                return true;
+            }
+            return false;
         }
 
         public void Watcher_Changed(object sender, FileSystemEventArgs inArgs)
         {
+            if(ShouldIgnoreThisEvent(inArgs))
+                return;
+
             fileList[inArgs.Name] = inArgs;
             SimpleLog.WriteLine("File changed added to Queue: " + inArgs.FullPath);
         }
 
         public void Watcher_Deleted(object sender, FileSystemEventArgs inArgs)
         {
+            if (ShouldIgnoreThisEvent(inArgs))
+                return;
+
             SimpleLog.WriteLine("File deleted: " + inArgs.FullPath);
 
             FileSystemEventArgs removed;
@@ -155,6 +176,19 @@ namespace Watcher.WindowsService
         //    Log.WriteLine("File renamed: " + inArgs.OldFullPath + ", New name: " + inArgs.FullPath);
         //    fileList.Remove(inArgs.OldFullPath);
         //    fileList.Add(inArgs.FullPath);
+        //}
+
+        //public void Watcher_Created(object source, FileSystemEventArgs inArgs)
+        //{
+        //    if (ShouldIgnoreThisEvent(inArgs))
+        //        return;
+        //    SimpleLog.WriteLine("File created or added: " + inArgs.FullPath);
+        //    fileList[inArgs.Name] = inArgs;
+        //}
+
+        //static void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        //{
+        //    SimpleLog.Write("Job completed");
         //}
     }
 }

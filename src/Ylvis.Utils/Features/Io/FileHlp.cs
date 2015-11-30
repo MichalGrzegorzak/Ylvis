@@ -1,9 +1,24 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace Ylvis.Utils.Helpers
 {
     public abstract class FileHlp
     {
+        public static bool Delete(string fullPath)
+        {
+            FileInfo fInfo = new FileInfo(fullPath);
+            try
+            {
+                fInfo.Delete();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        
         public static bool IsFileLocked(string fullPath)
         {
             FileInfo fInfo = new FileInfo(fullPath);

@@ -12,6 +12,20 @@ namespace Ylvis.Utils.Extensions
 {
     public static class StringExtensions
     {
+        public static string EnsureFullPath(this string path, string rootPath)
+        {
+            if (path.StartsWith(@"\"))
+            {
+                string strFinalPath = string.Empty;
+                string normalizedFirstPath = rootPath.TrimEnd(new char[] { '\\' });
+                string normalizedSecondPath = path.TrimStart(new char[] { '\\' });
+                strFinalPath = Path.Combine(normalizedFirstPath, normalizedSecondPath);
+                return strFinalPath;
+            }
+            //return Path.Combine(rootPath, path);
+            return path;
+        }
+        
         public static bool EqualsIgnCase(this string input, string value)
         {
             return input.Equals(value, StringComparison.InvariantCultureIgnoreCase);

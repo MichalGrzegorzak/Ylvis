@@ -54,6 +54,7 @@
     <Compile Include="Extensions\GeneralExtensions.cs" />
     <Compile Include="Extensions\GetValueOrDefault.cs" />
     <Compile Include="Extensions\Enumerators\IEnumerableExtension.cs" />
+    <Compile Include="Features\Io\DirHlp.cs" />
     <Compile Include="Helpers\IsNull.cs" />
     <Compile Include="Extensions\Enumerators\ListExtension.cs" />
     <Compile Include="Extensions\MathExtensions.cs" />
