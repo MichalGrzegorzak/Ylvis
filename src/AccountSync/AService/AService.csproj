@@ -127,10 +127,6 @@
     <Compile Include="Class\Spider\SpiderNavig.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\StockTrans\ElvCommons\Commons.csproj">
-      <Project>{0175ABED-ABFE-4105-A571-FE06DFEAFA3F}</Project>
-      <Name>Commons</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AServiceContract\AServiceContract.csproj">
       <Project>{033635B0-CE06-461F-9DFE-95D02ADDF8E1}</Project>
       <Name>AServiceContract</Name>

@@ -122,10 +122,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\StockTrans\ElvCommons\Commons.csproj">
-      <Project>{0175ABED-ABFE-4105-A571-FE06DFEAFA3F}</Project>
-      <Name>Commons</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AServiceAgent\AServiceAgent.csproj">
       <Project>{1F393668-4012-4946-9F41-010D88374D32}</Project>
       <Name>AServiceAgent</Name>

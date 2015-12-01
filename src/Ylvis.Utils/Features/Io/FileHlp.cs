@@ -13,7 +13,7 @@ namespace Ylvis.Utils.Helpers
                 fInfo.Delete();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

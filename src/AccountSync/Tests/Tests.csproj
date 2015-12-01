@@ -83,10 +83,6 @@
     <Compile Include="Tests\GmailWatcherFixture.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\StockTrans\ElvCommons\Commons.csproj">
-      <Project>{0175ABED-ABFE-4105-A571-FE06DFEAFA3F}</Project>
-      <Name>Commons</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{89375FC0-699D-419D-B57D-4223AF2C31BE}</Project>
       <Name>Core</Name>
