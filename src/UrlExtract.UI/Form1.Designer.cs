@@ -30,11 +30,12 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.txbInput = new System.Windows.Forms.TextBox();
-            this.txbResults = new System.Windows.Forms.TextBox();
-            this.btnParse = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnParse = new System.Windows.Forms.Button();
+            this.txbResults = new System.Windows.Forms.TextBox();
+            this.txbInput = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.cmbSettings = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -52,6 +53,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.cmbSettings);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.btnParse);
             this.tabPage1.Controls.Add(this.txbResults);
@@ -64,24 +66,25 @@
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // button1
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1062, 498);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.button1.Location = new System.Drawing.Point(147, 113);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // txbInput
+            // btnParse
             // 
-            this.txbInput.Location = new System.Drawing.Point(8, 15);
-            this.txbInput.MaxLength = 327670;
-            this.txbInput.Multiline = true;
-            this.txbInput.Name = "txbInput";
-            this.txbInput.Size = new System.Drawing.Size(214, 92);
-            this.txbInput.TabIndex = 0;
+            this.btnParse.Location = new System.Drawing.Point(8, 113);
+            this.btnParse.Name = "btnParse";
+            this.btnParse.Size = new System.Drawing.Size(75, 23);
+            this.btnParse.TabIndex = 2;
+            this.btnParse.Text = "Click";
+            this.btnParse.UseVisualStyleBackColor = true;
+            this.btnParse.Click += new System.EventHandler(this.btnParse_Click);
             // 
             // txbResults
             // 
@@ -96,25 +99,35 @@
             this.txbResults.Size = new System.Drawing.Size(826, 475);
             this.txbResults.TabIndex = 1;
             // 
-            // btnParse
+            // txbInput
             // 
-            this.btnParse.Location = new System.Drawing.Point(8, 113);
-            this.btnParse.Name = "btnParse";
-            this.btnParse.Size = new System.Drawing.Size(75, 23);
-            this.btnParse.TabIndex = 2;
-            this.btnParse.Text = "Click";
-            this.btnParse.UseVisualStyleBackColor = true;
-            this.btnParse.Click += new System.EventHandler(this.btnParse_Click);
+            this.txbInput.Location = new System.Drawing.Point(8, 15);
+            this.txbInput.MaxLength = 327670;
+            this.txbInput.Multiline = true;
+            this.txbInput.Name = "txbInput";
+            this.txbInput.Size = new System.Drawing.Size(214, 92);
+            this.txbInput.TabIndex = 0;
             // 
-            // button1
+            // tabPage2
             // 
-            this.button1.Location = new System.Drawing.Point(147, 113);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1062, 498);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // cmbSettings
+            // 
+            this.cmbSettings.FormattingEnabled = true;
+            this.cmbSettings.Items.AddRange(new object[] {
+            "hrt",
+            "mother"});
+            this.cmbSettings.Location = new System.Drawing.Point(8, 154);
+            this.cmbSettings.Name = "cmbSettings";
+            this.cmbSettings.Size = new System.Drawing.Size(121, 21);
+            this.cmbSettings.TabIndex = 4;
             // 
             // Form1
             // 
@@ -140,6 +153,7 @@
         private System.Windows.Forms.TextBox txbResults;
         private System.Windows.Forms.TextBox txbInput;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cmbSettings;
     }
 }
 

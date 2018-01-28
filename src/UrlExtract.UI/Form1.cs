@@ -17,7 +17,9 @@ namespace UrlExtract.UI
         public Form1()
         {
             InitializeComponent();
+
             BackgroundStart();
+            cmbSettings.SelectedIndex = 0;
         }
 
         public string FileContent { get; set; }
@@ -35,14 +37,6 @@ namespace UrlExtract.UI
             //btnParse_Click(this, null);
             txbResults.Text = ParseLinks(FileContent);
             //txbResults.Text.Decode()
-        }
-
-        private void NotBackgroundStart()
-        {
-            //Byte[] bytes = File.ReadAllBytes("test.txt");
-            //string file = Convert.ToBase64String(bytes);
-            //;
-            //OutputBox = File;
         }
 
         public string OutputBox
@@ -88,7 +82,6 @@ namespace UrlExtract.UI
             sb.AppendLine($"");
             foreach (string key in groupKeys)
             {
-                
                 foreach (string link in grouper.Groups[key])
                 {
                     sb.AppendLine($"\t\t {key}{link}");

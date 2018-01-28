@@ -24,8 +24,12 @@ namespace UrlExtract.UI
             var splitted = allLinks
                 .Take(15)
                 .Select(x => x.Replace("https://","").Replace("http://", "") )
+                
+                 //filtering empty
+                .Select(x => x.Split(new []{".onion"}, StringSplitOptions.RemoveEmptyEntries)).Where(x => x.Length > 1).Select(x => string.Join("",x))
+                
                 .Select(x => new [] {x.Substring(0, GroupByXletters), x.Substring(GroupByXletters)})
-                .Where(x=> x.Length > 1);
+                ;
 
             var lookup = splitted.ToLookup(p => p[0], p => p[1]);
             Groups = lookup.ToDictionary(x => x.Key, x => x.ToArray());
