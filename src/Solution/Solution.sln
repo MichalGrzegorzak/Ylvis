@@ -87,6 +87,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsynchronousDownloader", ".
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TorSharp.Sandbox", "..\TorSharp\TorSharp.Sandbox\TorSharp.Sandbox.csproj", "{B1B318A7-A085-401E-96D3-320FE1066C45}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TorSharp", "..\TorSharp\TorSharp\TorSharp.csproj", "{F62B195D-145F-4DA4-A4DE-638E423E5D93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -225,6 +227,10 @@ Global
 		{B1B318A7-A085-401E-96D3-320FE1066C45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1B318A7-A085-401E-96D3-320FE1066C45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1B318A7-A085-401E-96D3-320FE1066C45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F62B195D-145F-4DA4-A4DE-638E423E5D93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F62B195D-145F-4DA4-A4DE-638E423E5D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F62B195D-145F-4DA4-A4DE-638E423E5D93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F62B195D-145F-4DA4-A4DE-638E423E5D93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

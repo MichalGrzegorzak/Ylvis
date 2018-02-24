@@ -32,6 +32,8 @@ namespace Knapcode.TorSharp.Sandbox
             };
 
             // download tools
+            //var client = new HttpClient();
+            
             await new TorSharpToolFetcher(settings, new HttpClient()).FetchAsync();
             return settings;
         }
@@ -47,6 +49,7 @@ namespace Knapcode.TorSharp.Sandbox
                 CookieContainer = new CookieContainer()
             };
 
+            //var client = new HttpClientDownloadWithProgress();
             var httpClient = new HttpClient(handler);
             httpClient.Timeout = TimeSpan.FromMinutes(10);
 
