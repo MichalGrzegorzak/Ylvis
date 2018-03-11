@@ -48,6 +48,7 @@
     <Compile Include="HttpclientProgresscs.cs" />
     <Compile Include="HttpContentExtensions.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ProgressStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -10,8 +10,8 @@ namespace Knapcode.TorSharp.Sandbox
 {
     public class HttpClientDownloadWithProgress : IDisposable
     {
-        private readonly string _downloadUrl;
-        private readonly string _destinationFilePath;
+        private string _downloadUrl;
+        private string _destinationFilePath;
 
         private HttpClient _httpClient;
 
@@ -19,14 +19,15 @@ namespace Knapcode.TorSharp.Sandbox
 
         public event ProgressChangedHandler ProgressChanged;
 
-        public HttpClientDownloadWithProgress(string downloadUrl, string destinationFilePath)
+        public HttpClientDownloadWithProgress(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
+        public async Task StartDownload(string downloadUrl, string destinationFilePath)
         {
             _downloadUrl = downloadUrl;
             _destinationFilePath = destinationFilePath;
-        }
-
-        public async Task StartDownload()
-        {
             //_httpClient = new HttpClient { Timeout = TimeSpan.FromDays(1) };
 
             using (var response = await _httpClient.GetAsync(_downloadUrl, HttpCompletionOption.ResponseHeadersRead))

@@ -38,7 +38,7 @@ namespace Knapcode.TorSharp.Sandbox
             return settings;
         }
 
-        private static HttpClient CreateHttpClient(TorSharpSettings settings, out TorSharpProxy torProxy)
+        private static HttpClient CreateHttpClientWithTor(TorSharpSettings settings, out TorSharpProxy torProxy)
         {
             torProxy = new TorSharpProxy(settings);
             var handler = new HttpClientHandler
@@ -78,6 +78,19 @@ namespace Knapcode.TorSharp.Sandbox
 
         private static async Task DownloadFileFrom_Dl_free_fr(HttpClient httpClient, string target, string saveFileName)
         {
+            var request = new HttpRequestMessage(HttpMethod.Post, target);
+
+            var progressContent = new ProgressableStreamContent(stream, 4096);
+            progressContent.Progress = (bytes, totalBytes, totalBytesExpected) => {
+                Console.WriteLine("Uploading {0}/{1}", totalBytes, totalBytesExpected);
+            };
+
+            request.Content = progressContent;
+
+            var response = await client.SendAsync(request);
+            string result = await response.Content.ReadAsStringAsync();
+
+
             string html = await httpClient.GetStringAsync(target); //this is require to create cookie
             //html.
             //fileName is inside span id= 'coin2'
@@ -113,7 +126,7 @@ namespace Knapcode.TorSharp.Sandbox
             var settings = await PrepareEnvironment();
 
             // execute
-            var httpClient = CreateHttpClient(settings, out TorSharpProxy torProxy);
+            var httpClient = CreateHttpClientWithTor(settings, out TorSharpProxy torProxy);
             VerifyProxy(httpClient, torProxy);
 
             //orginal LINK is "http://dl.free.fr/getfile.pl?file=/0qOqSID5"
