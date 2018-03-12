@@ -1,4 +1,4 @@
-﻿namespace UrlExtractor.Tests
+﻿namespace UrlExtractor.Model
 {
     public class PostPreflightClassificator
     {

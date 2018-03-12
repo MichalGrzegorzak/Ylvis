@@ -5,47 +5,6 @@ using System.Text.RegularExpressions;
 
 namespace UrlExtractor.Model
 {
-    public class LinkFilter
-    {
-        public bool FilterLocal { get; set; } = true;
-        public bool OnlyOnion { get; set; } = true;
-
-        public LinkGrouper FilterLinks(IEnumerable<string> allLinks)
-        {
-            LinkGrouper grouper = new LinkGrouper();
-            foreach (string link in allLinks)
-            {
-                if (FilterLocal)
-                {
-                    if(!link.StartsWith("http"))
-                        continue;
-                }
-                if (OnlyOnion)
-                {
-                    if (!link.Contains(".onion"))
-                        continue;
-                }
-                grouper.AddLink(link);
-
-            }
-            return grouper;
-        }
-    }
-
-    public enum DownloadItemType
-    {
-        nn = 0,
-        download = 1,
-        mirror = 2
-    }
-
-    public class DownloadItem
-    {
-        public string Download { get; set; }
-        public string Preview { get; set; }
-        public string Type { get; set; }
-    }
-
     public class ItemAnalyzer
     {
         private string _rawTest;
