@@ -136,6 +136,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\UrlExtractor.Model\UrlExtractor.Model.csproj">
+      <Project>{0811eac7-9303-4c6e-8b82-f67f6f2f0eb4}</Project>
+      <Name>UrlExtractor.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ItemLibrary\ItemModel.csproj">
       <Project>{686291ed-57a0-468e-8b07-95cc530331b8}</Project>
       <Name>ItemModel</Name>

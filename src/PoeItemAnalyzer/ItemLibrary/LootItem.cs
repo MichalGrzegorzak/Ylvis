@@ -12,7 +12,7 @@ namespace ItemModel
         {
             RawItemText = rawItemText;
 
-            var sectionSeparators = new string[] { $"\r\n--------\r\n" };
+            var sectionSeparators = new string[] { $"\r\n" };
 
             RawSections = RawItemText.Split(sectionSeparators, StringSplitOptions.RemoveEmptyEntries);
         }

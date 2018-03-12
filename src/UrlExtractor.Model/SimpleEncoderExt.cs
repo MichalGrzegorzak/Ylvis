@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace UrlExtract.UI
+namespace UrlExtractor.Model
 {
     public static class SimpleEncoderExt
     {

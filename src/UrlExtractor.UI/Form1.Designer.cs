@@ -1,4 +1,4 @@
-﻿namespace UrlExtract.UI
+﻿namespace UrlExtractor.UI
 {
     partial class Form1
     {

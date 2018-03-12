@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace UrlExtract.UI
+namespace UrlExtractor.Model
 {
     public class LinkGrouper
     {
