@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +40,7 @@ namespace UrlExtractor.Tests
             Console.WriteLine(String.Join("\r\n", analyzer.FilteredOutput.ToArray()) );
             Assert.That(analyzer.HasPass, Is.EqualTo(true));
             Assert.That(analyzer.Parts.Count, Is.EqualTo(2));
+            Assert.That(analyzer.Downloads.Count, Is.EqualTo(4));
         }
 
         [Test]
@@ -84,12 +84,10 @@ Passwort
             string input = @"
 will someone have it?
 I did not see where to upload the images so I leave 
-
 live image preview
 http://upfile.mobi/cpTlZe
 -- backup image preview
 http://addfile.org/Rgretret
-
 -- name of file archive
 234trg
 
@@ -98,7 +96,7 @@ http://upfile.mobi/O7S2gvdfgfdg
 
 --password
 @qw12e345rtgr
-            ";
+";
 
             ItemAnalyzer analyzer = new ItemAnalyzer(input);
             analyzer.Analyze();
@@ -109,7 +107,8 @@ http://upfile.mobi/O7S2gvdfgfdg
             //
             //Assert.That(analyzer.HasPreview, Is.EqualTo(true));
             //
-            Assert.That(analyzer.Parts.Count, Is.EqualTo(3));
+            Assert.That(analyzer.Downloads.Count, Is.EqualTo(1));
+            Assert.That(analyzer.Previews.Count, Is.EqualTo(2));
         }
     }
 }

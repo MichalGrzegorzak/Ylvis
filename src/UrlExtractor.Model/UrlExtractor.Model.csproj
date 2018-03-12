@@ -43,8 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClipboardPost.cs" />
     <Compile Include="LinkFilter.cs" />
     <Compile Include="LinkGrouper.cs" />
+    <Compile Include="PostPreflightClassificator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleEncoderExt.cs" />
   </ItemGroup>

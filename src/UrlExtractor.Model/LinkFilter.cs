@@ -107,7 +107,7 @@ namespace UrlExtractor.Model
 
         public void Analyze()
         {
-            int partIndex = 0;
+            int partIndex = 0, prevIndex = 0;
 
             var allLines = _rawTest.Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries);
             for (var i = 0; i < allLines.Length; i++)
@@ -187,25 +187,71 @@ namespace UrlExtractor.Model
                     //    string index = matchPart.Groups[end].Value;
                     //}
 
-                    var linkMatch = regSingleLink.Match(line);
-                    if (linkMatch.Success)
+                    ExtractLink(line, nextLine, "Link", ref prevIndex, ref i, Downloads);
+                    //var linkMatch = regSingleLink.Match(line);
+                    //if (linkMatch.Success)
+                    //{
+                    //    Downloads.Add(linkMatch.Value);
+                    //    FilteredOutput.Add(line);
+                    //}
+                    //else
+                    //{
+                    //    linkMatch = regSingleLink.Match(nextLine);
+                    //    if (linkMatch.Success)
+                    //    {
+                    //        Downloads.Add(linkMatch.Value);
+                    //        i++;
+                    //        FilteredOutput.Add("LINK:" + linkMatch.Value);
+                    //    }
+                    //}
+                    continue;
+                }
+
+                if (line.ToLowerInvariant().Contains("preview"))
+                {
+                    var matchPart = regPreviewss.Matches(line);
+                    if (matchPart.Count > 0 && matchPart[0].Groups.Count == 3)
                     {
-                        Downloads.Add(linkMatch.Value);
+                        string index = matchPart[0].Groups[2].Value;
+                        string link = matchPart[0].Groups[3].Value;
                         FilteredOutput.Add(line);
+                        Parts.Add($"PREV:{index} -> {link}");
                     }
                     else
                     {
-                        linkMatch = regSingleLink.Match(nextLine);
-                        if (linkMatch.Success)
-                        {
-                            Downloads.Add(linkMatch.Value);
-                            i++;
-                            FilteredOutput.Add("LINK:" + linkMatch.Value);
-                        }
+                        ExtractLink(line, nextLine, "Preview", ref prevIndex, ref i, Previews);
                     }
                     continue;
                 }
             }
+        }
+
+        private string ExtractLink(string line, string nextLine, string title, ref int linkIndex, ref int i, List<string> list)
+        {
+            string result = string.Empty;
+
+            var linkMatch = regSingleLink.Match(line);
+            if (linkMatch.Success)
+            {
+                result = linkMatch.Value;
+                list.Add(result);
+                FilteredOutput.Add(line);
+                linkIndex++;
+            }
+            else
+            {
+                linkMatch = regSingleLink.Match(nextLine);
+                if (linkMatch.Success)
+                {
+                    result = linkMatch.Value;
+                    list.Add(result);
+                    linkIndex++;
+                    FilteredOutput.Add($"{title} {linkIndex}: {result}");
+                    i++;
+                }
+            }
+
+            return result;
         }
 
         public List<string> ControlWords { get; set; } = new List<string>(new string []
