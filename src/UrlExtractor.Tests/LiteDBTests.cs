@@ -61,6 +61,44 @@ namespace UrlExtractor.Tests
             Assert.That(post, Is.Not.Null);
         }
 
+        [Test]
+        public void t04_delete()
+        {
+            int deleted = 0;
+            ClipboardPost post;
+            using (var db = new LiteDatabase("test.db"))
+            {
+                var allPosts = db.GetCollection<ClipboardPost>("posts");
+                post = allPosts.FindAll().FirstOrDefault();
+                Console.WriteLine(PrintPost(post));
+                deleted = allPosts.Delete(x => x.Id == post.Id);
+            }
+            Console.WriteLine(deleted);
+            Assert.That(deleted, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void t04_delete_multi()
+        {
+            int deleted = 0;
+            var post1 = PostFactory.CreatePost(PostFactory.Test1(), "http://test.com/");
+            post1.Downloads = new List<string>();
+
+            var post2 = PostFactory.CreatePost(PostFactory.Test1(), "http://test.com/");
+            post2.Downloads = new List<string>();
+
+            using (var db = new LiteDatabase("test.db"))
+            {
+                var allPosts = db.GetCollection<ClipboardPost>("posts");
+                allPosts.Insert(post1);
+                allPosts.Insert(post2);
+                //
+                deleted = allPosts.Delete(x => x.Downloads.Count == 0);
+            }
+            Console.WriteLine(deleted);
+            Assert.That(deleted, Is.GreaterThan(1));
+        }
+
         private string PrintPost(ClipboardPost ps)
         {
             //string psString = JsonConvert.SerializeObject(ps);

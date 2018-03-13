@@ -109,7 +109,7 @@ namespace UrlExtractor.Model
                         string index = matchPart[0].Groups[2].Value;
                         string link = matchPart[0].Groups[3].Value;
                         FilteredOutput.Add(line);
-                        Parts.Add($"PART:{index} -> link");
+                        Parts.Add($"PART:{index} -> {link}");
                     }
                     else
                     {
