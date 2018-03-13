@@ -20,12 +20,15 @@ namespace UrlExtractor.Tests
             int count = 0;
             var post = PostFactory.CreatePost(PostFactory.Test1(), "http://test.com/");
 
-            using (var db = new LiteDatabase("test.db"))
+            //using (var db = new LiteDatabase("test.db"))
+            //var allPosts = db.GetCollection<ClipboardPost>("posts");
+
+            using (var repo = new LiteRepository("test.db"))
             {
-                var allPosts = db.GetCollection<ClipboardPost>("posts");
-                allPosts.Insert(post);
+                var allPosts = repo.Query<ClipboardPost>().ToList();
+                repo.Insert(post);
                 count = allPosts.Count();
-                foreach (ClipboardPost ps in allPosts.FindAll())
+                foreach (ClipboardPost ps in allPosts)
                 {
                     Console.WriteLine(PrintPost(ps));
                 }
@@ -39,10 +42,10 @@ namespace UrlExtractor.Tests
         public void t02_post_find_by_ID()
         {
             ClipboardPost post;
-            using (var db = new LiteDatabase("test.db"))
+            using (var repo = new LiteRepository("test.db"))
             {
-                var allPosts = db.GetCollection<ClipboardPost>("posts");
-                post = allPosts.FindOne(x => x.Id == 1);
+                var allPosts = repo.Query<ClipboardPost>();
+                post = allPosts.Where(x=> x.Id == 1).FirstOrDefault();
                 Console.WriteLine(PrintPost(post));
             }
             Assert.That(post.Id, Is.EqualTo(1));
@@ -52,10 +55,10 @@ namespace UrlExtractor.Tests
         public void t03_post_find_by_name()
         {
             ClipboardPost post;
-            using (var db = new LiteDatabase("test.db"))
+            using (var repo = new LiteRepository("test.db"))
             {
-                var allPosts = db.GetCollection<ClipboardPost>("posts");
-                post = allPosts.FindOne(x => x.Pass == "=)(§$$Z /%)(ßihs");
+                var allPosts = repo.Query<ClipboardPost>();
+                post = allPosts.Where(x => x.Pass == "=)(§$$Z /%)(ßihs").FirstOrDefault();
                 Console.WriteLine(PrintPost(post));
             }
             Assert.That(post, Is.Not.Null);

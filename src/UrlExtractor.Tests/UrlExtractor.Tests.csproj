@@ -49,8 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DownloadItemTests.cs" />
-    <Compile Include="GroupingLinksTests.cs" />
+    <Compile Include="ItemAnalyzerTests.cs" />
     <Compile Include="LiteDBMappingConfig.cs" />
     <Compile Include="LiteDBTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

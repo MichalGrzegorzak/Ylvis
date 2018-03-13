@@ -8,7 +8,7 @@ using UrlExtractor.Model;
 namespace UrlExtractor.Tests
 {
     [TestFixture]
-    public class DownloadItemTests
+    public class ItemAnalyzerTests
     {
         [Test]
         public void t01()
