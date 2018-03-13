@@ -18,6 +18,6 @@ namespace UrlExtractor.Model
     public class BaseID
     {
         public int Id { get; set; }
-        public DateTime Created { get; set; }
+        public DateTime Created { get; set; } = DateTime.UtcNow;
     }
 }
