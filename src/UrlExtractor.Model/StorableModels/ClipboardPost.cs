@@ -20,7 +20,7 @@ namespace UrlExtractor.Model
 
     public abstract class PostFactory
     {
-        public static ClipboardPost CreatePost(string rawText, string url)
+        public static ClipboardPost CreatePost(string rawText, string url = "unknown")
         {
             ClipboardPost post = new ClipboardPost() {RawText = rawText, FromUrl = url};
 

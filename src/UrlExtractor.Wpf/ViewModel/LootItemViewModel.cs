@@ -1,6 +1,7 @@
 ﻿using PropertyChanged;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using UrlExtractor.Model;
 using UrlExtractor.Wpf.Model;
 
 namespace UrlExtractor.Wpf.ViewModel
@@ -8,14 +9,14 @@ namespace UrlExtractor.Wpf.ViewModel
     [AddINotifyPropertyChangedInterface]
     public class LootItemViewModel
     {
-        private LootItem Item { get; }
+        private ClipboardPost Item { get; }
 
         public LootItemViewModel(string rawItemText)
         {
-            Item = new LootItem(rawItemText);
+            Item = PostFactory.CreatePost(rawItemText);
         }
 
-        public LootItemViewModel(LootItem item)
+        public LootItemViewModel(ClipboardPost item)
         {
             Item = item;
         }
@@ -29,9 +30,9 @@ namespace UrlExtractor.Wpf.ViewModel
             ItemPriceFromWeb = await Task.FromResult("NO WEB FOR YOU"); // result;
         }
         
-        public string RawItemText => Item.RawItemText;
+        public string RawItemText => Item.Text;
 
-        public string[] RawSections => Item.RawSections;
+        public string[] RawSections => Item.Downloads.ToArray();
 
         public string ItemPriceFromWeb { get; private set; } = "- no price information retrieved -";
 

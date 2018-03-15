@@ -35,12 +35,15 @@ namespace UrlExtractor.Tests
             ";
 
             ItemAnalyzer analyzer = new ItemAnalyzer(input);
-            analyzer.Analyze();
+            analyzer.AnalyzeByLine();
+            //analyzer.Analyze();
 
             Console.WriteLine(String.Join("\r\n", analyzer.FilteredOutput.ToArray()) );
             Assert.That(analyzer.HasPass, Is.EqualTo(true));
             Assert.That(analyzer.Parts.Count, Is.EqualTo(2));
-            Assert.That(analyzer.Downloads.Count, Is.EqualTo(4));
+            Assert.That(analyzer.Previews.Count, Is.EqualTo(1));
+            Assert.That(analyzer.Mirrors.Count, Is.EqualTo(4));
+            //Assert.That(analyzer.Downloads.Count, Is.EqualTo(4));
         }
 
         [Test]
@@ -69,7 +72,7 @@ Passwort
             ";
 
             ItemAnalyzer analyzer = new ItemAnalyzer(input);
-            analyzer.Analyze();
+            analyzer.AnalyzeByLine();
 
             Console.WriteLine(String.Join("\r\n", analyzer.FilteredOutput.ToArray()));
             Assert.That(analyzer.HasPass, Is.EqualTo(true));
@@ -109,6 +112,28 @@ http://upfile.mobi/O7S2gvdfgfdg
             //
             Assert.That(analyzer.Downloads.Count, Is.EqualTo(1));
             Assert.That(analyzer.Previews.Count, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void t04()
+        {
+            string input = @"
+Part1
+https://minfil.org/h8D/How_2_Dan.part1.rar
+
+Part2
+http://ichigo-up.com/1/download/1520.rar
+
+will someone have it?
+live image preview
+http://upfile.mobi/cpTlZe
+";
+
+            ItemAnalyzer analyzer = new ItemAnalyzer(input);
+            analyzer.AnalyzeByLine();
+
+            Console.WriteLine(String.Join("\r\n", analyzer.FilteredOutput.ToArray()));
+            Assert.That(analyzer.Parts.Count, Is.EqualTo(2));
         }
     }
 }

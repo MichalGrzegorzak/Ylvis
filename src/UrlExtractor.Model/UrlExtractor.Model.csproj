@@ -56,5 +56,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ylvis.Utils\Ylvis.Utils.csproj">
+      <Project>{224b2a16-0109-43bc-a2ce-16ecf5dba6e3}</Project>
+      <Name>Ylvis.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

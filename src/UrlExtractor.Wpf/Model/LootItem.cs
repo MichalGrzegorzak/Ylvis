@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace UrlExtractor.Wpf.Model
 {
-    public class LootItem
-    {
-        public LootItem(string rawItemText)
-        {
-            RawItemText = rawItemText;
+    //public class LootItem
+    //{
+    //    public LootItem(string rawItemText)
+    //    {
+    //        RawItemText = rawItemText;
 
-            var sectionSeparators = new string[] { $"\r\n" };
+    //        var sectionSeparators = new string[] { $"\r\n" };
 
-            RawSections = RawItemText.Split(sectionSeparators, StringSplitOptions.RemoveEmptyEntries);
-        }
+    //        RawSections = RawItemText.Split(sectionSeparators, StringSplitOptions.RemoveEmptyEntries);
+    //    }
 
-        public string RawItemText { get; }
+    //    public string RawItemText { get; }
 
-        public string[] RawSections { get; }
-    }
+    //    public string[] RawSections { get; }
+    //}
 }

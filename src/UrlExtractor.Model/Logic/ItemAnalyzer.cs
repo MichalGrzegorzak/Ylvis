@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Ylvis.Utils.Extensions;
 
 namespace UrlExtractor.Model
 {
@@ -27,7 +29,7 @@ namespace UrlExtractor.Model
         Regex regSingleLink = new Regex(LINK, RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled);
 
         Regex regPartWords = new Regex($@"(part[s]?)\s*(\d)?{IS}{LINK}", RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled);
-        Regex regBackups = new Regex($@"(backup|mir[r]?or[s]?|back)\s*([0-9]*){IS}{LINK}", RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled);
+        Regex regBackups = new Regex($@"(back[up]?|mir[r]?or[s]?)\s*([0-9]*){IS}{LINK}", RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled);
         Regex regLinkWords = new Regex(@"(link[s]?)\s*(\d)?", RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled);
         Regex regPreviewss = new Regex($@"(preview[s]|image|gallery)\s*(\d)?{LINK}", RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled);
 
@@ -44,6 +46,7 @@ namespace UrlExtractor.Model
         public ItemAnalyzer(string rawText)
         {
             _rawTest = rawText;
+            linkCounter = new Dictionary<string, int>();
 
             //store all links
             MatchCollection ms = regAllLinks.Matches(_rawTest);
@@ -62,6 +65,196 @@ namespace UrlExtractor.Model
             //    HasPass = true;
             //if (_rawTest.Contains("key"))
             //    HasDLKey = true;
+        }
+
+        private bool GetPassword(string line, string nextLine, ref int i)
+        {
+            
+            var matchPart = regPassword.Matches(line);
+            if (matchPart.Count > 0 && matchPart[0].Success)
+            {
+                string pass = matchPart[0].Groups[3].Value;
+                Passwords.Add(pass);
+                FilteredOutput.Add(pass);
+                return true;
+            }
+            else
+            {
+                Passwords.Add(nextLine);
+                FilteredOutput.Add(nextLine);
+                i++;
+                //matchPart = regPartWords.Matches(nextLine);
+                //if (matchPart.Count > 0 && matchPart[0].Success)
+                //{
+                //    i++;
+                //    string pass = matchPart[0].Groups[1].Value;
+                //    Passwords.Add(pass);
+                //}
+            }
+
+            return false;
+        }
+
+        private Dictionary<string, int> linkCounter = null;
+
+        private bool ExtractLinkInfoFromAnotherLine(string line, string nextLine, ref int i)
+        {
+            bool containsPart = line.ToLowerInvariant().Contains("part", "link");
+            bool containsMirror = line.ToLowerInvariant().ContainsAnyOf("backup", "mirr");
+            bool containsPreview = line.ToLowerInvariant().ContainsAnyOf("prev", "image", "gallery");
+            string result = null;
+
+            if (containsPart)
+            {
+                result = ExtractLink(line, nextLine, "Part", ref i, Parts);
+            }
+
+            if (containsMirror)
+            {
+                result = ExtractLink(line, nextLine, "Mirror", ref i, Mirrors);
+            }
+
+            if (containsPreview)
+            {
+                result = ExtractLink(line, nextLine, "Preview", ref i, Previews);
+            }
+
+            return (result != null);
+        }
+
+        private bool ExtractLinkInfo(string line)
+        {
+            bool containsPart = line.ToLowerInvariant().Contains("part", "link");
+            bool containsMirror = line.ToLowerInvariant().ContainsAnyOf("backup", "mirr");
+            bool containsPreview = line.ToLowerInvariant().ContainsAnyOf("prev", "image", "gallery");
+            string part = string.Empty, link = string.Empty;
+
+            if (containsMirror)
+            {
+                if (GetMirrorAndLink(line, ref part, ref link))
+                {
+                    FilteredOutput.Add(line);
+                    //part moze byc empty
+                    Mirrors.Add($"MIRROR {part}: {link}");
+                    return true;
+                }
+            }
+
+            if (containsPreview)
+            {
+                if (GetPartAndPreview(line, ref part, ref link))
+                {
+                    FilteredOutput.Add(line);
+                    //part moze byc empty
+                    Previews.Add($"PREV {part}: {link}");
+                    return true;
+                }
+            }
+
+            if (containsPart)
+            {
+                //bool linkWithoutNumber = !hasLinkWithNumber.Match(line).Success;
+                //if (linkWithoutNumber)
+                //{
+                //    line = line.ToLowerInvariant().Replace("link", "link 0");
+                //}
+
+                if (GetPartAndLink(line, ref part, ref link))
+                {
+                    FilteredOutput.Add(line);
+                    Parts.Add($"PART{part}: {link}");
+                    return true;
+                }
+                else
+                {
+                    FilteredOutput.Add(line);
+                    Mirrors.Add($"MIRROR : {link}");
+                    return true;
+                }
+            }
+
+
+
+            return false;
+        }
+
+        public void AnalyzeByLine()
+        {
+            int partIndex = 0, prevIndex = 0;
+
+            var allLines = _rawTest.Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries);
+            for (var i = 0; i < allLines.Length; i++)
+            {
+                string line = allLines[i].Trim();
+                string nextLine = string.Empty;
+                if (i < allLines.Length - 1)
+                    nextLine = allLines[i + 1].Trim();
+
+
+
+                bool hasPass = line.ToLowerInvariant().Contains("pass");
+                bool containsUrl = line.ToLowerInvariant().ContainsAnyOf("http", "www");
+
+                if (!containsUrl && hasPass)
+                {
+                    if(GetPassword(line, nextLine, ref i))
+                        continue;
+                }
+                //bool nextContainsUrl = nextLine.ToLowerInvariant().ContainsAnyOf("http", "www");
+                //bool nextContainsPart = nextLine.ToLowerInvariant().Contains("part", "link");
+                //bool nextContainsMirror = nextLine.ToLowerInvariant().ContainsAnyOf("backup", "mirr");
+                //bool nextContainsPreview = nextLine.ToLowerInvariant().ContainsAnyOf("prev", "image", "gallery");
+                if (containsUrl)
+                {
+                    if(ExtractLinkInfo(line))
+                        continue;
+                }
+                else //link probably in next line
+                {
+                    //ExtractLinkInfoFromAnotherLine
+                    if (ExtractLinkInfoFromAnotherLine(line, nextLine, ref i))
+                        continue;
+                }
+            }
+        }
+        static Regex hasLinkWithNumber = new Regex(@"^(link)\s*(\d)+([\s]|$)", RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled);
+        static Regex regPartAndLink = new Regex(@"^(part[s]?|link[s]?)\s*(\d)+\s*[:|=]?\s*(www.+|http.+)([\s]|$)", RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled);
+        private bool GetPartAndLink(string line, ref string part, ref string link)
+        {
+            var matchPart = regPartAndLink.Matches(line);
+            if (matchPart.Count > 0 && matchPart[0].Groups.Count == 5)
+            {
+                part = matchPart[0].Groups[2].Value;
+                link = matchPart[0].Groups[3].Value;
+                return true;
+            }
+            return false;
+        }
+
+        static Regex regMirrorAndLink = new Regex(@"(link|backups|backup|back?|mir[r]?or[s]?)\s*(\d)?\s*[:|=]?\s*(www.+|http.+)([\s]|$)", RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled);
+        private bool GetMirrorAndLink(string line, ref string part, ref string link)
+        {
+            var matchPart = regMirrorAndLink.Matches(line);
+            if (matchPart.Count > 0 && matchPart[0].Groups.Count == 5)
+            {
+                part = matchPart[0].Groups[2].Value;
+                link = matchPart[0].Groups[3].Value;
+                return true;
+            }
+            return false;
+        }
+
+        static Regex regPartAndPreview = new Regex(@"^(preview[s]|image|gallery|img)\s*(\d)?\s*[:|=]?\s*(www.+|http.+)([\s]|$)", RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled);
+        private bool GetPartAndPreview(string line, ref string part, ref string link)
+        {
+            var matchPart = regPartAndPreview.Matches(line);
+            if (matchPart.Count > 0 && matchPart[0].Groups.Count == 5)
+            {
+                part = matchPart[0].Groups[2].Value;
+                link = matchPart[0].Groups[3].Value;
+                return true;
+            }
+            return false;
         }
 
         public void Analyze()
@@ -146,7 +339,7 @@ namespace UrlExtractor.Model
                     //    string index = matchPart.Groups[end].Value;
                     //}
 
-                    ExtractLink(line, nextLine, "Link", ref prevIndex, ref i, Downloads);
+                    ExtractLink(line, nextLine, "Link", ref i, Downloads);
                     //var linkMatch = regSingleLink.Match(line);
                     //if (linkMatch.Success)
                     //{
@@ -178,16 +371,18 @@ namespace UrlExtractor.Model
                     }
                     else
                     {
-                        ExtractLink(line, nextLine, "Preview", ref prevIndex, ref i, Previews);
+                        ExtractLink(line, nextLine, "Preview", ref i, Previews);
                     }
                     continue;
                 }
             }
         }
 
-        private string ExtractLink(string line, string nextLine, string title, ref int linkIndex, ref int i, List<string> list)
+        private string ExtractLink(string line, string nextLine, string title, ref int i, List<string> list)
         {
-            string result = string.Empty;
+            string result = null;
+            if(!linkCounter.ContainsKey(title))
+                linkCounter.Add(title, 0);
 
             var linkMatch = regSingleLink.Match(line);
             if (linkMatch.Success)
@@ -195,7 +390,7 @@ namespace UrlExtractor.Model
                 result = linkMatch.Value;
                 list.Add(result);
                 FilteredOutput.Add(line);
-                linkIndex++;
+                linkCounter[title]++;
             }
             else
             {
@@ -204,8 +399,8 @@ namespace UrlExtractor.Model
                 {
                     result = linkMatch.Value;
                     list.Add(result);
-                    linkIndex++;
-                    FilteredOutput.Add($"{title} {linkIndex}: {result}");
+                    linkCounter[title]++;
+                    FilteredOutput.Add($"{title} {linkCounter[title]}: {result}");
                     i++;
                 }
             }

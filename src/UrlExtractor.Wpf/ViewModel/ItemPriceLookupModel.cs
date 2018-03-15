@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using UrlExtractor.Model;
 using UrlExtractor.Wpf.Model;
 
 namespace UrlExtractor.Wpf.ViewModel
@@ -27,11 +28,11 @@ namespace UrlExtractor.Wpf.ViewModel
         // https://github.com/trackpete/exiletools-price-macro/blob/master/poe_price_macro.ahk#L92
         public static readonly string ShowDays = "7";
         
-        public static async Task<string> GetItemPriceFromWeb(LootItem item)
+        public static async Task<string> GetItemPriceFromWeb(ClipboardPost item)
         {
             var client = new HttpClient();
 
-             var itemData = Uri.EscapeDataString(item.RawItemText);
+             var itemData = Uri.EscapeDataString(item.RawText);
             //var itemData = AhkScriptUrlEscaping(item.RawItemText.Trim());
 
             // https://github.com/trackpete/exiletools-price-macro/blob/master/poe_price_macro.ahk#L168
