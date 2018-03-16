@@ -18,6 +18,27 @@ namespace UrlExtractor.Model
         //public List<Items> CategorizedDownloads { get; set; }
     }
 
+    public class ClipboardVm
+    {
+        public ClipboardVm(ClipboardPost post)
+        {
+            Url = post.FromUrl;
+            Pass = post.Pass;
+            DlKey = post.DlKey;
+            Downloads = post.Downloads
+        }
+
+        public string Url { get; set; }
+        //public string Text { get; set; }
+
+        public string Pass { get; set; }
+        public string DlKey { get; set; }
+
+        public string Downloads { get; set; }
+        public string Previews { get; set; }
+        //public List<Items> CategorizedDownloads { get; set; }
+    }
+
     public abstract class PostFactory
     {
         public static ClipboardPost CreatePost(string rawText, string url = "unknown")
@@ -25,7 +46,8 @@ namespace UrlExtractor.Model
             ClipboardPost post = new ClipboardPost() {RawText = rawText, FromUrl = url};
 
             ItemAnalyzer analyzer = new ItemAnalyzer(rawText);
-            analyzer.Analyze();
+            //analyzer.Analyze();
+            analyzer.AnalyzeByLine();
 
             post.Pass = analyzer.Passwords.FirstOrDefault();
             post.DlKey = analyzer.DLKeys.FirstOrDefault();
@@ -33,8 +55,8 @@ namespace UrlExtractor.Model
             post.Previews = analyzer.Previews;
             //
             post.Downloads.AddRange(analyzer.Parts);
-            post.Downloads.AddRange(analyzer.Downloads);
             post.Downloads.AddRange(analyzer.Mirrors);
+            post.Downloads.AddRange(analyzer.Previews);
 
             return post;
         }

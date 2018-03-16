@@ -129,51 +129,55 @@ namespace UrlExtractor.Model
             bool containsPreview = line.ToLowerInvariant().ContainsAnyOf("prev", "image", "gallery");
             string part = string.Empty, link = string.Empty;
 
-            if (containsMirror)
-            {
-                if (GetMirrorAndLink(line, ref part, ref link))
-                {
-                    FilteredOutput.Add(line);
-                    //part moze byc empty
-                    Mirrors.Add($"MIRROR {part}: {link}");
-                    return true;
-                }
-            }
-
             if (containsPreview)
             {
                 if (GetPartAndPreview(line, ref part, ref link))
                 {
                     FilteredOutput.Add(line);
-                    //part moze byc empty
                     Previews.Add($"PREV {part}: {link}");
                     return true;
+                }
+                else //PREV without a number
+                {
+                    var linkMatch = regSingleLink.Match(line);
+                    if (linkMatch.Success)
+                    {
+                        FilteredOutput.Add(line);
+                        Mirrors.Add($"PREV : {linkMatch.Value}");
+                        return true;
+                    }
                 }
             }
 
             if (containsPart)
             {
-                //bool linkWithoutNumber = !hasLinkWithNumber.Match(line).Success;
-                //if (linkWithoutNumber)
-                //{
-                //    line = line.ToLowerInvariant().Replace("link", "link 0");
-                //}
-
                 if (GetPartAndLink(line, ref part, ref link))
                 {
                     FilteredOutput.Add(line);
                     Parts.Add($"PART{part}: {link}");
                     return true;
                 }
-                else
-                {
-                    FilteredOutput.Add(line);
-                    Mirrors.Add($"MIRROR : {link}");
-                    return true;
-                }
             }
 
-
+            if (containsMirror || containsPart)
+            {
+                if (GetMirrorAndLink(line, ref part, ref link))
+                {
+                    FilteredOutput.Add(line);
+                    Mirrors.Add($"MIRROR {part}: {link}");
+                    return true;
+                }
+                else //LINK or PART without a number
+                {
+                    var linkMatch = regSingleLink.Match(line);
+                    if (linkMatch.Success)
+                    {
+                        FilteredOutput.Add(line);
+                        Mirrors.Add($"MIRROR : {linkMatch.Value}");
+                        return true;
+                    }
+                }
+            }
 
             return false;
         }

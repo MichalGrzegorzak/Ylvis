@@ -1,6 +1,9 @@
-﻿using PropertyChanged;
+﻿using System;
+using PropertyChanged;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
+using LiteDB;
 using UrlExtractor.Model;
 using UrlExtractor.Wpf.Model;
 
@@ -23,11 +26,20 @@ namespace UrlExtractor.Wpf.ViewModel
 
         public async Task PopulatePriceInfoFromWeb()
         {
-            ItemPriceFromWeb = "- retrieving item price information... -";
-            
+            ItemPriceFromWeb = "- saving to file... -";
+
             // var result = await ItemPriceLookupModel.GetItemPriceFromWeb(Item);
 
-            ItemPriceFromWeb = await Task.FromResult("NO WEB FOR YOU"); // result;
+            int count = 0;
+            using (var repo = new LiteRepository("test.db"))
+            {
+                //var allPosts = .ToList();
+                repo.Insert(Item);
+                count = repo.Query<ClipboardPost>().Count();
+
+            }
+
+            ItemPriceFromWeb = await Task.FromResult($"SAVED count:{count}"); // result;
         }
         
         public string RawItemText => Item.Text;
