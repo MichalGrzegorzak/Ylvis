@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using LiteDB;
+using UrlExtractor.Model;
+using UrlExtractor.Wpf.ViewModel;
 
 namespace UrlExtractor.Wpf.Forms
 {
@@ -21,6 +24,7 @@ namespace UrlExtractor.Wpf.Forms
     {
         LogWindow formLogWindow = new LogWindow();
         ListView formListView = new ListView();
+        DetailsView formDetailsView = new DetailsView();
 
         public Start()
         {
@@ -35,6 +39,19 @@ namespace UrlExtractor.Wpf.Forms
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             formListView.Show();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            ClipboardPost post;
+            using (var repo = new LiteRepository("test.db"))
+            {
+                post = repo.Query<ClipboardPost>().FirstOrDefault();
+            }
+
+            formDetailsView.Data = new ClipboardVm(post);
+            formDetailsView.Show();
+
         }
     }
 }

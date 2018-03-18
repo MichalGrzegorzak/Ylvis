@@ -5,16 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UrlExtractor.Wpf.Forms"
         mc:Ignorable="d"
-        Title="ListView" Height="450" Width="800" AutomationProperties.Name="ListView" Loaded="Window_Loaded">
+        Title="ListView" Height="450" Width="800"  Loaded="Window_Loaded" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="89*"/>
             <ColumnDefinition Width="43*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="MyGrid" AutoGenerateColumns="True" Grid.ColumnSpan="2">
+        <DataGrid x:Name="dataGrid" AutoGenerateColumns="True" Grid.ColumnSpan="2">
             <DataGrid.Columns>
 
             </DataGrid.Columns>
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                </Style>
+            </DataGrid.Resources>
         </DataGrid>
     </Grid>
 </Window>

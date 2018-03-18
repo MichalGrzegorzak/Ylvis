@@ -77,8 +77,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\FormPanel\FormGroup.cs" />
+    <Compile Include="Controls\FormPanel\FormGroupHost.cs" />
+    <Compile Include="Controls\FormPanel\FormPanel.cs" />
+    <Compile Include="Controls\FormPanel\IFormPanelCoordinator.cs" />
+    <Compile Include="Controls\FormPanel\OkCancelFrame.cs" />
     <Compile Include="Controls\ItemDisplay.xaml.cs">
       <DependentUpon>ItemDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DetailsView.xaml.cs">
+      <DependentUpon>DetailsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\ListView.xaml.cs">
       <DependentUpon>ListView.xaml</DependentUpon>
@@ -87,10 +95,15 @@
       <DependentUpon>Start.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\LootItem.cs" />
+    <Compile Include="ViewModel\ClipboardVm.cs" />
     <Compile Include="ViewModel\ItemLogViewModel.cs" />
     <Compile Include="ViewModel\ItemPriceLookupModel.cs" />
     <Compile Include="ViewModel\LootItemViewModel.cs" />
     <Page Include="Controls\ItemDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\DetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,6 +171,10 @@
     <ProjectReference Include="..\PoeItemAnalyzer\WpfClipboardMonitor\WpfClipboardMonitor.csproj">
       <Project>{9D38DFDC-9EA0-4F5D-8E7D-2E52C415A2DD}</Project>
       <Name>WpfClipboardMonitor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\_Ylvis\Ylvis.Utils\Ylvis.Utils.csproj">
+      <Project>{224b2a16-0109-43bc-a2ce-16ecf5dba6e3}</Project>
+      <Name>Ylvis.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

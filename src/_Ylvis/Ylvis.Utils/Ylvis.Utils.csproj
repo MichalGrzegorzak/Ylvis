@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{224B2A16-0109-43BC-A2CE-16ECF5DBA6E3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ylvis.Utils</RootNamespace>
+    <AssemblyName>Ylvis.Utils</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentValidation, Version=5.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Solution\packages\FluentValidation.5.6.2.0\lib\portable-net40+sl50+wp80+win8+wpa81\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\Solution\packages\log4net.2.0.4\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\Solution\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions\Enumerators\DictionaryExtension.cs" />
+    <Compile Include="Extensions\Enumerators\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\GeneralExtensions.cs" />
+    <Compile Include="Extensions\GetValueOrDefault.cs" />
+    <Compile Include="Extensions\Enumerators\IEnumerableExtension.cs" />
+    <Compile Include="Features\Io\DirHlp.cs" />
+    <Compile Include="Helpers\IsNull.cs" />
+    <Compile Include="Extensions\Enumerators\ListExtension.cs" />
+    <Compile Include="Extensions\MathExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtension.cs" />
+    <Compile Include="Extensions\PropertyInfoExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Features\AppSettings\ConfigurationBase.cs" />
+    <Compile Include="Features\AppSettings\ConfigurationManagerWrapper.cs" />
+    <Compile Include="Features\AppSettings\IConfigurationManager.cs" />
+    <Compile Include="Features\AutoHashing\IAutoHash.cs" />
+    <Compile Include="Features\AutoHashing\NhLinqExtensionMethods.cs" />
+    <Compile Include="Features\Cloning\CloneHelper.cs" />
+    <Compile Include="Features\Debug\Dbg.cs" />
+    <Compile Include="Features\ExtendentEnum\EnumDescription.cs" />
+    <Compile Include="Features\ExtendentEnum\KeyValueTriplet.cs" />
+    <Compile Include="Features\ExtendentEnum\SpecializedEnum.cs" />
+    <Compile Include="Features\ExtendentEnum\TestySpecializedEnum.cs" />
+    <Compile Include="Features\Finalizer.cs" />
+    <Compile Include="Features\Hashes\DontHash.cs" />
+    <Compile Include="Features\Hashes\HashHelper.cs" />
+    <Compile Include="Features\Linq\PredicateBuilder.cs" />
+    <Compile Include="Features\Logging\Exception.cs" />
+    <Compile Include="Features\Paging\IPager.cs" />
+    <Compile Include="Features\Paging\IQuerable.cs" />
+    <Compile Include="Features\Proceses\ProcessHlp.cs" />
+    <Compile Include="Features\Reflection\PropertyResolver.cs" />
+    <Compile Include="Features\Reflection\ReflectClassFind.cs" />
+    <Compile Include="Features\Reflection\Reflector.cs" />
+    <Compile Include="Features\Reflection\StaticReflection.cs" />
+    <Compile Include="Features\Serialization\SerializeHelper.cs" />
+    <Compile Include="Features\TypesParsing\DateHelper.cs" />
+    <Compile Include="Features\TypesParsing\Parser.cs" />
+    <Compile Include="Features\Validation\DefaultValidatorExtensions.cs" />
+    <Compile Include="Features\Validation\GreaterThanNullableDate.cs" />
+    <Compile Include="Features\Validation\Iban.cs" />
+    <Compile Include="Features\Validation\IbanValidator.cs" />
+    <Compile Include="Features\Validation\NumericValidator.cs" />
+    <Compile Include="Features\Threading\BackgroundWorkedHlp.cs" />
+    <Compile Include="Helpers\Enum.cs" />
+    <Compile Include="Features\Io\FileHlp.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Features\Logging\SimpleLog.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\Enums\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

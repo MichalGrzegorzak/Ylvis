@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using LiteDB;
 using UrlExtractor.Model;
+using UrlExtractor.Wpf.ViewModel;
 
 namespace UrlExtractor.Wpf.Forms
 {
@@ -35,9 +36,21 @@ namespace UrlExtractor.Wpf.Forms
                 allPosts = repo.Query<ClipboardPost>().ToList();
             }
 
-            MyGrid.ItemsSource = allPosts;                                          //attempting to bind the list to a datagrid
+            dataGrid.ItemsSource = allPosts;//attempting to bind the list to a datagrid
         }
 
-   
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (dataGrid.SelectedItem == null) return;
+            ClipboardPost data = dataGrid.SelectedItem as ClipboardPost;
+
+            DataGridRow row = sender as DataGridRow;
+            var clipboardVm = new ClipboardVm(data);
+
+            DetailsView view = new DetailsView();
+            view.Data = clipboardVm;
+            view.Show();
+            // Some operations with this row
+        }
     }
 }

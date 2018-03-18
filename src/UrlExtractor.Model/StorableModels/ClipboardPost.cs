@@ -18,27 +18,6 @@ namespace UrlExtractor.Model
         //public List<Items> CategorizedDownloads { get; set; }
     }
 
-    public class ClipboardVm
-    {
-        public ClipboardVm(ClipboardPost post)
-        {
-            Url = post.FromUrl;
-            Pass = post.Pass;
-            DlKey = post.DlKey;
-            Downloads = post.Downloads
-        }
-
-        public string Url { get; set; }
-        //public string Text { get; set; }
-
-        public string Pass { get; set; }
-        public string DlKey { get; set; }
-
-        public string Downloads { get; set; }
-        public string Previews { get; set; }
-        //public List<Items> CategorizedDownloads { get; set; }
-    }
-
     public abstract class PostFactory
     {
         public static ClipboardPost CreatePost(string rawText, string url = "unknown")

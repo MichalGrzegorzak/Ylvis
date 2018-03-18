@@ -7,6 +7,7 @@
         Title="MainWindow" Height="506.653" Width="708.468">
     <Grid Margin="10,0,0,10" HorizontalAlignment="Left" Width="680" Height="456" VerticalAlignment="Bottom">
         <Label x:Name="DisplayArea" Margin="0,0,0,33">(Waiting)</Label>
-        <Button x:Name="openLogWindow" Content="Open Log Window" Margin="0,428,0,0" Click="openLogWindow_Click" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="119"/>
+        <Button x:Name="openLogWindow" Content="Open Log Window" Margin="0,428,0,0" Click="openLogWindow_Click" 
+                Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="119"/>
     </Grid>
 </Window>
