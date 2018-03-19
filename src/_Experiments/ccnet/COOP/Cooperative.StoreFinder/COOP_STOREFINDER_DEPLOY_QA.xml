@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<project name="CO-OP Store Finder - Deploy QA">
+ <workingDirectory>C:\GIT_Working_Directory\COOP\Coop.StoreFinder\COOP_STOREFINDER_DEPLOY_QA</workingDirectory>
+  <artifactDirectory>c:\CCNet_Artefacts_Directory\Coop.StoreFinder\COOP_STOREFINDER_DEPLOY_QA</artifactDirectory>
+  <webURL>http://vmp-ccnet/server/local/project/CO-OP%20Store%20Finder%20Deploy%20QA/ViewProjectReport.aspx</webURL>
+  <category>Internal Deployment</category>
+
+    <labeller type="assemblyVersionLabeller">
+        <major>1</major>
+        <minor>0</minor>
+        <build>0</build>
+        <incrementOnFailure>false</incrementOnFailure>
+    </labeller>
+
+    <publishers>
+        <xmllogger logDir="buildlogs" />
+        <artifactcleanup cleanUpMethod="KeepLastXBuilds" cleanUpValue="50" />
+        <rss items="50" />
+    </publishers>
+
+	<sourcecontrol type="git">
+		<executable>C:\Program Files (x86)\Git\bin\git.exe</executable>
+		<repository>git@bitbucket.org:fortunecookie/cooperative.storefinder.git</repository>
+		<branch>development</branch>
+		<workingDirectory>C:\GIT_Working_Directory\COOP\Coop.StoreFinder\COOP_STOREFINDER_DEPLOY_QA</workingDirectory>
+		<timeout units="seconds">7000</timeout>
+	</sourcecontrol>
+  
+  <tasks>  
+  
+	  <!-- build API project -->
+	  <msbuild>
+		<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+		<workingDirectory>C:\GIT_Working_Directory\COOP\Coop.StoreFinder\COOP_STOREFINDER_DEPLOY_QA</workingDirectory>
+		<projectFile>Cooperative.StoreFinder.Api\Cooperative.StoreFinder.Api.csproj</projectFile>
+		<buildArgs>/noconsolelogger /v:diag /p:Configuration=PossibleQA</buildArgs>
+		<targets>Build</targets>
+		<timeout>900</timeout>
+		<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+	  </msbuild>
+	  
+	  <!-- build Web project -->
+	  <msbuild>
+		<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+		<workingDirectory>C:\GIT_Working_Directory\COOP\Coop.StoreFinder\COOP_STOREFINDER_DEPLOY_QA</workingDirectory>
+		<projectFile>Cooperative.StoreFinder.Web\Cooperative.StoreFinder.Web.csproj</projectFile>
+		<buildArgs>/noconsolelogger /v:diag /p:Configuration=PossibleQA</buildArgs>
+		<targets>Build</targets>
+		<timeout>900</timeout>
+		<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+	  </msbuild>
+	  	  
+	 <!-- deployment packages  -->
+		<exec>
+			<executable>cmd.exe</executable>
+			<buildArgs>/c "if exist C:\GIT_Working_Directory\COOP\Coop.StoreFinder\COOP_STOREFINDER_DEPLOY_QA\Package del C:\GIT_Working_Directory\COOP\Coop.StoreFinder\COOP_STOREFINDER_DEPLOY_QA\Package\*.* /Q /F"</buildArgs>
+		</exec>
+		<msbuild>
+			<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+			<projectFile>Cooperative.StoreFinder.Api\Cooperative.StoreFinder.Api.csproj</projectFile>
+			<buildArgs>/noconsolelogger /v:diag /t:Package /p:PackageLocation="C:\GIT_Working_Directory\COOP\Coop.StoreFinder\COOP_STOREFINDER_DEPLOY_QA\Package\Cooperative.StoreFinder.Api.zip" /p:Configuration=PossibleQA</buildArgs>
+			<targets>Package</targets>
+			<timeout>900</timeout>
+			<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+		</msbuild> 
+		<msbuild>
+			<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+			<projectFile>Cooperative.StoreFinder.Web\Cooperative.StoreFinder.Web.csproj</projectFile>
+			<buildArgs>/noconsolelogger /v:diag /t:Package /p:PackageLocation="C:\GIT_Working_Directory\COOP\Coop.StoreFinder\COOP_STOREFINDER_DEPLOY_QA\Package\Cooperative.StoreFinder.Web.zip" /p:Configuration=PossibleQA</buildArgs>
+			<targets>Package</targets>
+			<timeout>900</timeout>
+			<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+		</msbuild> 
+	  
+	  <!--  Deploy to QA (load balanced)  -->
+		<exec>
+			<executable>C:\GIT_Working_Directory\COOP\Coop.StoreFinder\COOP_STOREFINDER_DEPLOY_QA\Package\Cooperative.StoreFinder.Api.deploy.cmd</executable>
+			<buildArgs>/y /m:vmp-coop -enableRule:AppOffline</buildArgs>
+			<buildTimeoutSeconds>6000</buildTimeoutSeconds>
+		</exec>
+		<exec>
+			<executable>C:\GIT_Working_Directory\COOP\Coop.StoreFinder\COOP_STOREFINDER_DEPLOY_QA\Package\Cooperative.StoreFinder.Web.deploy.cmd</executable>
+			<buildArgs>/y /m:vmp-coop -enableRule:AppOffline</buildArgs>
+			<buildTimeoutSeconds>6000</buildTimeoutSeconds>
+		</exec>
+		<exec>
+			<executable>C:\GIT_Working_Directory\COOP\Coop.StoreFinder\COOP_STOREFINDER_DEPLOY_QA\Package\Cooperative.StoreFinder.Api.deploy.cmd</executable>
+			<buildArgs>/y /m:vmp-coop2 -enableRule:AppOffline</buildArgs>
+			<buildTimeoutSeconds>6000</buildTimeoutSeconds>
+		</exec>
+		<exec>
+			<executable>C:\GIT_Working_Directory\COOP\Coop.StoreFinder\COOP_STOREFINDER_DEPLOY_QA\Package\Cooperative.StoreFinder.Web.deploy.cmd</executable>
+			<buildArgs>/y /m:vmp-coop2 -enableRule:AppOffline</buildArgs>
+			<buildTimeoutSeconds>6000</buildTimeoutSeconds>
+		</exec>
+    </tasks>
+</project>

@@ -1,0 +1,17 @@
+<project name="CC.NET updater">
+    <triggers>
+        <intervalTrigger seconds="30" />
+    </triggers>
+    
+	<sourcecontrol type="svn">
+		<trunkUrl>svn://vm-svn.fcdev.local/fc-internal/CruiseControl/1.8/PL/server</trunkUrl>
+		<username>dev.tools</username>
+		<password>KL129377</password>
+		<workingDirectory>C:\Program Files (x86)\CruiseControl.NET\server</workingDirectory>
+		<executable>C:\Program Files\CollabNet\Subversion Client\svn.exe</executable>
+		<cleanUp>true</cleanUp>
+	</sourcecontrol>
+
+	
+</project>
+

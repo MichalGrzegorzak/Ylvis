@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DB3CE696-4C63-4CF9-832F-453F325F248C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Showoff</RootNamespace>
+    <AssemblyName>Showoff</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Elmah">
+      <HintPath>packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServerCompact">
+      <HintPath>packages\EntityFramework.SqlServerCompact.6.1.1\lib\net45\EntityFramework.SqlServerCompact.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Find">
+      <HintPath>libs\EPiServer.Find.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=3.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\structuremap.3.0.3.116\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.Net4">
+      <HintPath>packages\structuremap.3.0.3.116\lib\net40\StructureMap.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.Web">
+      <HintPath>packages\structuremap.web.3.0.0.108\lib\net40\StructureMap.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.SqlServer.Compact.4.0.8854.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlServerCe.Entity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.SqlServer.Compact.4.0.8854.1\lib\net40\System.Data.SqlServerCe.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Core\Logging\ElmahExtension.cs" />
+    <Compile Include="Core\Logging\LoggerConfiguration.cs" />
+    <Compile Include="Core\Logging\NoticeLogger.cs" />
+    <Compile Include="Core\NoticesRegistry.cs" />
+    <Compile Include="DAL\Context\AutoDrop.cs" />
+    <Compile Include="Features\NoticesIndexer\Exceptions\EpiFindException.cs" />
+    <Compile Include="Features\Wcs\IWcsFielsd.cs" />
+    <Compile Include="Features\Wcs\ProductConfigSessionData.cs" />
+    <Compile Include="Features\Wcs\WcsBaseFields.cs" />
+    <Compile Include="Features\Wcs\WcsOnlineFields.cs" />
+    <Compile Include="DAL\Migrations\201406252213253_InitialConfiguration.cs" />
+    <Compile Include="DAL\Migrations\201406252213253_InitialConfiguration.Designer.cs">
+      <DependentUpon>201406252213253_InitialConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Migrations\201406252215130_FirstRecord.cs" />
+    <Compile Include="DAL\Migrations\201406252215130_FirstRecord.Designer.cs">
+      <DependentUpon>201406252215130_FirstRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tests\WcsDataProviderTests.cs" />
+    <Compile Include="DAL\Context\Initializer.cs" />
+    <Compile Include="DAL\Context\NoticesContext.cs" />
+    <Compile Include="DAL\Context\NoticesContextExtensions.cs" />
+    <Compile Include="DAL\Entities\AuditFuneralNotice.cs" />
+    <Compile Include="DAL\Entities\FuneralNotice.cs" />
+    <Compile Include="DAL\Entities\FuneralNoticeBase.cs" />
+    <Compile Include="DAL\Enums\Enums.cs" />
+    <Compile Include="DAL\Enums\ResponseCode.cs" />
+    <Compile Include="Core\Configuration\ConfigurationBase.cs" />
+    <Compile Include="Core\Configuration\ConfigurationManagerWrapper.cs" />
+    <Compile Include="Core\Configuration\IConfigurationManager.cs" />
+    <Compile Include="Core\Extensions\CacheExtension.cs" />
+    <Compile Include="Core\Extensions\DictionaryExtension.cs" />
+    <Compile Include="Core\Extensions\EnumExtension.cs" />
+    <Compile Include="Core\Extensions\GeneralExtensions.cs" />
+    <Compile Include="Core\Extensions\GroupsConversionExtension.cs" />
+    <Compile Include="Core\Extensions\IEnumerbale.cs" />
+    <Compile Include="Core\Extensions\IQuerable.cs" />
+    <Compile Include="Core\Extensions\JsonExtensions.cs" />
+    <Compile Include="Core\Extensions\ListExtension.cs" />
+    <Compile Include="Core\Extensions\NameValueCollectionExtensions.cs" />
+    <Compile Include="Core\Extensions\Parser.cs" />
+    <Compile Include="Core\Extensions\SPExtension.cs" />
+    <Compile Include="Core\Extensions\StringExtensions.cs" />
+    <Compile Include="Core\Extensions\XmlSerializerExtension.cs" />
+    <Compile Include="Core\SessionState\DefaultSession\DefaultSessionState.cs" />
+    <Compile Include="Core\SessionState\DefaultSession\ISessionState.cs" />
+    <Compile Include="Core\SessionState\DefaultSession\SessionExtensions.cs" />
+    <Compile Include="Core\SessionState\SessionDataProvider.cs" />
+    <Compile Include="Features\NoticesIndexer\Dto\DTOMessageType.cs" />
+    <Compile Include="Features\NoticesIndexer\Dto\FuneralNoticeEntityDto.cs" />
+    <Compile Include="Features\NoticesIndexer\Dto\IFuneralNoticeEntityDto.cs" />
+    <Compile Include="Features\NoticesIndexer\EpiFindNotice.cs" />
+    <Compile Include="Features\NoticesIndexer\INoticesIndexer.cs" />
+    <Compile Include="Features\NoticesIndexer\NoticesIndexer.cs" />
+    <Compile Include="Features\NoticesIndexer\NoticesSearchOptions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\FuneralNotices\EF_Verify_Entities.cs" />
+    <Compile Include="Tests\FuneralNotices\EF_Verify_Logger.cs" />
+    <Compile Include="Tests\FuneralNotices\Elmah\LoggingHelper.cs" />
+    <Compile Include="Tests\FuneralNotices\Helpers\EntityFrameworkNewDatabase.cs" />
+    <Compile Include="Tests\FuneralNotices\Helpers\FuneraNoticeBuilder.cs" />
+    <Compile Include="Tests\FuneralNotices\Helpers\NoticesStructureInitBase.cs" />
+    <Compile Include="Tests\FuneralNotices\Verify_LoggetSettings.cs" />
+    <Compile Include="Tests\FuneralNotices\Verify_NoticesIndexer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="DBs\Elmah.sdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DBs\Notices.sdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.SQL.Server.Compact.4.0">
+      <Visible>False</Visible>
+      <ProductName>SQL Server Compact 4.0 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DAL\Migrations\201406252213253_InitialConfiguration.resx">
+      <DependentUpon>201406252213253_InitialConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\Migrations\201406252215130_FirstRecord.resx">
+      <DependentUpon>201406252215130_FirstRecord.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    if not exist "$(TargetDir)x86" md "$(TargetDir)x86"
+    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8854.1\NativeBinaries\x86\*.*" "$(TargetDir)x86"
+    if not exist "$(TargetDir)amd64" md "$(TargetDir)amd64"
+    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8854.1\NativeBinaries\amd64\*.*" "$(TargetDir)amd64"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

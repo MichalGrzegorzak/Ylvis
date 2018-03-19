@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<project name="CO-OP FOOD">
+  <workingDirectory>C:\GIT_Working_Directory\COOP\FOOD\CI</workingDirectory>
+  <artifactDirectory>c:\CCNet_Artefacts_Directory\COOP\FOOD\CI</artifactDirectory>
+  <webURL>http://vmp-ccnet.fcuk.local/server/local/project/CO-OP%20FOOD/ViewProjectReport.aspx</webURL>
+  <category>Continuous Integration</category>
+  
+  <labeller type="assemblyVersionLabeller">
+	<major>1</major>
+	<minor>0</minor>
+	<incrementOnFailure>false</incrementOnFailure>
+  </labeller>
+  
+  <publishers>
+    <xmllogger logDir="buildlogs" />
+    <artifactcleanup cleanUpMethod="KeepLastXBuilds" cleanUpValue="50" />
+      <rss items="50" />
+  </publishers>
+  
+  <triggers>
+    <intervalTrigger seconds="60" name="continuous" />
+  </triggers>
+  
+  <sourcecontrol type="git">
+    <executable>C:\Program Files (x86)\Git\bin\git.exe</executable>
+    <repository>git@bitbucket.org:fortunecookie/coop.food.git</repository>
+    <branch>develop</branch>
+	<fetchSubmodules>true</fetchSubmodules>
+    <workingDirectory>C:\GIT_Working_Directory\COOP\FOOD\CI</workingDirectory>
+    <timeout units="seconds">300</timeout>
+  </sourcecontrol>
+  
+  <tasks>
+	
+	  <!-- build web application -->
+	  <msbuild>
+		<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+		<workingDirectory>C:\GIT_Working_Directory\COOP\FOOD\CI</workingDirectory>
+		<projectFile>Solution Files\Cooperative.Food.Web.sln</projectFile>
+		<buildArgs>/noconsolelogger /v:diag /p:Configuration=Release</buildArgs>
+		<targets>Build</targets>
+		<timeout>900</timeout>
+		<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+	  </msbuild>
+	  
+		<!-- StyleCop -->
+		<msbuild>
+			<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+			<projectFile>Solution Files\CI-StyleCop.proj</projectFile>
+			<buildArgs>/noconsolelogger /v:diag /p:SolutionRoot="C:\GIT_Working_Directory\COOP\FOOD\CI" /p:ArtifactDirectory="c:\CCNet_Artefacts_Directory\COOP\FOOD\CI\buildlogs"</buildArgs>
+			<targets>StyleCop</targets>
+			<timeout>900</timeout>
+			<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+		</msbuild>
+		
+		<!-- Unit tests -->
+	  	<!-- nunit>
+			<path>C:\Program Files (x86)\NUnit 2.6.2\bin\nunit-console.exe</path>
+			<assemblies>
+				<assembly>C:\SVN_Working_Directory\COOP_FNC\COOP_CI\Funeralcare.Web.Mvc.Tests\bin\Funeralcare.Web.Tests.dll</assembly>
+			</assemblies>
+		</nunit -->
+		
+		<!-- deployment package  -->
+		<!--exec>
+			<executable>cmd.exe</executable>
+			<buildArgs>/c "if exist C:\GIT_Working_Directory\COOP\FOOD\CI\Package\Release del C:\GIT_Working_Directory\COOP\FOOD\CI\Package\*.* /Q /F"</buildArgs>
+		</exec>
+		<msbuild>
+			<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+			<projectFile>Cooperative.Food.Web\Cooperative.Food.Web.csproj</projectFile>
+			<buildArgs>/noconsolelogger /v:diag /t:Package /p:PackageLocation="C:\GIT_Working_Directory\COOP\FOOD\CI\Package\Cooperative.Food.Web.zip" /p:Configuration=DEV</buildArgs>
+			<targets>Package</targets>
+			<timeout>900</timeout>
+			<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+		</msbuild--> 
+	
+		<!--exec>
+			<executable>C:\GIT_Working_Directory\COOP\FOOD\CI\Package\Cooperative.Food.Web.deploy.cmd</executable>
+			<buildArgs>/y /m:172.21.2.77 -enableRule:AppOffline</buildArgs>
+			<buildTimeoutSeconds>6000</buildTimeoutSeconds>
+		</exec-->
+				
+		<!-- merge the results -->
+		<merge>
+			<files>
+				<file>c:\CCNet_Artefacts_Directory\COOP\FOOD\CI\buildlogs\stylecop-results.xml</file>
+			</files>
+		</merge>
+	</tasks>
+</project>

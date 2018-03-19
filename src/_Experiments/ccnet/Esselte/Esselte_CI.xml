@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<project name="Esselte">
+  <workingDirectory>c:\SVN_Working_Directory\Esselte\Esselte_Stable_CI</workingDirectory>
+  <artifactDirectory>c:\CCNet_Artefacts_Directory\Esselte\Esselte_Stable_CI</artifactDirectory>
+  <webURL>http://vmp-ccnet.fcuk.local/server/local/project/Esselte/ViewProjectReport.aspx</webURL>
+  <category>Continuous Integration</category>
+  
+  <labeller type="assemblyVersionLabeller">
+		<major>1</major>
+		<minor>0</minor>
+		<build>0</build>
+		<incrementOnFailure>false</incrementOnFailure>
+  </labeller>
+  
+  <publishers>
+    <xmllogger logDir="buildlogs" />
+    <artifactcleanup cleanUpMethod="KeepLastXBuilds" cleanUpValue="50" />
+      <rss items="50" />
+  </publishers>
+  
+  <triggers>
+    <intervalTrigger seconds="60" name="continuous" />
+  </triggers>
+  
+  <sourcecontrol type="svn">
+    <trunkUrl>svn://vm-svn.fcdev.local/enp/trunk/Esselte Stable</trunkUrl>
+    <username>dev.tools</username>
+    <password>KL129377</password>
+    <workingDirectory>c:\SVN_Working_Directory\Esselte\Esselte_Stable_CI</workingDirectory>
+    <executable>C:\Program Files\CollabNet\Subversion Client\svn.exe</executable>
+  </sourcecontrol>
+  
+  <tasks>
+	  
+  
+	  <!-- build web application -->
+	  <msbuild>
+		<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+		<workingDirectory>c:\SVN_Working_Directory\Esselte\Esselte_Stable_CI</workingDirectory>
+		<projectFile>Esselte.Stable.sln</projectFile>
+		<buildArgs>/noconsolelogger /v:diag /p:ReferencePath="C:\SVN_Working_Directory\Esselte\Esselte_Stable_CI\Lib"</buildArgs>
+		<targets>Build</targets>
+		<timeout>900</timeout>
+		<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+	  </msbuild>
+	  	  
+	  <!-- Unit tests -->
+	  <!-- nunit>
+		<path>C:\Program Files (x86)\NUnit 2.6.2\bin\nunit-console.exe</path>
+		<assemblies>
+		  <assembly></assembly>
+		</assemblies>
+	  </nunit -->
+	  	  
+  </tasks>
+</project>

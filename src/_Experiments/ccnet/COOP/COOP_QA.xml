@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<project name="CO-OP Funeralcare - Deploy QA">
+ <workingDirectory>c:\SVN_Working_Directory\COOP_FNC\COOP_QA</workingDirectory>
+  <artifactDirectory>c:\CCNet_Artefacts_Directory\COOP_FNC\COOP_QA</artifactDirectory>
+  <webURL>http://vmp-ccnet/server/local/project/CO-OP%20Funeralcare%20-%20Deploy%20QA/ViewProjectReport.aspx</webURL>
+  <category>Internal Deployment</category>
+
+    <labeller type="assemblyVersionLabeller">
+        <major>1</major>
+        <minor>0</minor>
+        <build>0</build>
+        <incrementOnFailure>false</incrementOnFailure>
+    </labeller>
+
+    <publishers>
+        <xmllogger logDir="buildlogs" />
+        <artifactcleanup cleanUpMethod="KeepLastXBuilds" cleanUpValue="50" />
+        <rss items="50" />
+    </publishers>
+
+	 <sourcecontrol type="svn">
+    <trunkUrl>svn://vm-svn.fcdev.local/funeralcare/trunk</trunkUrl>
+    <username>dev.tools</username>
+    <password>KL129377</password>
+    <workingDirectory>c:\SVN_Working_Directory\COOP_FNC\COOP_QA</workingDirectory>
+    <executable>C:\Program Files\CollabNet\Subversion Client\svn.exe</executable>
+  </sourcecontrol>
+  
+  <tasks>  
+  
+	  <!-- build web application -->
+	  <msbuild>
+		<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+		<workingDirectory>c:\SVN_Working_Directory\COOP_FNC\COOP_QA</workingDirectory>
+		<projectFile>SolutionFiles\Funeralcare.Web.sln</projectFile>
+		<buildArgs>/noconsolelogger /v:diag /p:ReferencePath="C:\SVN_Working_Directory\COOP_FNC\COOP_QA\Lib\Funeralcare.Web.Lib" /p:Configuration=QA</buildArgs>
+		<targets>Build</targets>
+		<timeout>900</timeout>
+		<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+	  </msbuild>
+	  	  
+	 <!-- deployment package  -->
+		<exec>
+			<executable>cmd.exe</executable>
+			<buildArgs>/c "if exist C:\SVN_Working_Directory\COOP_FNC\COOP_QA\Package\DEV del C:\SVN_Working_Directory\COOP_FNC\COOP_QA\Package\*.* /Q /F"</buildArgs>
+		</exec>
+		<msbuild>
+			<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+			<projectFile>Funeralcare.Web.Mvc\Funeralcare.Web.csproj</projectFile>
+			<buildArgs>/noconsolelogger /v:diag /t:Package /p:PackageLocation="C:\SVN_Working_Directory\COOP_FNC\COOP_QA\Package\Funeralcare.Web.zip" /p:Configuration=QA</buildArgs>
+			<targets>Package</targets>
+			<timeout>900</timeout>
+			<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+		</msbuild> 
+	  
+	  <!--  Deploy to DEV  -->
+		<exec>
+			<executable>C:\SVN_Working_Directory\COOP_FNC\COOP_QA\Package\Funeralcare.Web.deploy.cmd</executable>
+			<buildArgs>/y /m:172.21.2.86 -enableRule:AppOffline</buildArgs>
+			<buildTimeoutSeconds>6000</buildTimeoutSeconds>
+		</exec>
+		
+		<exec>
+			<executable>C:\SVN_Working_Directory\COOP_FNC\COOP_QA\Package\Funeralcare.Web.deploy.cmd</executable>
+			<buildArgs>/y /m:172.21.2.87 -enableRule:AppOffline</buildArgs>
+			<buildTimeoutSeconds>6000</buildTimeoutSeconds>
+		</exec>
+    </tasks>
+</project>

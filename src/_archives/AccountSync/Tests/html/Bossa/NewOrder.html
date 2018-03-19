@@ -1,0 +1,947 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<link rel="stylesheet" type="text/css" href="../style/bos2.css">
+<style>
+DIV.page {margin:10 0 20 0;width:645}
+.abs {position:absolute;}
+.ar {text-align:right;}
+</style>
+<title>DM BOŚ: zlecenie</title>
+<script language="JavaScript">
+function clear( f )
+{
+    f.value = '';
+}
+function set( f, v )
+{
+    if ( v != '' ) f.value = v;
+}
+function get( f )
+{
+    return f.value;
+}
+var SecIndex = 0;
+var isSubmitted = false;
+var secs = new Array();
+
+
+var firstTimeOpen = 0; 
+var nextDayOrder; 
+var currentDate = '17.08.2009 14:11:28';
+var currentDate = currentDate.split(" ");
+var currentDateArray = currentDate[0].split(".");
+var currentTimeArray = currentDate[1].split(":");
+    
+var day = currentDateArray[0];
+var month = currentDateArray[1];
+var year = currentDateArray[2];
+var hour=currentTimeArray[0];
+var minute=currentTimeArray[1];
+var seconds=currentTimeArray[2];
+    
+var currentDateFormated = new Date(year,month-1,day,hour,minute,seconds) 
+var marginDateFormated_15_30 = new Date(year,month-1,day,15,30,0);
+var marginDateFormated_16_30 = new Date(year,month-1,day,16,30,0);
+var marginDateFormated_16_35 = new Date(year,month-1,day,16,35,0);
+
+
+var marketDateFrom = '17.08.2009';
+var marketDateTo = '18.08.2009';
+var marketID = '6';
+var ddm = new Boolean("");
+
+function sec( nazwa, kod, typ, nnazwa, rynek )
+{
+    this.secname = nazwa;
+    this.seccode = kod;
+    this.sectype = typ;
+    this.secsecname = nnazwa;
+    this.secmarket = rynek;
+    this.isLoaded = false;
+}
+var flts = new Array();
+function flt( typ, nazwa )
+{
+    this.sectype = typ;
+    this.secname = ( nazwa=='' ? null : nazwa );
+    this.equals = function( typ, nazwa )
+    {
+        return (this.sectype==typ && this.secname==( nazwa=='' ? null : nazwa ));
+    }
+    this.toString = function()
+    {
+        return ( this.sectype + ':' + ( this.secname==null ? ' - 0' : ' - ' + this.secname ) );
+    }
+}
+function getFlt( sectype, secname )
+{
+    for ( var i=0; i<flts.length; i++ )
+    {
+        if ( flts[i].equals( sectype, secname ) )
+        {
+            return flts[i];
+        }
+    }
+    return null;
+}
+function initFlt()
+{
+    for ( var i=0; i<secs.length; i++ )
+    {
+        var filter = getFlt( secs[i].sectype, null )
+        if ( filter == null )
+        {
+            flts[flts.length]=new flt( secs[i].sectype, null );
+        }
+        var filter = getFlt( secs[i].sectype, secs[i].secsecname )
+        if ( filter == null )
+        {
+            flts[flts.length]=new flt( secs[i].sectype, secs[i].secsecname );
+        }
+    }
+    flts.sort();
+    for ( var i=0; i<flts.length; i++ )
+    {
+        f.Filter.options[f.Filter.options.length] = new Option( getSecTypeName( flts[i].sectype ) + ( flts[i].secname==null?'':' - ' + flts[i].secname ), flts[i].sectype + ( flts[i].secname==null?'':':' + flts[i].secname ) );
+    }
+}
+function getSecTypeName( sectype )
+{
+    if ( sectype == 'F' ) return 'Kontrakty';
+    if ( sectype == 'P' ) return 'Opcje';
+    if ( sectype == 'J' ) return 'Jednostki';
+    if ( sectype == 'A' ) return 'Akcje';
+    if ( sectype == 'C' ) return 'Certyfikaty';
+    if ( sectype == 'O' ) return 'Obligacje';
+}
+function setFilter( sectype )
+{
+    f.SecCode.options.length=1;
+    var ind = sectype.indexOf( ':' );
+    var secname = '';
+    if ( ind > -1 )
+    {
+        secname = sectype.substring(ind+1);
+        sectype = sectype.substring(0,ind);
+    }
+    for ( var i=0; i<secs.length; i++ )
+    {
+        if ( sectype != '' && ( sectype != secs[i].sectype || ( secname != '' && secname != secs[i].secsecname ) ) )
+        {
+            continue;
+        }
+        f.SecCode.options[f.SecCode.options.length] = new Option( secs[i].secname, secs[i].seccode );
+    }
+}
+secs[secs.length]=new sec('FEURU09','PL0GF0000042','F','EUR', '6' );
+secs[secs.length]=new sec('FGBPU09','PL0GF0000182','F','GBP', '6' );
+secs[secs.length]=new sec('FKGHU09','PL0GF0000208','F','KGHM', '6' );
+secs[secs.length]=new sec('FPKOU09','PL0GF0000232','F','PKOBP', '6' );
+secs[secs.length]=new sec('FTPSU09','PL0GF0000240','F','TPSA', '6' );
+secs[secs.length]=new sec('FUSDU09','PL0GF0000034','F','USD', '6' );
+secs[secs.length]=new sec('FW20Z09','PL0GF0000281','F','WIG20', '6' );
+function init()
+{
+    window.focus();
+    f = document.forms.main;
+setFormColor( 'P2' );
+    initFlt();
+    setFilter('');
+    
+    nextDayOrder = isNextDayOrder();
+    
+    setDateType();
+     
+}
+
+function isNextDayOrder()
+{
+        value = false;
+        
+        if (ddm==false) 
+        {
+            if (marketID == 8) 
+            {
+                if ( currentDateFormated > marginDateFormated_15_30 && currentDateFormated < marginDateFormated_16_35)
+                {
+                    value=true ;                
+                }
+            
+            }
+            else if (marketID == 0 || marketID == 11) 
+            {
+                if ( currentDateFormated > marginDateFormated_16_30 && currentDateFormated < marginDateFormated_16_35)
+                {
+                    value=true ;                
+                }
+            }
+        }
+        return value;
+}
+
+function openStatement()
+{
+    var winX = (screen.availWidth - 680)*.5;
+    var winY = (screen.availHeight - 500)*.5;
+    statement = window.open( 'wyciag', 'w','scrollbars=yes,resizable=yes,width=680,height=500,left=' + winX + ',top=' + winY);
+    statement.focus();
+}
+function openHelp( url )
+{
+    var winX = (screen.availWidth - 400)*.5;
+    var winY = (screen.availHeight - 500)*.5;
+    help = window.open( url, 'h','scrollbars=yes,resizable=yes,width=400,height=500,left=' + winX + ',top=' + winY);
+    help.focus();
+}
+function setOrderBasket()
+{
+    if( calc() )
+    {
+        f.onsubmit=null;
+        freeze(true);
+        f.SecCode.disabled=false;
+        f.Basket.value='T';
+        f.action=document.location.pathname;
+        f.submit();
+    }
+}
+function setOrder( basket )
+{
+    if ( isSubmitted )
+    {
+        alert( 'Proszę czekać na odpowied? systemu!' );
+        return false;
+    }
+    else
+    {
+        if( calc() && confirm('Czy na pewno chcesz złożyć to zlecenie?'))
+        {
+            f.Basket.value='N';
+            isSubmitted = true;
+            freeze(true);
+            f.SecCode.disabled=false;
+            f.action=document.location.pathname;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
+function getSecID( seccode )
+{
+    for ( var i=0; i<secs.length; i++ )
+    {
+        if ( secs[i].seccode == seccode )
+        {
+            return i;
+        }
+    }
+}
+function setSecurity()
+{
+    if( f.SecCode.selectedIndex>0 )
+    {
+        SecIndex = getSecID( f.SecCode.value );
+        if ( secs[SecIndex].isLoaded )
+        {
+            fillSecOrderData();
+        }
+        else
+        {
+            var ajax = new AJAXInteraction( 'commission', setSecOrderData, 'SecCode=' + f.SecCode.value + '&OrdDateFrom=' + f.OrdDateFrom.value );
+            ajax.doPost();
+        }
+    }
+    else
+    {
+        if ( f.SecSubAcc110 ) clear( f.SecSubAcc110 );
+        if ( f.SecSubAcc110A ) clear( f.SecSubAcc110A );
+        if ( f.SecSubAccSCZA ) clear( f.SecSubAccSCZA );
+        if ( f.SecSubAccSCZB ) clear( f.SecSubAccSCZB );
+        if ( f.SecSubAccSCZC ) clear( f.SecSubAccSCZC );
+        if ( f.kocz ) clear( f.kocz );
+        if ( f.socz ) clear( f.socz );
+        if ( f.kurs ) clear( f.kurs );
+        if ( f.Portfolio ) clear( f.Portfolio );
+        if ( f.OrdGrossValue ) clear( f.OrdGrossValue );
+        if ( f.OrdCommission ) clear( f.OrdCommission );
+        if ( f.OrdNetValue ) clear( f.OrdNetValue );
+        if ( f.SecInterests ) clear( f.SecInterests );
+        if ( f.SecMultiplier ) clear( f.SecMultiplier );
+        if ( f.SecMarketName ) clear( f.SecMarketName );
+    }
+}
+function setOrdType()
+{
+    var type = f.OrdType.value;
+}
+function setDateType()
+{
+
+    if ( nextDayOrder && firstTimeOpen==0)
+    {
+            f.OrdDateType.selectedIndex=0;
+            f.OrdDateTo.value=marketDateTo;
+            firstTimeOpen=1;
+    }
+        
+  
+    if ( f.OrdDateType.value=='D' ) 
+    {
+       
+        if ( nextDayOrder )
+        {
+                f.OrdDateTo.value=marketDateTo;
+        }
+        
+        f.OrdDateTo.disabled=false;
+        
+    }
+    else 
+    { 
+        f.OrdDateTo.disabled=true; 
+        f.OrdDateTo.value = f.OrdDateFrom.value; 
+             
+    }
+    
+}
+function getFormColor( FormID )
+{
+    if ( FormID == 'M1' ) return '#009900';
+    else if ( FormID == 'M2' ) return '#0000FF';
+    else if ( FormID == 'M3' ) return '#AA9900';
+    else if ( FormID == 'M4' ) return '#0099AA';
+    else if ( FormID == 'P1' ) return '#0000FF';
+    else if ( FormID == 'P2' ) return '#009900';
+    else if ( FormID == 'P3' ) return '#FF0000';
+}
+function setFormColor( FormID )
+{
+    var frm = document.getElementById ? document.getElementById('FormID') : document.all['FormID'];
+    if ( frm ) frm.style.color = getFormColor( FormID );
+    if ( frm.options )
+    {
+        for ( var i=0; i<frm.options.length; i++ )
+        {
+            var fopt = document.getElementById('FormID').options[i];
+            fopt.style.color = getFormColor( fopt.value );
+        }
+    }
+}
+function setFormID( FormID )
+{
+    setFormColor( FormID );
+    document.location.search = 'FormID=' + FormID + '&allsec=' + f.AllSec.value;
+}
+function getPortfolio( sectype )
+{
+    var portfolio = null;
+    if ( sectype == 'M' )
+    {
+        portfolio = '50';
+    }
+    else
+    {
+        portfolio = '00';
+    }
+    return portfolio;
+}
+function addSecurities()
+{
+    document.location.search = 'allsec=T&FormID=' + f.FormID.value;
+}
+function check()
+{
+    if ( f.OrdLimit ) f.OrdLimit.value = f.OrdLimit.value.replace( ',', '.' );
+    if ( f.OrdLimAkt ) f.OrdLimAkt.value = f.OrdLimAkt.value.replace( ',', '.' );
+    if ( f.OrdActPrice ) f.OrdActPrice.value = f.OrdActPrice.value.replace( ',', '.' );
+    if ( f.SecCode.selectedIndex==0 )
+    {
+        alert( 'Proszę wybrać papier!' );
+        f.SecCode.focus();
+        return false;
+    }
+    if ( f.OrdType.selectedIndex==0 )
+    {
+        alert( 'Proszę wybrać kierunek zlecenia!' );
+        f.OrdType.focus();
+        return false;
+    }
+    if ( !f.OrdQty.value.match( /^\d{1,8}$/ ) )
+    {
+        alert( 'Ilość musi być liczbą naturalną!' )
+        f.OrdQty.select();
+        return false;
+    }
+    if ( f.OrdLimitType.value == 'L' && (!f.OrdLimit.value.match( /^\d{1,8}([.]\d{1,2})?$/ ) || f.OrdLimit.value <= 0) )
+    {
+        alert( 'Limit musi być liczbą dodatnią zaokrągloną do maksymalnie dwóch miejsc po przecinku!' );
+        f.OrdLimit.select();
+        return false;
+    }
+    if ( f.OrdActPrice && !f.OrdActPrice.value.match( /^\d{1,8}([.]\d{1,2})?$/ ) )
+    {
+        alert( 'Cena uaktywnienia musi być liczbą dodatnią zaokrągloną do maksymalnie dwóch miejsc po przecinku!' );
+        f.OrdActPrice.select();
+        return false;
+    }
+    if ( !f.OrdDateFrom.value.match( /^\d{2}[.]\d{2}[.]\d{4}$/ ) )
+    {
+        alert( 'Data od musi być podana w formacie DD.MM.RRRR!' );
+        f.OrdDateFrom.select();
+        return false;
+    }
+    if ( !f.OrdDateTo.value.match( /^\d{2}[.]\d{2}[.]\d{4}$/ ) )
+    {
+        alert( 'Data do musi być podana w formacie DD.MM.RRRR!' );
+        f.OrdDateTo.select();
+        return false;
+    }
+    if ( f.OrdDateType.value != 'D' ) f.OrdDateTo.value = f.OrdDateFrom.value;
+    var s = f.OrdDateFrom.value;
+    var df = new Date( Number(s.slice(6,10)), Number(s.slice(3,5))-1, Number(s.slice(0,2)) );
+    var s = f.OrdDateTo.value;
+    var dt = new Date( Number(s.slice(6,10)), Number(s.slice(3,5))-1, Number(s.slice(0,2)) );
+    var s =  marketDateFrom;
+    var dm = new Date( Number(s.slice(6,10)), Number(s.slice(3,5))-1, Number(s.slice(0,2)) );
+    if ( df.getTime() < dm.getTime() )
+    {
+        alert( 'Data od nie może być mniejsza niż ' + marketDateFrom + ' !' );
+        f.OrdDateFrom.select();
+        return false;
+    }
+    if ( df.getTime() > dt.getTime() )
+    {
+        alert( 'Data do nie może być mniejsza niż data od!' );
+        f.OrdDateTo.select();
+        return false;
+    }
+    
+    var otp = f.OrdOTP ? f.OrdOTP.value : 'N';
+    if ( df.getTime() != dt.getTime() && ( otp == 'T' || otp == 'P' ) )
+    {
+        alert( 'Zlecenie z OTP może być ważne tylko na jedną sesję!' );
+        f.OrdOTP.focus();
+        return false;
+    }
+    
+   
+    pkc='PKC'; 
+    pcr='PCR';
+    pcro='PCRO'; 
+ 
+    WuA='L'; 
+    WiA='I';
+       
+    ordLimitType = f.OrdLimitType;
+    ordDateType  = f.OrdDateType;
+    ordDateTo = f.OrdDateTo;
+    ordDateFrom= f.OrdDateFrom;
+
+    arrayDateFrom = f.OrdDateFrom.value;
+    arrayDateFrom= arrayDateFrom.split(".");
+    dayDateFrom =  arrayDateFrom[0];
+    monthDateFrom =  arrayDateFrom[1];
+    yearDateFrom =  arrayDateFrom[2];
+    
+    arrayDateTo = f.OrdDateTo.value;
+    arrayDateTo= arrayDateTo.split(".");
+    dayDateTo =  arrayDateTo[0];
+    monthDateTo =  arrayDateTo[1];
+    yearDateTo =  arrayDateTo[2];
+    
+    ordDateTypeSelectedIndex=ordDateType.selectedIndex;
+    
+    
+    if (isRightDate(ordDateFrom,dayDateFrom,monthDateFrom,yearDateFrom))
+    {
+          return false;
+    }    
+    
+    if (isRightDate(ordDateTo,dayDateTo,monthDateTo,yearDateTo))
+    {
+          return false;
+    }
+
+     //(PKC)
+    if (ordLimitType.selectedIndex==1)
+    {     
+
+         if (ordDateType.options[ordDateTypeSelectedIndex].value==WuA || ordDateType.options[ordDateTypeSelectedIndex].value==WiA)
+         {
+                 alert( 'Dla zlecenie PKC nie może wybrać ważności WuA i WiA!' );
+                ordDateType.focus();
+                return false;  
+         }
+         
+       
+         if (isOneSession(df,dt,ordDateType,pkc))
+         {
+             return false;  
+         }
+        
+    
+         if (isTodaySession(dm,df,pkc))
+         {
+                return false;  
+         }  
+         
+         
+         if (isLimitNextDay())
+         {
+                 return false;  
+         } 
+            
+    }
+    
+    //(PCR)
+    if (ordLimitType.selectedIndex==2)
+    {
+           
+         if (isOneSession(df,dt,ordDateType,pcr))
+         {
+             return false;  
+         }
+
+    
+         if (isTodaySession(dm,df,pkc))
+         {
+                return false;  
+         }  
+         
+         if (isLimitNextDay())
+         {
+                 return false;  
+         } 
+         
+    }
+    
+    //(PCRO)
+    if (ordLimitType.selectedIndex==3)
+    {
+
+         if (ordDateType.options[ordDateTypeSelectedIndex].value==WuA )
+         {
+                 alert( 'Dla zlecenie PCRO nie może wybrać ważności WuA!' );
+                ordDateType.focus();
+                return false;  
+         }
+  
+         if (isOneSession(df,dt,ordDateType,pcro))
+         {
+             return false;  
+         }
+
+         if (isTodaySession(dm,df,pkc))
+         {
+                return false;  
+         }  
+                              
+         if (isLimitNextDay())
+         {
+                 return false;  
+         } 
+         
+    }    
+    
+    if ( isOneYear(yearDateTo,year,ordDateTo))
+    {
+          return false;
+    }
+    
+    return true;
+    
+}
+
+function isLimitNextDay()
+{        
+        value=false;
+        if (nextDayOrder)
+        {
+                if (marketID == 8) 
+                {
+                    if ( currentDateFormated > marginDateFormated_15_30 && currentDateFormated < marginDateFormated_16_35)
+                    {
+                        alert('Zlecenia bez limitu nie są przyjmowane w godzinach między 15.30-16.35!');    
+                        value=true;     
+                    }
+                
+                }
+                else if (marketID == 0 || marketID == 11) 
+                {
+                    if ( currentDateFormated > marginDateFormated_16_30 && currentDateFormated < marginDateFormated_16_35)
+                    {
+                        alert('Zlecenia bez limitu nie są przyjmowane w godzinach między 16.30-16.35!');
+                        value=true;            
+                    }
+                }
+         }   
+         return value;         
+}
+
+function isTodaySession(dm,df,limitName) 
+{
+         if (df.getTime()!=dm.getTime())
+         {
+                alert('Zlecenie '+ limitName + ' może być złożone tylko na bieżącą sesję!' );
+                ordDateFrom.focus();
+                return true;   
+         }
+         return false;
+}
+
+         
+function isOneSession(df,dt,ordDateType,limitName)
+{
+         if (df.getTime() != dt.getTime() )
+         {
+                alert( 'Zlecenie ' +limitName+ ' może być złożone tylko na jedną sesję!' );
+                ordDateType.focus();
+                return true;    
+         }
+         return false;
+}
+
+
+
+function isOneYear(yearDateTo,year,ordDateTo)
+{
+    if (yearDateTo!=yearDateFrom)
+    {
+          alert('Data ważności zlecenia nie może przekraczać ostatniej sesji w danym roku kalendarzowym!');
+          ordDateTo.focus();
+          return true;  
+    }
+    return false;
+}
+
+
+function isRightDate(ordDate,day,month,year)
+{
+    month--;
+    dateFormated = new Date(year,month,day,0,0,0); 
+    
+    realDay=dateFormated.getDate(); 
+    realMonth=dateFormated.getMonth(); 
+    realYear=dateFormated.getFullYear(); 
+     
+    day = new Number(day); 
+    
+    if (realDay!=day || realMonth!=month || realYear!=year)
+    {
+          alert('Podana data nie istnieje !');
+          ordDate.focus();
+          return true; 
+    } 
+    
+    return false;
+    
+}
+
+function calc()
+{
+    if ( check() )
+    {
+        var ajax = new AJAXInteraction( 'commission?' + 'SecCode=' + f.SecCode.value + '&SecID=' + secs[SecIndex].secid + '&SecMultiplier=' + secs[SecIndex].secmulti + '&SecQuotation=' + secs[SecIndex].secprice + '&SecType=' + secs[SecIndex].sectype + '&SecSubType=' + secs[SecIndex].secsubtype + '&MrkID=' + f.MarketID.value + '&OrdQty=' + f.OrdQty.value + '&OrdLimit=' + f.OrdLimit.value + '&OrdType=' + f.OrdType.value + '&OrdLimitType=' + f.OrdLimitType.value + '&OrdDateFrom=' + f.OrdDateFrom.value + '&OrdDateTo=' + f.OrdDateTo.value, setOrderValueData, null );
+        ajax.doGet();
+        return true;
+    }
+    return false;
+}
+//AJAX
+function setSecOrderData(responseXML)
+{
+    var ajaxData = responseXML.getElementsByTagName( 'SecOrderData' )[0];
+    
+    if ( ajaxData )
+    {
+        secs[SecIndex].secprice = ajaxData.getAttribute( 'SecQuotation' );
+        secs[SecIndex].secmulti = ajaxData.getAttribute( 'SecMultiplier' );
+        secs[SecIndex].secsubtype = ajaxData.getAttribute( 'SecSubType' );
+        secs[SecIndex].secbalance = ajaxData.getAttribute( 'SecSubAcc110' );
+        secs[SecIndex].secmeanprice = ajaxData.getAttribute( 'SecSubAccSCZ' );
+        secs[SecIndex].secbuy = ajaxData.getAttribute( 'SecOrdWPB' );
+        secs[SecIndex].secsell = ajaxData.getAttribute( 'SecOrdWPS' );
+        secs[SecIndex].secid = ajaxData.getAttribute( 'SecID' );
+        secs[SecIndex].isOTP = ajaxData.getAttribute( 'SecIsOTP' );
+        secs[SecIndex].isPKC = ajaxData.getAttribute( 'SecIsPKC' );
+        secs[SecIndex].secint = ajaxData.getAttribute( 'SecInterests' );
+        secs[SecIndex].isLoaded = true;
+        fillSecOrderData();
+    }
+}
+function setOrderValueData(responseXML)
+{
+    var ajaxData = responseXML.getElementsByTagName( 'OrderValueData' )[0];
+    
+    if ( ajaxData )
+    {
+        f.OrdGrossValue.value = ajaxData.getAttribute( 'OrdGrossValue' );
+        f.OrdCommission.value = ajaxData.getAttribute( 'OrdCommission' );
+        if ( f.OrdNetValue )
+        {
+            f.OrdNetValue.value = ajaxData.getAttribute( 'OrdNetValue' );
+            if ( f.OrdType.value == 'K' )
+            {
+                f.SecSubAcc110A.value = Number(f.SecSubAcc110.value) + Number(f.OrdQty.value);
+                f.SecSubAccSCZC.value = Math.round((Number(secs[SecIndex].secmeanprice)*Number(secs[SecIndex].secbalance)+Number(f.OrdNetValue.value.replace(/ /g,'')))/Number(f.SecSubAcc110A.value)*100)/100;
+            }
+            else
+            {
+                f.SecSubAccRPT.value = Math.round((Number(f.OrdNetValue.value.replace(/ /g,''))/(Number(f.OrdQty.value)*Number(secs[SecIndex].secmeanprice)) - 1)*100*100)/100 + '%';
+                if(f.SecSubAccRPT.value.indexOf('Infinity')!=-1) f.SecSubAccRPT.value='';
+            }
+        }
+        if ( f.SecInterests ) f.SecInterests.value = ajaxData.getAttribute( 'SecInterests' );
+    }
+}
+function freeze( isFreezed )
+{
+    f.SecCode.disabled=isFreezed;
+    f.Filter.disabled=isFreezed;
+    if ( f.bc ) f.bc.disabled=isFreezed;
+    if ( f.bs ) f.bs.disabled=isFreezed;
+    if ( f.bb ) f.bb.disabled=isFreezed;
+}
+function fillSecOrderData()
+{
+    f.SecSubAcc110.value = secs[SecIndex].secbalance;
+    f.kurs.value = secs[SecIndex].secprice;
+    f.OrdGrossValue.value = '';
+    f.OrdCommission.value = '';
+    f.kocz.value = secs[SecIndex].secbuy;
+    f.socz.value = secs[SecIndex].secsell;
+    f.Portfolio.value = getPortfolio( secs[SecIndex].sectype );
+}
+var xmlHR = false;
+function AJAXInteraction(url, callback, qs )
+{
+    var req = init();
+    function init()
+    {
+        var reqInit = null;
+        if (window.XMLHttpRequest)
+        {
+            reqInit = new XMLHttpRequest();
+            xmlHR = true;
+        }
+        else if (window.ActiveXObject)
+        {
+            try
+            {
+                var XHI = new Array( 'MSXML2.XMLHTTP.5.0', 'MSXML2.XMLHTTP.4.0', 'MSXML2.XMLHTTP.3.0', 'MSXML2.XMLHTTP', 'Microsoft.XMLHTTP' );
+                for ( var i=0; i<XHI.length; i++ )
+                {
+                    try
+                    {
+                        reqInit = new ActiveXObject( XHI[i] );
+                        break;
+                    }
+                    catch ( e )
+                    {
+                        if ( i == XHI.length-1 )
+                        {
+                            throw e;
+                        }
+                    }
+                }
+            }
+            catch( err )
+            {
+                if ( !top.ieMsg )
+                {
+                    alert( 'Błąd inicjalizacji ActiveX.\n\nAby wykorzystać pełną funkcjonalność formatki niezbędne jest\nzezwolenie na uruchamianie i wykonywanie skryptów bezpiecznych\nformantów ActiveX.\n\nOpis błędu: ' + err.message );
+                    top.ieMsg = true;
+                }
+            }
+        }
+        if ( reqInit )
+        {
+            reqInit.onreadystatechange = processRequest;
+        }
+        return reqInit;
+    }
+    
+    function processRequest()
+    {
+        if (req.readyState == 4)
+        {
+            if (req.status == 200)
+            {
+                if (callback) callback(req.responseXML);
+            }
+            if ( xmlHR ) freeze(false);
+        }
+    }
+    
+    this.doGet = function()
+    {
+        if ( req )
+        {
+            req.open( 'GET', url, true);
+            if ( xmlHR ) freeze(true);
+            req.send(null);
+        }
+    }
+    this.doPost = function()
+    {
+        if ( req )
+        {
+            req.open( 'POST', url, true);
+            req.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+            if ( xmlHR ) freeze(true);
+            req.send( qs );
+        }
+    }
+}
+
+
+</script>
+</head>
+<body bgcolor="#ffffff" onLoad="init()" style="margin-top:5">
+<form name="main" method="post" onSubmit="return setOrder();">
+<input type="hidden" name="Basket">
+<input type="hidden" name="ReqID" value="0">
+<input type="hidden" name="AllSec" value="N">
+<input type="hidden" name="OrdFrom" value="1">
+<input type="hidden" name="MarketID" value="6">
+<input type="hidden" name="OrdID" value="">
+<table width="645" border="0" cellspacing="0" cellpadding="2">
+<tr>
+<td><b>NOWE ZLECENIE<span class="zegar"> - rach. nr 00-22-255294</span></b></td>
+<td align="right"><span class="zegar">17.08.2009 14:11:28</span> <b>[</b> <a href="mapa">mapa serwisu</a> <b>] [</b> <a href="javascript:openHelp('help?HlpID=HLP121101','h',400,500,50);">pomoc</a> <b>]</b></td>
+</tr>
+<tr>
+<td id="FormID"><b>KONTRAKTY</b><input type="hidden" name="FormID" value="P2"></td>
+</tr>
+</table>
+<hr align="left" size="0">
+<table border="0" width="645">
+<tr>
+<td><a href="javascript:openHelp('help?HlpID=HLP121102','h',400,500,50);">Papier</a>:&nbsp;<select name="SecCode" onChange="setSecurity();" style="width:135">
+<option>Wybierz...</option>
+<option value="PL0GF0000042">FEURU09</option>
+<option value="PL0GF0000182">FGBPU09</option>
+<option value="PL0GF0000208">FKGHU09</option>
+<option value="PL0GF0000232">FPKOU09</option>
+<option value="PL0GF0000240">FTPSU09</option>
+<option value="PL0GF0000034">FUSDU09</option>
+<option value="PL0GF0000281">FW20Z09</option></select></td>
+    <td><input type="button" onclick="addSecurities();" value="Dodaj pozostałe PW" style="width:140"></td>
+<td><a href="javascript:openHelp('help?HlpID=HLP121103','h',400,500,50);">Typ</a>:&nbsp;<select name="Filter" onChange="setFilter(this.value);setSecurity();"><option value="">Wszystkie</option></select></td>
+    <td align="right">
+        <!-- Portfel: --><input type="hidden" name="Portfolio" size="3" maxlength="3" onFocus="this.blur();">
+<a href="javascript:openHelp('help?HlpID=HLP121104','h',400,500,50);">Kurs</a>:&nbsp;<input type="text" name="kurs" size="8" maxlength="8" onFocus="this.blur();" style="text-align:right">
+    </td>
+</tr>
+</table>
+<br>
+<table width="645" border="0" cellspacing="0" cellpadding="4">
+<tr class="td1" align=center>
+<td><span><b><a href="javascript:openHelp('help?HlpID=HLP121105','h',400,500,50);">k/s</a></b></span></td>
+<td><span><b><a href="javascript:openHelp('help?HlpID=HLP121107','h',400,500,50);">ilość</a></b></span></td>
+<td><span><b><a href="javascript:openHelp('help?HlpID=HLP121108','h',400,500,50);">limit</a></b></span></td>
+<td width="100"><span><b><a href="javascript:openHelp('help?HlpID=HLP121109','h',400,500,50);">data</a></b></span></td>
+<td width="100"><span><b><a href="javascript:openHelp('help?HlpID=HLP121110','h',400,500,50);">ważne</a></b></span></td>
+    <td width="100">&nbsp;</td>
+</tr>
+<tr class="td2">
+    <td align="center">
+        <select name="OrdType" onChange="setOrdType();" style="width:38">
+            <option></option>
+            <option value="K">K</option>
+            <option value="S">S</option>
+        </select>
+    </td>
+    <td align="center"><input type="text" name="OrdQty" size="8" maxlength="8"></td>
+    <td>
+        <input type="radio" name="isLimit" value="T" checked onClick="OrdLimitType.selectedIndex=0;">
+        <input type="text" name="OrdLimit" size="8" maxlength="8" onClick="isLimit[0].checked=true;OrdLimitType.selectedIndex=0;" style="width:70">
+    </td>
+<td align="center">17.08.2009<input type="hidden" name="OrdDateFrom" value="17.08.2009"></td>
+    <td align="center">
+        <select name="OrdDateType">
+            <option value="S" selected >DZIEŃ</option>
+            <option value="L">WuA</option>
+            <option value="I">WiA</option>
+        </select>
+    </td>
+<td><input type="hidden" name="OrdDateTo" value="17.08.2009"></td>
+</tr>
+<tr class="td2">
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>
+        <input type="radio" name="isLimit" value="N" onClick="OrdLimitType.selectedIndex=1;OrdLimit.value='';">
+        <select name="OrdLimitType" onChange="if (this.value=='L') { isLimit[0].checked=true; OrdLimit.focus(); } else { OrdLimit.value=''; isLimit[1].checked=true;}" style="width:70">
+            <option value="L" selected></option>
+            <option value="P">PKC</option>
+            <option value="R">PCR</option>
+            <option value="O">PCRO</option>
+        </select>
+    </td>
+<td align="center"><div style="margin-bottom:3px"><a href="javascript:openHelp('help?HlpID=HLP121114','h',400,500,50);">WUJ:</a></div><input type="text" name="OrdWUj" size="10" value="0" maxlength="10"></td>
+<td align="center"><div style="margin-bottom:3px"><a href="javascript:openHelp('help?HlpID=HLP121115','h',400,500,50);">LimAkt:</a></div><input type="text" name="OrdLimAkt" size="10" value="0" maxlength="10"></td>
+<td align="center"><div style="margin-bottom:3px"><a href="javascript:openHelp('help?HlpID=HLP121116','h',400,500,50);">WMin:</a></div><input type="text" name="OrdWMin" size="10" value="0" maxlength="10"></td>
+</tr>
+</table>
+<br>
+<table width="645" border="0" cellspacing="0" cellpadding="4">
+<tr>
+    <td width="50%" valign="top">
+        <table width="300" border="0" cellspacing="0" cellpadding="4">
+        <tr class="td3">
+            <td>Konto zwykłe:</td>
+<td align="right">15&nbsp;663.64</td>
+        </tr>
+        <tr class="td4">
+            <td>Depozyt:</td>
+<td align="right">3&nbsp;792.36</td>
+        </tr>
+        <tr class="td3">
+            <td>Wartość zlecenia:</td>
+            <td align="right"><input type="text" name="OrdGrossValue" size="12" maxlength="12" onFocus="this.blur()" style="border:1px solid gray;text-align:right"></td>
+        </tr>
+        <tr class="td4">
+            <td>Prowizja:</td>
+            <td align="right"><input type="text" name="OrdCommission" size="12" maxlength="12" onFocus="this.blur()" style="border:1px solid gray;text-align:right"></td>
+        </tr>
+        </table>
+        <br>
+        <input type="button" name="bc" value="Przelicz" onclick="calc();">
+    </td>
+    <td width="50%" valign="top">
+        <table width="300" border="0" cellspacing="0" cellpadding="4">
+        <tr class="td3">
+            <td>Aktualny stan rejestru:</td>
+            <td align="right"><input type="text" name="SecSubAcc110" size="12" maxlength="12" onFocus="this.blur()" style="border:1px solid gray;text-align:right"></td>
+        </tr>
+        <tr class="td4">
+            <td>Kupno oczekujące:</td>
+            <td align="right"><input type="text" name="kocz" size="12" maxlength="12" onFocus="this.blur()" style="border:1px solid gray;text-align:right"></td>
+        </tr>
+        <tr class="td3">
+            <td>Sprzedaż oczekująca:</td>
+            <td align="right"><input type="text" name="socz" size="12" maxlength="12" onFocus="this.blur()" style="border:1px solid gray;text-align:right"></td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+<hr align="left" size="0">
+<table width="645" border="0" cellspacing="0" cellpadding="2">
+<tr>
+    <td align="center"><input name="bs" type="submit" value="złóż zlecenie bezpośrednio"></td>
+    <td align="center"><input name="bb" type="button" value="dodaj zlecenie do koszyka" onClick="setOrderBasket();"></td>
+</tr>
+</table>
+<div class="page">
+<div class="abs">Aktualna liczba zleceń w koszyku: <b>0</b></div>
+<div class="ar"><b>[</b> <a href="zleceniaq?mid=6">szybkie składanie zleceń</a> <b>] [</b> <a href="javascript:openStatement();">pokaż wyciąg</a> <b>]</b></div>
+</div>
+</form>
+</body>
+</html>

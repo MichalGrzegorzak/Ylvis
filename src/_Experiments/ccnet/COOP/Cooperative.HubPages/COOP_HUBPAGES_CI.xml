@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<project name="CO-OP Hub Pages">
+  <workingDirectory>C:\GIT_Working_Directory\COOP\HUBPAGES\COOP_HUBPAGES_CI</workingDirectory>
+  <artifactDirectory>C:\CCNet_Artefacts_Directory\COOP\HUBPAGES\COOP_HUBPAGES_CI</artifactDirectory>
+  <webURL>http://vmp-ccnet/server/local/project/CO-OP%20Hub%20Pages/ViewProjectReport.aspx</webURL>
+
+  <category>Continuous Integration</category>
+  
+  <labeller type="assemblyVersionLabeller">
+	<major>1</major>
+	<minor>0</minor>
+	<incrementOnFailure>false</incrementOnFailure>
+  </labeller>
+  
+  <publishers>
+    <xmllogger logDir="buildlogs" />
+    <artifactcleanup cleanUpMethod="KeepLastXBuilds" cleanUpValue="50" />
+      <rss items="50" />
+  </publishers>
+  
+  <triggers>
+    <intervalTrigger seconds="60" name="continuous" />
+  </triggers>
+  
+  <sourcecontrol type="git">
+    <executable>C:\Program Files (x86)\Git\bin\git.exe</executable>
+    <repository>git@bitbucket.org:fortunecookie/cooperative.hubpages.git</repository>
+    <branch>development</branch>
+    <workingDirectory>C:\GIT_Working_Directory\COOP\HUBPAGES\COOP_HUBPAGES_CI</workingDirectory>
+    <timeout units="seconds">7000</timeout>
+  </sourcecontrol>
+  
+  <tasks>
+	
+		<msbuild>
+			<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+			<projectFile>Solution Files\UpdatePackages.proj</projectFile>
+			<buildArgs>/noconsolelogger /v:diag /p:SolutionRoot="C:\GIT_Working_Directory\COOP\HUBPAGES\COOP_HUBPAGES_CI" /p:PackagePath="C:\GIT_Working_Directory\COOP\HUBPAGES\COOP_HUBPAGES_CI\Solution Files"</buildArgs>
+			<targets>LoadNuGetPackages</targets>
+			<timeout>900</timeout>
+			<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+		</msbuild>
+		
+	  <!-- build web application -->
+	  <msbuild>
+		<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+		<workingDirectory>C:\GIT_Working_Directory\COOP\HUBPAGES\COOP_HUBPAGES_CI</workingDirectory>
+		<projectFile>Solution Files\Cooperative.HubPages.sln</projectFile>
+		<buildArgs>/noconsolelogger /v:diag /p:Configuration=Release</buildArgs>
+		<targets>Build</targets>
+		<timeout>900</timeout>
+		<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+	  </msbuild>
+	  
+	  <!-- StyleCop -->
+		<msbuild>
+			<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+			<projectFile>Solution Files\CI-StyleCop.proj</projectFile>
+			<buildArgs>/noconsolelogger /v:diag /p:SolutionRoot="C:\GIT_Working_Directory\COOP\HUBPAGES\COOP_HUBPAGES_CI" /p:ArtifactDirectory="C:\CCNet_Artefacts_Directory\COOP\HUBPAGES\COOP_HUBPAGES_CI\buildlogs"</buildArgs>
+			<targets>StyleCop</targets>
+			<timeout>900</timeout>
+			<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+		</msbuild>
+		
+		<!-- Unit tests -->
+	  	<nunit>
+			<path>C:\Program Files (x86)\NUnit 2.6.2\bin\nunit-console.exe</path>
+			<assemblies>
+				<assembly>C:\GIT_Working_Directory\COOP\HUBPAGES\COOP_HUBPAGES_CI\Cooperative.HubPages.Web.Tests\bin\Release\Cooperative.HubPages.Web.Tests.dll</assembly>
+			</assemblies>
+		</nunit>
+	  	  
+		<!-- merge the results -->
+		<merge>
+			<files>
+				<file>C:\CCNet_Artefacts_Directory\COOP\HUBPAGES\COOP_HUBPAGES_CI\buildlogs\ccnet-fxcop.xml </file>
+				<file>C:\CCNet_Artefacts_Directory\COOP\HUBPAGES\COOP_HUBPAGES_CI\buildlogs\stylecop-results.xml</file>
+			</files>
+		</merge>
+	</tasks>
+</project>

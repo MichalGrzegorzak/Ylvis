@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<project name="CO-OP Funeralcare - Create SIT Package v1.1">
+   <workingDirectory>c:\SVN_Working_Directory\COOP_FNC\COOP_SIT_last</workingDirectory>
+  <artifactDirectory>c:\CCNet_Artefacts_Directory\COOP_FNC\COOP_SIT_last</artifactDirectory>
+  <webURL>http://vmp-ccnet/server/local/project/CO-OP%20Funeralcare%20-%20Create%20SIT%20Package/ViewProjectReport.aspx</webURL>
+    <category>Package</category>
+
+    <labeller type="assemblyVersionLabeller">
+        <major>1</major>
+        <minor>1</minor>
+        <build>0</build>
+        <incrementOnFailure>false</incrementOnFailure>
+    </labeller>
+
+    <publishers>
+        <xmllogger logDir="buildlogs" />
+        <artifactcleanup cleanUpMethod="KeepLastXBuilds" cleanUpValue="50" />
+        <rss items="50" />
+    </publishers>
+
+  <sourcecontrol type="svn">
+    <trunkUrl>svn://vm-svn.fcdev.local/funeralcare/branches/v1.1</trunkUrl>
+    <username>dev.tools</username>
+    <password>KL129377</password>
+    <workingDirectory>c:\SVN_Working_Directory\COOP_FNC\COOP_SIT_last</workingDirectory>
+    <executable>C:\Program Files\CollabNet\Subversion Client\svn.exe</executable>
+	<tagOnSuccess>true</tagOnSuccess>
+	<tagBaseUrl>svn://vm-svn.fcdev.local/funeralcare/tags</tagBaseUrl>
+	<tagWorkingCopy>true</tagWorkingCopy>
+    <cleanUp>true</cleanUp>
+	
+  </sourcecontrol>
+  
+  <tasks>
+	  <!-- build web application -->
+	  <msbuild>
+		<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+		<workingDirectory>c:\SVN_Working_Directory\COOP_FNC\COOP_SIT_last</workingDirectory>
+		<projectFile>SolutionFiles\Funeralcare.Web.sln</projectFile>
+		<buildArgs>/noconsolelogger /v:diag /p:ReferencePath="C:\SVN_Working_Directory\COOP_FNC\COOP_SIT_last\Lib\Funeralcare.Web.Lib" /p:Configuration=SIT</buildArgs>
+		<targets>Build</targets>
+		<timeout>900</timeout>
+		<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+	  </msbuild>
+	  
+ 	<!-- deployment package  -->
+		<exec>
+			<executable>cmd.exe</executable>
+			<buildArgs>/c "if exist c:\SVN_Working_Directory\COOP_FNC\COOP_SIT_last\Package\SIT del c:\SVN_Working_Directory\COOP_FNC\COOP_SIT_last\Package\SIT\*.* /Q /F"</buildArgs>
+		</exec>
+		<msbuild>
+			<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+			<projectFile>Funeralcare.Web.Mvc\Funeralcare.Web.csproj</projectFile>
+			<dynamicValues>
+				<replacementValue property="buildArgs">
+				<format>/noconsolelogger /v:diag /t:Package /p:PackageLocation="C:\BuildPackages\COOP_FNC\COOP_FNC-SIT-{0}\COOP_FNC-SIT-{0}.zip" /p:Configuration=SIT</format>
+					<parameters>
+						<namedValue name="$CCNetLabel" value="Default" />
+					</parameters>
+				</replacementValue>
+			</dynamicValues>
+			<targets>Package</targets>
+			<timeout>900</timeout>
+			<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+		</msbuild> 	
+		<msbuild>
+			<executable>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+			<projectFile>Funeralcare.Web.Mvc\Funeralcare.Web.csproj</projectFile>
+			<dynamicValues>
+				<replacementValue property="buildArgs">
+				<format>/noconsolelogger /v:diag /t:Package /p:PackageLocation="C:\BuildPackages\COOP_FNC\COOP_FNC-SIT-{0}\COOP_FNC-SIT-{0}.zip" /p:Configuration=SIT</format>
+					<parameters>
+						<namedValue name="$CCNetLabel" value="Default" />
+					</parameters>
+				</replacementValue>
+			</dynamicValues>
+			<targets>Package</targets>
+			<timeout>900</timeout>
+			<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MSBuild.dll</logger>
+	</msbuild> 	
+    </tasks>
+</project>
