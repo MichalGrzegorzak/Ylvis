@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UrlExtractor.Wpf.Forms"
         mc:Ignorable="d"
-        Title="ListView" Height="450" Width="800"  Loaded="Window_Loaded" >
+        Title="ListView" Height="450" Width="800" Loaded="Window_Loaded" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="89*"/>

@@ -1,38 +1,23 @@
 ﻿<Window x:Class="UrlExtractor.Wpf.Forms.DetailsView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:l="clr-namespace:UrlExtractor.Wpf.Controls.FormPanel"
         xmlns:formPanel="clr-namespace:UrlExtractor.Wpf.Controls.FormPanel"
-        Title="Window5" Height="400" Width="500">
-    <DockPanel Margin="10">
-        <formPanel:FormGroupHost DockPanel.Dock="Top">
-            <formPanel:FormGroup Header="General Details">
-                <TextBlock Text="Title:"/>
-                <TextBox/>
-                <TextBlock Text="Area:"/>
-                <ComboBox/>
-                <TextBlock Text="Category:"/>
-                <ComboBox/>
-                <TextBlock Text="Assigned To:"/>
-                <ComboBox/>
-                <TextBlock Text="Status:"/>
-                <ComboBox/>
-                <TextBlock Text="Estimate:"/>
-                <TextBox/>
-            </formPanel:FormGroup>
+        Title="Details view" Height="313.637" Width="521.817">
+    <DockPanel Margin="10" Name="pnlDock">
+        <formPanel:FormPanel Margin="10" DockPanel.Dock="Top">
+            <TextBlock Text="From:"/>
+            <TextBox Text="{Binding Url}"/>
+            <TextBlock Text="Pass:"/>
+            <TextBox Text="{Binding Pass}"/>
+            <TextBlock Text="DlKey:"/>
+            <TextBox Text="{Binding DlKey}"/>
+            <TextBlock Text="DlKey:" Visibility="Hidden"/>
+            <TextBox Text="" Visibility="Hidden"/>
+ 
+        </formPanel:FormPanel>
 
-            <l:FormGroup Header="User Defined Fields">
-                <TextBlock Text="Tags:"/>
-                <TextBox/>
-                <TextBlock Text="Version:"/>
-                <TextBox/>
-            </l:FormGroup>
-
-        </formPanel:FormGroupHost>
         <GroupBox Header="Comments">
-            <TextBox TextWrapping="Wrap" Margin="5"/>
+            <TextBox TextWrapping="Wrap" Margin="5" Text="{Binding Downloads}"/>
         </GroupBox>
     </DockPanel>
 </Window>
-
-

@@ -26,7 +26,7 @@ namespace UrlExtractor.Wpf.Forms
         public DetailsView()
         {
             InitializeComponent();
-            pnlDetails.DataContext = _data;
+            pnlDock.DataContext = _data;
         }
 
         public ClipboardVm Data
@@ -34,7 +34,7 @@ namespace UrlExtractor.Wpf.Forms
             get => _data;
             set {
                 _data = value;
-                pnlDetails.DataContext = _data;
+                pnlDock.DataContext = _data;
             }
         }
     }

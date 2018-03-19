@@ -28,7 +28,7 @@ namespace UrlExtractor.Wpf.ViewModel
             Url = post.FromUrl;
             Pass = post.Pass;
             DlKey = post.DlKey;
-            Downloads = string.Join(",", post.Downloads);
+            Downloads = string.Join("\r\n", post.Downloads);
         }
 
         public string Url { get; set; }
