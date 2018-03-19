@@ -17,21 +17,21 @@ namespace UrlExtractor.Tests
             Last update: 12.11.2018
             Preview: Image
 
-                Backup Preview: http://twlba5.com/?img=351.jpg
+                Backup Preview: http://tlba5.com/?img=351.jpg
 
-            Part 1: https://minfil.org/veD20/usn.rar
+            Part 1: https://minil.org/veD20/usn.rar
 
-            Part 2: http://dl.free.fr/mrO3
+            Part 2: http://dlfree.fr/mrO3
 
-            Backup Link: http://upfile.mobi/toi8C
+            Backup Link: http://upile.mobi/toi8C
 
-            Link: http://addfile.org/3pSX
+            Link: http://addile.org/3pSX
 
-            Link: http://qtfile.com/lOev
+            Link: http://qtile.com/lOev
 
-            Link: http://9files.co/KHr
+            Link: http://files.co/KHr
 
-            Password: =)(§$$Z /%)(ßihs
+            Password: =§$$Z /%)(ßihs
             ";
 
             ItemAnalyzer analyzer = new ItemAnalyzer(input);
@@ -51,24 +51,24 @@ namespace UrlExtractor.Tests
         {
             string input = @"
 Part1
-https://minfil.org/h8D/How_2_Dan.part1.rar
+https://mifil.org/h8D/How_2_Dan.part1.rar
 
 Part2
-http://ichigo-up.com/1/download/1520.rar
+http://iigo-up.com/1/download/120.rar
 
 Part3
 
-http://upfile.mobi/Q4T4cStnK5K
-http://addfile.org/zNQFiClC32w
+http://uile.mobi/Q4T4cStnK5K
+http://afile.org/zNQFiClC32w
 
 
-Please say thank you if you enjoy my post.
+Please say.
 
 DL Key
 L@AD2
 
 Passwort
-4$F%R13NdZ@HM
+4dZ@HM
             ";
 
             ItemAnalyzer analyzer = new ItemAnalyzer(input);
@@ -76,7 +76,7 @@ Passwort
 
             Console.WriteLine(String.Join("\r\n", analyzer.FilteredOutput.ToArray()));
             Assert.That(analyzer.HasPass, Is.EqualTo(true));
-            Assert.That(analyzer.Passwords.FirstOrDefault(), Is.EqualTo("4$F%R13NdZ@HM"));
+            Assert.That(analyzer.Passwords.FirstOrDefault(), Is.EqualTo("4dZ@HM"));
             //
             Assert.That(analyzer.Parts.Count, Is.EqualTo(3));
         }
@@ -119,14 +119,14 @@ http://upfile.mobi/O7S2gvdfgfdg
         {
             string input = @"
 Part1
-https://minfil.org/h8D/How_2_Dan.part1.rar
+https://mfil.org/hD/Hown.part1.rar
 
 Part2
-http://ichigo-up.com/1/download/1520.rar
+http://icho-up.com/1/download/20.rar
 
-will someone have it?
+will someone?
 live image preview
-http://upfile.mobi/cpTlZe
+http://upile.moi/clZe
 ";
 
             ItemAnalyzer analyzer = new ItemAnalyzer(input);
