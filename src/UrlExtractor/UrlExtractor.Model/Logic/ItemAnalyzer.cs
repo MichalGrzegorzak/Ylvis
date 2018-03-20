@@ -19,7 +19,18 @@ namespace UrlExtractor.Model
         public List<string> Previews { get; set; } = new List<string>();
         public List<string> Parts { get; set; } = new List<string>();
         public List<string> Mirrors { get; set; } = new List<string>();
-        public List<string> Downloads { get; set; } = new List<string>();
+
+        public List<string> Downloads
+        {
+            get
+            {
+                List<string> results = new List<string>(Parts);
+                results.AddRange(Mirrors);
+                return results;
+            }
+        }
+
+
         public List<string> Passwords { get; set; } = new List<string>();
         public List<string> DLKeys { get; set; } = new List<string>();
 

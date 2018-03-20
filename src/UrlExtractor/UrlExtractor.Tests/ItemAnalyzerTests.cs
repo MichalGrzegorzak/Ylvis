@@ -43,7 +43,7 @@ namespace UrlExtractor.Tests
             Assert.That(analyzer.Parts.Count, Is.EqualTo(2));
             Assert.That(analyzer.Previews.Count, Is.EqualTo(1));
             Assert.That(analyzer.Mirrors.Count, Is.EqualTo(4));
-            //Assert.That(analyzer.Downloads.Count, Is.EqualTo(4));
+            Assert.That(analyzer.Downloads.Count, Is.EqualTo(6));
         }
 
         [Test]

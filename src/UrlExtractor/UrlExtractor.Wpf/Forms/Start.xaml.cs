@@ -46,7 +46,7 @@ namespace UrlExtractor.Wpf.Forms
             ClipboardPost post;
             using (var repo = new LiteRepository("test.db"))
             {
-                post = repo.Query<ClipboardPost>().FirstOrDefault();
+                post = repo.Query<ClipboardPost>().ToList().LastOrDefault();
             }
 
             formDetailsView.Data = new ClipboardVm(post);
