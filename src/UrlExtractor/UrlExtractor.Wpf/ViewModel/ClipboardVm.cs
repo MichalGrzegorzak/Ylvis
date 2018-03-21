@@ -1,4 +1,5 @@
-﻿using PropertyChanged;
+﻿using System.Collections.Generic;
+using PropertyChanged;
 using UrlExtractor.Model;
 
 namespace UrlExtractor.Wpf.ViewModel
@@ -28,7 +29,8 @@ namespace UrlExtractor.Wpf.ViewModel
             Url = post.FromUrl;
             Pass = post.Pass;
             DlKey = post.DlKey;
-            Downloads = string.Join("\r\n", post.Downloads);
+            //Downloads = string.Join("\r\n", post.Downloads);
+            Downloads = post.Downloads;
         }
 
         public string Url { get; set; }
@@ -37,7 +39,9 @@ namespace UrlExtractor.Wpf.ViewModel
         public string Pass { get; set; }
         public string DlKey { get; set; }
 
-        public string Downloads { get; set; }
+        public List<string> Downloads { get; set; } = new List<string>();
+
+        //public string Downloads { get; set; }
         public string Previews { get; set; }
         //public List<Items> CategorizedDownloads { get; set; }
     }

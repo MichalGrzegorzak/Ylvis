@@ -4,6 +4,30 @@
         xmlns:formPanel="clr-namespace:UrlExtractor.Wpf.Controls.FormPanel"
         Title="Details view" Height="313.637" Width="521.817">
     <DockPanel Margin="10" Name="pnlDock">
+        <formPanel:FormPanel Margin="10" DockPanel.Dock="Top" x:Name="frmPanel">
+            <TextBlock Text="From:"/>
+            <TextBox Text="{Binding Url}"/>
+            <TextBlock Text="Pass:"/>
+            <TextBox Text="{Binding Pass}"/>
+            <TextBlock Text="DlKey:"/>
+            <TextBox Text="{Binding DlKey}"/>
+            <!--<TextBlock Text="DlKey:" Visibility="Hidden"/>
+            <TextBox Text="" Visibility="Hidden"/>-->
+
+        </formPanel:FormPanel>
+
+        <!--<GroupBox Header="Comments">
+            <TextBox TextWrapping="Wrap" Margin="5" Text="{Binding Downloads}"/>
+        </GroupBox>-->
+    </DockPanel>
+</Window>
+
+<!--<Window x:Class="UrlExtractor.Wpf.Forms.DetailsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:formPanel="clr-namespace:UrlExtractor.Wpf.Controls.FormPanel"
+        Title="Details view" Height="313.637" Width="521.817">
+    <DockPanel Margin="10" Name="pnlDock">
         <formPanel:FormPanel Margin="10" DockPanel.Dock="Top">
             <TextBlock Text="From:"/>
             <TextBox Text="{Binding Url}"/>
@@ -20,4 +44,4 @@
             <TextBox TextWrapping="Wrap" Margin="5" Text="{Binding Downloads}"/>
         </GroupBox>
     </DockPanel>
-</Window>
+</Window>-->
