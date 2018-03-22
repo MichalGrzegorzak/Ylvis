@@ -82,6 +82,9 @@
     <Compile Include="Controls\FormPanel\FormPanel.cs" />
     <Compile Include="Controls\FormPanel\IFormPanelCoordinator.cs" />
     <Compile Include="Controls\FormPanel\OkCancelFrame.cs" />
+    <Compile Include="Controls\TextWithButton.xaml.cs">
+      <DependentUpon>TextWithButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ItemDisplay.xaml.cs">
       <DependentUpon>ItemDisplay.xaml</DependentUpon>
     </Compile>
@@ -99,6 +102,10 @@
     <Compile Include="ViewModel\ItemLogViewModel.cs" />
     <Compile Include="ViewModel\ItemPriceLookupModel.cs" />
     <Compile Include="ViewModel\LootItemViewModel.cs" />
+    <Page Include="Controls\TextWithButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\ItemDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
