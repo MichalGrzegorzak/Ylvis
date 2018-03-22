@@ -13,7 +13,10 @@ namespace UrlExtractor.Wpf.Controls
         public TextWithButton()
         {
             InitializeComponent();
+            SearchText  = "skopiuj mnie";
         }
+
+        public string SearchText { get; set; }
 
 
         private void SearchBoxKeyDown(object sender, KeyEventArgs e)
@@ -23,7 +26,7 @@ namespace UrlExtractor.Wpf.Controls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("hi");
+            Clipboard.SetText(txb.Text);
         }
     }
 }

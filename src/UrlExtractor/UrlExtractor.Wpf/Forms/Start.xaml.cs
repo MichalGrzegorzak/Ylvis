@@ -53,5 +53,7 @@ namespace UrlExtractor.Wpf.Forms
             formDetailsView.Show();
 
         }
+
+
     }
 }

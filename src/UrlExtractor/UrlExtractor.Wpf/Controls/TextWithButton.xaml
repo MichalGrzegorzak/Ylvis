@@ -4,30 +4,36 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="200">
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+             MinWidth="120" MinHeight="22">
 
-    <Grid HorizontalAlignment="Left" Width="150">
+    <Grid Margin="0,0,0,0" 
+          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+          MinWidth="120" MinHeight="22">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="35"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" ></RowDefinition>
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBox x:Name="SearchBoxView"
-                 HorizontalAlignment="Stretch"
-                 MinWidth="100" Margin="5, 5, 10, 5"
+
+        <TextBox x:Name="txb"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                 Margin="5,5,5,5" MinWidth="70"
                  FontSize="16"
                  KeyUp="SearchBoxKeyDown"
                  Text="{Binding SearchText, Mode=TwoWay}"
-                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                 HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
                  Grid.Column="0"/>
 
         <Button
-            Grid.Column="1"
-            HorizontalAlignment="Left"
-            Margin="5, 5, 5, 5"
-            Width="20" Click="Button_Click"
+            Grid.Column="1" x:Name="btn"
+            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            Margin="5,5,5,5" 
+            Content="CP"
+            MinWidth="25" Width="25" 
+            Click="Button_Click"
             >
         </Button>
     </Grid>
