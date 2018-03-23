@@ -6,8 +6,7 @@ namespace UrlExtractor.Wpf.Controls.FormPanel
 {
     public class FormPanel : Panel
     {
-        public static readonly DependencyProperty ColumnsProperty =
-            DependencyProperty.Register("Columns", typeof(int), typeof(FormPanel),
+        public static readonly DependencyProperty ColumnsProperty = DependencyProperty.Register("Columns", typeof(int), typeof(FormPanel),
             new FrameworkPropertyMetadata(2, FrameworkPropertyMetadataOptions.AffectsMeasure));
         public int Columns
         {
@@ -15,24 +14,21 @@ namespace UrlExtractor.Wpf.Controls.FormPanel
             set { SetValue(ColumnsProperty, value); }
         }
 
-        public static readonly DependencyProperty LabelSizeProperty =
-            DependencyProperty.Register("LabelSize", typeof(Size), typeof(FormPanel));
+        public static readonly DependencyProperty LabelSizeProperty = DependencyProperty.Register("LabelSize", typeof(Size), typeof(FormPanel));
         public Size LabelSize
         {
             get { return (Size)GetValue(LabelSizeProperty); }
             set { SetValue(LabelSizeProperty, value); }
         }
 
-        public static readonly DependencyProperty ControlSizeProperty =
-            DependencyProperty.Register("ControlSize",typeof(Size),typeof(FormPanel));
+        public static readonly DependencyProperty ControlSizeProperty = DependencyProperty.Register("ControlSize",typeof(Size),typeof(FormPanel));
         public Size ControlSize
         {
             get { return (Size)GetValue(ControlSizeProperty); }
             set { SetValue(ControlSizeProperty, value); }
         }
 
-        public static readonly DependencyProperty ColumnSpacingProperty =
-            DependencyProperty.Register("ColumnSpacing", typeof(double), typeof(FormPanel),
+        public static readonly DependencyProperty ColumnSpacingProperty = DependencyProperty.Register("ColumnSpacing", typeof(double), typeof(FormPanel),
             new FrameworkPropertyMetadata(15.0, FrameworkPropertyMetadataOptions.AffectsMeasure));
         public double ColumnSpacing
         {
@@ -40,8 +36,7 @@ namespace UrlExtractor.Wpf.Controls.FormPanel
             set { SetValue(ColumnSpacingProperty, value); }
         }
 
-        public static readonly DependencyProperty RowSpacingProperty =
-            DependencyProperty.Register("RowSpacing", typeof(double), typeof(FormPanel),
+        public static readonly DependencyProperty RowSpacingProperty = DependencyProperty.Register("RowSpacing", typeof(double), typeof(FormPanel),
             new FrameworkPropertyMetadata(10.0, FrameworkPropertyMetadataOptions.AffectsMeasure));
         public double RowSpacing
         {
@@ -49,8 +44,7 @@ namespace UrlExtractor.Wpf.Controls.FormPanel
             set { SetValue(RowSpacingProperty, value); }
         }
 
-        public static readonly DependencyProperty LabelControlSpacingProperty =
-            DependencyProperty.Register("LabelControlSpacing", typeof(double), typeof(FormPanel),
+        public static readonly DependencyProperty LabelControlSpacingProperty = DependencyProperty.Register("LabelControlSpacing", typeof(double), typeof(FormPanel),
             new FrameworkPropertyMetadata(5.0, FrameworkPropertyMetadataOptions.AffectsMeasure));
         public double LabelControlSpacing
         {

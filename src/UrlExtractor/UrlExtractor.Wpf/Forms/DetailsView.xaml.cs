@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using UrlExtractor.Model;
+using UrlExtractor.Wpf.Controls;
 using UrlExtractor.Wpf.ViewModel;
 
 namespace UrlExtractor.Wpf.Forms
@@ -65,7 +66,8 @@ namespace UrlExtractor.Wpf.Forms
                 lbl.Text = lines[0];
                 frmPanel.Children.Add(lbl);
 
-                TextBox editBox = new TextBox();
+                TextWithButton editBox = new TextWithButton();
+                //TextBox editBox = new TextBox();
                 editBox.Text = lines[1];
                 frmPanel.Children.Add(editBox);
             }

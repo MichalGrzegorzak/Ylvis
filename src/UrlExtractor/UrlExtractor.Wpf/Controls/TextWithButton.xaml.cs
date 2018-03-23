@@ -21,7 +21,7 @@ namespace UrlExtractor.Wpf.Controls
 
         static TextWithButton()
         {
-            HeightProperty.OverrideMetadata(typeof(TextWithButton), new PropertyMetadata((double)22));
+            HeightProperty.OverrideMetadata(typeof(TextWithButton), new FrameworkPropertyMetadata((double)22));
         }
 
         //public static readonly DependencyProperty CaptionProperty = DependencyProperty.Register("Caption", typeof(string), typeof(TextWithButton), new FrameworkPropertyMetadata(String.Empty));
