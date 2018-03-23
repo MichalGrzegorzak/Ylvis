@@ -11,10 +11,11 @@
         <Button Content="Capture form" HorizontalAlignment="Left" Margin="45,24,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <Button Content="List view" HorizontalAlignment="Left" Margin="45,69,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
         <Button Content="Details view" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="45,105,0,0" Click="Button_Click_2"/>
-        <TextBox HorizontalAlignment="Left" Height="26" Margin="221,218,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="126" RenderTransformOrigin="0.282,-0.225"/>
+        <TextBox HorizontalAlignment="Left" Height="26" Margin="301,190,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="126" RenderTransformOrigin="0.282,-0.225"/>
         <Label Content="Label" HorizontalAlignment="Left" Margin="146,343,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="51" Margin="69,270,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="370"/>
-        <Controls:TextWithButton HorizontalAlignment="Left" Height="45" Margin="426,105,0,0" VerticalAlignment="Top" Width="163"/>
+        <Controls:TextWithButton HorizontalAlignment="Left" Height="29" Margin="301,105,0,0" VerticalAlignment="Top" Width="168" Text="TextBox"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="480,69,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>

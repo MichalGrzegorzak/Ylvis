@@ -5,14 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
              HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-             MinWidth="120" MinHeight="22">
+             d:DesignHeight="22" d:DesignWidth="120"
+             Name="ucTextWithButton">
 
     <Grid Margin="0,0,0,0" 
-          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-          MinWidth="120" MinHeight="22">
+          HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="35"/>
+            <ColumnDefinition Width="26"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -20,19 +20,18 @@
 
         <TextBox x:Name="txb"
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                 Margin="5,5,5,5" MinWidth="70"
-                 FontSize="16"
-                 KeyUp="SearchBoxKeyDown"
-                 Text="{Binding SearchText, Mode=TwoWay}"
+                 Margin="1,1,0,1" 
+                 FontSize="12"
+                 Text="{Binding ElementName=ucTextWithButton, Path=Text}"
+                 TextChanged="TextBox_TextChanged"
                  HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
                  Grid.Column="0"/>
 
         <Button
             Grid.Column="1" x:Name="btn"
             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-            Margin="5,5,5,5" 
+            Margin="0,1,1,1" 
             Content="CP"
-            MinWidth="25" Width="25" 
             Click="Button_Click"
             >
         </Button>
