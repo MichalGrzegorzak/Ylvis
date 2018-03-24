@@ -40,13 +40,7 @@
             this.ddlNetwork = new System.Windows.Forms.ComboBox();
             this.ddlSymbol = new System.Windows.Forms.ComboBox();
             this.dgvCandles = new System.Windows.Forms.DataGridView();
-            this.ddlCandleTimes = new System.Windows.Forms.ComboBox();
             this.gbCandles = new System.Windows.Forms.GroupBox();
-            this.lblMA2 = new System.Windows.Forms.Label();
-            this.nudMA2 = new System.Windows.Forms.NumericUpDown();
-            this.lblMA1 = new System.Windows.Forms.Label();
-            this.nudMA1 = new System.Windows.Forms.NumericUpDown();
-            this.chkUpdateCandles = new System.Windows.Forms.CheckBox();
             this.tmrCandleUpdater = new System.Windows.Forms.Timer(this.components);
             this.rdoBuy = new System.Windows.Forms.RadioButton();
             this.rdoSell = new System.Windows.Forms.RadioButton();
@@ -82,11 +76,16 @@
             this.label6 = new System.Windows.Forms.Label();
             this.lblOverTimeSummary = new System.Windows.Forms.Label();
             this.btnOverTimeStop = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblMA2 = new System.Windows.Forms.Label();
+            this.nudMA2 = new System.Windows.Forms.NumericUpDown();
+            this.lblMA1 = new System.Windows.Forms.Label();
+            this.nudMA1 = new System.Windows.Forms.NumericUpDown();
+            this.chkUpdateCandles = new System.Windows.Forms.CheckBox();
+            this.ddlCandleTimes = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudQty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCandles)).BeginInit();
             this.gbCandles.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMA2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMA1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAutoMarketTakeProfitPercent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAutoQuantity)).BeginInit();
@@ -95,6 +94,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudOverTimeContracts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOverTimeInterval)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOverTimeIntervalCount)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMA2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMA1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBuy
@@ -208,6 +210,9 @@
             // 
             this.dgvCandles.AllowUserToAddRows = false;
             this.dgvCandles.AllowUserToDeleteRows = false;
+            this.dgvCandles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvCandles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCandles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -218,109 +223,27 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvCandles.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvCandles.Location = new System.Drawing.Point(6, 46);
+            this.dgvCandles.Location = new System.Drawing.Point(6, 70);
             this.dgvCandles.Name = "dgvCandles";
             this.dgvCandles.ReadOnly = true;
             this.dgvCandles.RowHeadersVisible = false;
             this.dgvCandles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvCandles.Size = new System.Drawing.Size(1227, 204);
+            this.dgvCandles.Size = new System.Drawing.Size(1227, 183);
             this.dgvCandles.TabIndex = 8;
-            // 
-            // ddlCandleTimes
-            // 
-            this.ddlCandleTimes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlCandleTimes.FormattingEnabled = true;
-            this.ddlCandleTimes.Items.AddRange(new object[] {
-            "1m",
-            "5m",
-            "1h",
-            "1d"});
-            this.ddlCandleTimes.Location = new System.Drawing.Point(6, 19);
-            this.ddlCandleTimes.Name = "ddlCandleTimes";
-            this.ddlCandleTimes.Size = new System.Drawing.Size(46, 21);
-            this.ddlCandleTimes.TabIndex = 9;
-            this.ddlCandleTimes.SelectedIndexChanged += new System.EventHandler(this.ddlCandleTimes_SelectedIndexChanged);
             // 
             // gbCandles
             // 
-            this.gbCandles.Controls.Add(this.lblMA2);
-            this.gbCandles.Controls.Add(this.nudMA2);
-            this.gbCandles.Controls.Add(this.lblMA1);
-            this.gbCandles.Controls.Add(this.nudMA1);
-            this.gbCandles.Controls.Add(this.chkUpdateCandles);
+            this.gbCandles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbCandles.Controls.Add(this.flowLayoutPanel1);
             this.gbCandles.Controls.Add(this.dgvCandles);
-            this.gbCandles.Controls.Add(this.ddlCandleTimes);
             this.gbCandles.Location = new System.Drawing.Point(13, 114);
             this.gbCandles.Name = "gbCandles";
             this.gbCandles.Size = new System.Drawing.Size(1239, 256);
             this.gbCandles.TabIndex = 10;
             this.gbCandles.TabStop = false;
             this.gbCandles.Text = "Candles";
-            // 
-            // lblMA2
-            // 
-            this.lblMA2.AutoSize = true;
-            this.lblMA2.Location = new System.Drawing.Point(438, 21);
-            this.lblMA2.Name = "lblMA2";
-            this.lblMA2.Size = new System.Drawing.Size(29, 13);
-            this.lblMA2.TabIndex = 16;
-            this.lblMA2.Text = "MA2";
-            // 
-            // nudMA2
-            // 
-            this.nudMA2.Location = new System.Drawing.Point(389, 18);
-            this.nudMA2.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudMA2.Name = "nudMA2";
-            this.nudMA2.Size = new System.Drawing.Size(42, 20);
-            this.nudMA2.TabIndex = 15;
-            this.nudMA2.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            // 
-            // lblMA1
-            // 
-            this.lblMA1.AutoSize = true;
-            this.lblMA1.Location = new System.Drawing.Point(322, 21);
-            this.lblMA1.Name = "lblMA1";
-            this.lblMA1.Size = new System.Drawing.Size(29, 13);
-            this.lblMA1.TabIndex = 14;
-            this.lblMA1.Text = "MA1";
-            // 
-            // nudMA1
-            // 
-            this.nudMA1.Location = new System.Drawing.Point(273, 18);
-            this.nudMA1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudMA1.Name = "nudMA1";
-            this.nudMA1.Size = new System.Drawing.Size(42, 20);
-            this.nudMA1.TabIndex = 13;
-            this.nudMA1.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            // 
-            // chkUpdateCandles
-            // 
-            this.chkUpdateCandles.AutoSize = true;
-            this.chkUpdateCandles.Checked = true;
-            this.chkUpdateCandles.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUpdateCandles.Location = new System.Drawing.Point(58, 21);
-            this.chkUpdateCandles.Name = "chkUpdateCandles";
-            this.chkUpdateCandles.Size = new System.Drawing.Size(111, 17);
-            this.chkUpdateCandles.TabIndex = 12;
-            this.chkUpdateCandles.Text = "Update Every 10s";
-            this.chkUpdateCandles.UseVisualStyleBackColor = true;
-            this.chkUpdateCandles.CheckedChanged += new System.EventHandler(this.chkUpdateCandles_CheckedChanged);
             // 
             // tmrCandleUpdater
             // 
@@ -491,9 +414,9 @@
             this.stsAPIValid,
             this.stsAccountBalance,
             this.stsOTProgress});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 373);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 374);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1259, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1286, 22);
             this.statusStrip1.TabIndex = 15;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -728,11 +651,107 @@
             this.btnOverTimeStop.UseVisualStyleBackColor = true;
             this.btnOverTimeStop.Click += new System.EventHandler(this.btnOverTimeStop_Click);
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.ddlCandleTimes);
+            this.flowLayoutPanel1.Controls.Add(this.chkUpdateCandles);
+            this.flowLayoutPanel1.Controls.Add(this.lblMA1);
+            this.flowLayoutPanel1.Controls.Add(this.nudMA1);
+            this.flowLayoutPanel1.Controls.Add(this.lblMA2);
+            this.flowLayoutPanel1.Controls.Add(this.nudMA2);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(5);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1233, 46);
+            this.flowLayoutPanel1.TabIndex = 17;
+            // 
+            // lblMA2
+            // 
+            this.lblMA2.AutoSize = true;
+            this.lblMA2.Location = new System.Drawing.Point(260, 8);
+            this.lblMA2.Margin = new System.Windows.Forms.Padding(3);
+            this.lblMA2.Name = "lblMA2";
+            this.lblMA2.Size = new System.Drawing.Size(29, 13);
+            this.lblMA2.TabIndex = 22;
+            this.lblMA2.Text = "MA2";
+            // 
+            // nudMA2
+            // 
+            this.nudMA2.Location = new System.Drawing.Point(295, 8);
+            this.nudMA2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudMA2.Name = "nudMA2";
+            this.nudMA2.Size = new System.Drawing.Size(42, 20);
+            this.nudMA2.TabIndex = 21;
+            this.nudMA2.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // lblMA1
+            // 
+            this.lblMA1.AutoSize = true;
+            this.lblMA1.Location = new System.Drawing.Point(177, 8);
+            this.lblMA1.Margin = new System.Windows.Forms.Padding(3);
+            this.lblMA1.Name = "lblMA1";
+            this.lblMA1.Size = new System.Drawing.Size(29, 13);
+            this.lblMA1.TabIndex = 20;
+            this.lblMA1.Text = "MA1";
+            // 
+            // nudMA1
+            // 
+            this.nudMA1.Location = new System.Drawing.Point(212, 8);
+            this.nudMA1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudMA1.Name = "nudMA1";
+            this.nudMA1.Size = new System.Drawing.Size(42, 20);
+            this.nudMA1.TabIndex = 19;
+            this.nudMA1.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
+            // chkUpdateCandles
+            // 
+            this.chkUpdateCandles.AutoSize = true;
+            this.chkUpdateCandles.Checked = true;
+            this.chkUpdateCandles.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUpdateCandles.Location = new System.Drawing.Point(60, 8);
+            this.chkUpdateCandles.Name = "chkUpdateCandles";
+            this.chkUpdateCandles.Size = new System.Drawing.Size(111, 17);
+            this.chkUpdateCandles.TabIndex = 18;
+            this.chkUpdateCandles.Text = "Update Every 10s";
+            this.chkUpdateCandles.UseVisualStyleBackColor = true;
+            // 
+            // ddlCandleTimes
+            // 
+            this.ddlCandleTimes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlCandleTimes.FormattingEnabled = true;
+            this.ddlCandleTimes.Items.AddRange(new object[] {
+            "1m",
+            "5m",
+            "1h",
+            "1d"});
+            this.ddlCandleTimes.Location = new System.Drawing.Point(8, 8);
+            this.ddlCandleTimes.Name = "ddlCandleTimes";
+            this.ddlCandleTimes.Size = new System.Drawing.Size(46, 21);
+            this.ddlCandleTimes.TabIndex = 17;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1259, 395);
+            this.ClientSize = new System.Drawing.Size(1286, 396);
             this.Controls.Add(this.btnOverTimeStop);
             this.Controls.Add(this.lblOverTimeSummary);
             this.Controls.Add(this.label6);
@@ -767,9 +786,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudQty)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCandles)).EndInit();
             this.gbCandles.ResumeLayout(false);
-            this.gbCandles.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMA2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMA1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAutoMarketTakeProfitPercent)).EndInit();
@@ -780,6 +796,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudOverTimeContracts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOverTimeInterval)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOverTimeIntervalCount)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMA2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMA1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -796,14 +816,8 @@
         private System.Windows.Forms.ComboBox ddlNetwork;
         private System.Windows.Forms.ComboBox ddlSymbol;
         private System.Windows.Forms.DataGridView dgvCandles;
-        private System.Windows.Forms.ComboBox ddlCandleTimes;
         private System.Windows.Forms.GroupBox gbCandles;
         private System.Windows.Forms.Timer tmrCandleUpdater;
-        private System.Windows.Forms.CheckBox chkUpdateCandles;
-        private System.Windows.Forms.Label lblMA2;
-        private System.Windows.Forms.NumericUpDown nudMA2;
-        private System.Windows.Forms.Label lblMA1;
-        private System.Windows.Forms.NumericUpDown nudMA1;
         private System.Windows.Forms.RadioButton rdoBuy;
         private System.Windows.Forms.RadioButton rdoSell;
         private System.Windows.Forms.RadioButton rdoSwitch;
@@ -838,6 +852,13 @@
         private System.Windows.Forms.Label lblOverTimeSummary;
         private System.Windows.Forms.ToolStripProgressBar stsOTProgress;
         private System.Windows.Forms.Button btnOverTimeStop;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label lblMA2;
+        private System.Windows.Forms.NumericUpDown nudMA2;
+        private System.Windows.Forms.Label lblMA1;
+        private System.Windows.Forms.NumericUpDown nudMA1;
+        private System.Windows.Forms.CheckBox chkUpdateCandles;
+        private System.Windows.Forms.ComboBox ddlCandleTimes;
     }
 }
 
