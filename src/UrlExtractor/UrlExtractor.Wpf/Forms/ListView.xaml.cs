@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,40 +18,74 @@ using UrlExtractor.Wpf.ViewModel;
 
 namespace UrlExtractor.Wpf.Forms
 {
+    
     /// <summary>
     /// Interaction logic for ListView.xaml
     /// </summary>
     public partial class ListView : Window
     {
-        List<ClipboardPost> allPosts = new List<ClipboardPost>();
+        public ObservableCollection<ClipboardVm> Items { get; set; } = new ObservableCollection<ClipboardVm>();
 
         public ListView()
         {
             InitializeComponent();
+
+            dataGrid.RowDetailsVisibilityMode = DataGridRowDetailsVisibilityMode.VisibleWhenSelected;
+            dataGrid.ItemsSource = Items;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            List<ClipboardPost> posts;
             using (var repo = new LiteRepository("test.db"))
             {
-                allPosts = repo.Query<ClipboardPost>().ToList();
+                posts = repo.Query<ClipboardPost>().ToList();
             }
 
-            dataGrid.ItemsSource = allPosts;//attempting to bind the list to a datagrid
+            foreach (ClipboardPost post in posts)
+            {
+                Items.Add(new ClipboardVm(post));
+            }
+
+            //dataGrid.ItemsSource = Items;//attempting to bind the list to a datagrid
         }
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (dataGrid.SelectedItem == null) return;
-            ClipboardPost data = dataGrid.SelectedItem as ClipboardPost;
+            ClipboardVm data = dataGrid.SelectedItem as ClipboardVm;
 
             DataGridRow row = sender as DataGridRow;
-            var clipboardVm = new ClipboardVm(data);
+            //var clipboardVm = new ClipboardVm(data);
 
             DetailsView view = new DetailsView();
-            view.Data = clipboardVm;
+            view.Data = data;
             view.Show();
             // Some operations with this row
+        }
+    }
+
+    public class ListViewMock
+    {
+        public ListViewMock()
+        {
+            AddMockedPosts();
+        }
+        public List<ClipboardVm> Items { get; set; } = new List<ClipboardVm>();
+        protected void AddMockedPosts()
+        {
+            var downloads = new List<string>(new[] { "111", "222", "333" });
+            var cvm = new ClipboardVm()
+            {
+                Created = DateTime.Now.ToString(),
+                DlKey = "DK1",
+                Id = 111,
+                Pass = "qwert",
+                Url = "http://www.onet.pl",
+                Previews = "http://preview/1",
+                Downloads = downloads
+            };
+            Items.Add(cvm);
         }
     }
 }

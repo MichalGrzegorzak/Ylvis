@@ -31,13 +31,19 @@ namespace UrlExtractor.Wpf.ViewModel
             DlKey = post.DlKey;
             //Downloads = string.Join("\r\n", post.Downloads);
             Downloads = post.Downloads;
+            Created = post.Created.ToShortDateString();
+            Id = post.Id;
         }
 
         public string Url { get; set; }
         //public string Text { get; set; }
 
+        public int Count => Downloads.Count;
+
         public string Pass { get; set; }
         public string DlKey { get; set; }
+        public string Created { get; set; }
+        public int Id { get; set; }
 
         public List<string> Downloads { get; set; } = new List<string>();
 

@@ -22,6 +22,7 @@ namespace UrlExtractor.Model
     {
         public static ClipboardPost CreatePost(string rawText, string url = "unknown")
         {
+            rawText = rawText.Replace("\r\n\r\n", "\r\n").Replace("  ", "");
             ClipboardPost post = new ClipboardPost() {RawText = rawText, FromUrl = url};
 
             ItemAnalyzer analyzer = new ItemAnalyzer(rawText);

@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using LiteDB;
+using NDde.Client;
 using UrlExtractor.Model;
 using UrlExtractor.Wpf.ViewModel;
 
@@ -29,6 +30,8 @@ namespace UrlExtractor.Wpf.Forms
         public Start()
         {
             InitializeComponent();
+
+           //this.Reques
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -55,5 +58,12 @@ namespace UrlExtractor.Wpf.Forms
         }
 
 
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            string browser = @"C:\Users\user\Desktop\TBrowser\Browser\firefox.exe";
+            //string url = GetBrowserURL();
+            //MessageBox.Show(url);
+        }
     }
 }
