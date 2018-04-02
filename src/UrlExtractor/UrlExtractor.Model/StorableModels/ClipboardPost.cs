@@ -14,6 +14,7 @@ namespace UrlExtractor.Model
         public string DlKey { get; set; }
         
         public List<string> Downloads { get; set; } = new List<string>();
+        public List<string> Mirrors { get; set; } = new List<string>();
         public List<string> Previews { get; set; } = new List<string>();
         //public List<Items> CategorizedDownloads { get; set; }
     }
@@ -34,9 +35,12 @@ namespace UrlExtractor.Model
             post.Text = String.Join("\r\n", analyzer.FilteredOutput);
             post.Previews = analyzer.Previews;
             //
-            post.Downloads.AddRange(analyzer.Parts);
-            post.Downloads.AddRange(analyzer.Mirrors);
-            post.Downloads.AddRange(analyzer.Previews);
+            post.Downloads = analyzer.Downloads;
+            post.Mirrors = analyzer.Mirrors;
+            post.Previews = analyzer.Previews;
+            //post.Downloads.AddRange(analyzer.Parts);
+            //post.Downloads.AddRange(analyzer.Mirrors);
+            //post.Downloads.AddRange(analyzer.Previews);
 
             return post;
         }

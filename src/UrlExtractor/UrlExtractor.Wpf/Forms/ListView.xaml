@@ -42,20 +42,22 @@
                         <StackPanel Orientation="Horizontal" >
 
                             <StackPanel Orientation="Horizontal" >
-                                <TextBlock FontSize="12" Text="Downloads: " VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10" />
+                                <TextBlock FontSize="12" Text="Down: " VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10" />
                                 <Grid>
                                     <ItemsControl x:Name="lstDownloads" ItemTemplate="{DynamicResource DataTemplate_Level2}" ItemsSource="{Binding Downloads}"/>
                                 </Grid>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="12" Text="Mirrors: " VerticalAlignment="Center" Margin="20 10 10 10" />
+                                <TextBlock FontSize="12" Text="Mirr: " VerticalAlignment="Center" Margin="20 10 10 10" />
                                 <Grid>
-                                    <ItemsControl x:Name="lstMirrors" ItemTemplate="{DynamicResource DataTemplate_Level2}" ItemsSource="{Binding Downloads}"/>
+                                    <ItemsControl x:Name="lstMirrors" ItemTemplate="{DynamicResource DataTemplate_Level2}" ItemsSource="{Binding Mirrors}"/>
                                 </Grid>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="20 10 10 10">
                                 <TextBlock FontSize="12" Text="PREV: " VerticalAlignment="Center" Margin="20 10 10 10" />
-                                <TextBlock FontSize="16" Foreground="MidnightBlue" Text="{Binding Previews}" VerticalAlignment="Center" />
+                                <Grid>
+                                    <ItemsControl x:Name="lstPreviews" ItemTemplate="{DynamicResource DataTemplate_Level2}" ItemsSource="{Binding Previews}"/>
+                                </Grid>
                             </StackPanel>
 
                         </StackPanel>

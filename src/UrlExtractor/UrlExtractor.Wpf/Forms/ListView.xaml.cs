@@ -75,6 +75,8 @@ namespace UrlExtractor.Wpf.Forms
         protected void AddMockedPosts()
         {
             var downloads = new List<string>(new[] { "111", "222", "333" });
+            var prev = new List<string>(new[] { "http://preview/1", "http://preview/2" });
+
             var cvm = new ClipboardVm()
             {
                 Created = DateTime.Now.ToString(),
@@ -82,7 +84,7 @@ namespace UrlExtractor.Wpf.Forms
                 Id = 111,
                 Pass = "qwert",
                 Url = "http://www.onet.pl",
-                Previews = "http://preview/1",
+                Previews = prev,
                 Downloads = downloads
             };
             Items.Add(cvm);

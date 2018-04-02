@@ -16,7 +16,6 @@ namespace UrlExtractor.Wpf.Controls
         private void OnRequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             //a = Environment.ExpandEnvironmentVariables(a);
-
             //https://check.torproject.org/?lang=en_US
             Process.Start(new ProcessStartInfo()
             {

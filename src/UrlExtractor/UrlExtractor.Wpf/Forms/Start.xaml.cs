@@ -61,9 +61,14 @@ namespace UrlExtractor.Wpf.Forms
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            string browser = @"C:\Users\user\Desktop\TBrowser\Browser\firefox.exe";
-            //string url = GetBrowserURL();
-            //MessageBox.Show(url);
+            using (var repo = new LiteRepository("test.db"))
+            {
+                var all = repo.Query<ClipboardPost>().ToList();
+                foreach (ClipboardPost post in all)
+                {
+                    repo.Delete<ClipboardPost>(post.Id);
+                }
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Input;
 using UrlExtractor.Wpf.ViewModel;
 using WpfClipboardMonitor;
 
@@ -11,7 +12,14 @@ namespace UrlExtractor.Wpf
     /// </summary>
     public partial class LogWindow : Window
     {
-        ItemLogViewModel items = new ItemLogViewModel();
+        public ItemLogViewModel Items = new ItemLogViewModel();
+
+        public void NavigateAction()
+        {
+            MessageBox.Show("Custom Command Executed");
+        }
+
+        public bool CaptureClipboard { get; set; }
 
         WindowClipboardMonitor clipboardMonitor;
 
@@ -19,25 +27,31 @@ namespace UrlExtractor.Wpf
         {
             InitializeComponent();
 
-            itemListbox.ItemsSource = items;
+            itemListbox.ItemsSource = Items;
+            CaptureClipboard = true;
         }
 
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
-
             clipboardMonitor = new WindowClipboardMonitor(this);
             clipboardMonitor.ClipboardTextChanged += ClipboardTextChanged;
+        }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            clipboardMonitor.ClipboardTextChanged -= ClipboardTextChanged;
+            clipboardMonitor.Dispose();
         }
 
         private async void ClipboardTextChanged(object sender, string text)
         {
             var clippedText = text.Trim();
-            if (string.IsNullOrWhiteSpace(clippedText))
+            if (string.IsNullOrWhiteSpace(clippedText) || !CaptureClipboard)
                 return;
 
             var item = new LootItemViewModel(clippedText);
-            items.Add(item);
+            Items.Add(item);
 
             itemListbox.Items.MoveCurrentToLast();
             itemListbox.ScrollIntoView(itemListbox.Items.CurrentItem);
@@ -45,11 +59,21 @@ namespace UrlExtractor.Wpf
             await item.PopulatePriceInfoFromWeb();
         }
 
-        protected override void OnClosing(CancelEventArgs e)
+        //public bool CanExecuteNavigateDownCommand => true;
+        //public void ExecutedNavigateDownCommand(object sender, RoutedEventArgs e)
+        //{
+        //    MessageBox.Show("Custom Command Executed");
+        //}
+        //public void NavigateDownCommand(object sender, RoutedEventArgs e)
+        //{
+        //    MessageBox.Show("Custom Command Executed");
+        //}
+
+
+        //NavigateDownCommand
+        private void CommandBinding_OnExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            base.OnClosing(e);
-            clipboardMonitor.ClipboardTextChanged -= ClipboardTextChanged;
-            clipboardMonitor.Dispose();
+            NavigateAction();
         }
     }
 }

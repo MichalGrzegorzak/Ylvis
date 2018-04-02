@@ -31,6 +31,8 @@ namespace UrlExtractor.Wpf.ViewModel
             DlKey = post.DlKey;
             //Downloads = string.Join("\r\n", post.Downloads);
             Downloads = post.Downloads;
+            Previews = post.Previews;
+            Mirrors = post.Mirrors;
             Created = post.Created.ToShortDateString();
             Id = post.Id;
         }
@@ -46,9 +48,11 @@ namespace UrlExtractor.Wpf.ViewModel
         public int Id { get; set; }
 
         public List<string> Downloads { get; set; } = new List<string>();
+        public List<string> Mirrors { get; set; } = new List<string>();
+        public List<string> Previews { get; set; } = new List<string>();
 
         //public string Downloads { get; set; }
-        public string Previews { get; set; }
+        //public string Previews { get; set; }
         //public List<Items> CategorizedDownloads { get; set; }
     }
 }

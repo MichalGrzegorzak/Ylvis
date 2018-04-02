@@ -86,6 +86,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\DigitsOnlyBehavior.cs" />
+    <Compile Include="Controls\DoubleClickSelectorItem.cs" />
     <Compile Include="Controls\FormPanel\FormGroup.cs" />
     <Compile Include="Controls\FormPanel\FormGroupHost.cs" />
     <Compile Include="Controls\FormPanel\FormPanel.cs" />
@@ -109,6 +111,8 @@
     </Compile>
     <Compile Include="Model\LootItem.cs" />
     <Compile Include="ViewModel\ClipboardVm.cs" />
+    <Compile Include="Controls\CommandHandler.cs" />
+    <Compile Include="Controls\Commands.cs" />
     <Compile Include="ViewModel\ItemLogViewModel.cs" />
     <Compile Include="ViewModel\ItemPriceLookupModel.cs" />
     <Compile Include="ViewModel\LootItemViewModel.cs" />
