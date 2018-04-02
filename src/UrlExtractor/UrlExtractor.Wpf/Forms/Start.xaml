@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:UrlExtractor.Wpf.Forms"
         xmlns:controls="clr-namespace:UrlExtractor.Wpf.Controls" x:Class="UrlExtractor.Wpf.Forms.Start"
         mc:Ignorable="d" Name="windowStart"
-        Title="Start" Height="450" Width="800">
+        Title="Start" Height="450" Width="800" Loaded="windowStart_Loaded">
     <Grid>
         <Button Content="Capture form" HorizontalAlignment="Left" Margin="45,24,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <Button Content="List view" HorizontalAlignment="Left" Margin="45,69,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>

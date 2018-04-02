@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using UrlExtractor.Wpf.Forms;
 using UrlExtractor.Wpf.ViewModel;
 using WpfClipboardMonitor;
 
@@ -71,9 +72,10 @@ namespace UrlExtractor.Wpf
 
 
         //NavigateDownCommand
-        private void CommandBinding_OnExecuted(object sender, ExecutedRoutedEventArgs e)
+        public void CommandBinding_OnExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             NavigateAction();
+            DetailsView details = new DetailsView();
         }
     }
 }

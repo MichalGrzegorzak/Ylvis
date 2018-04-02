@@ -88,6 +88,7 @@
     </ApplicationDefinition>
     <Compile Include="Controls\DigitsOnlyBehavior.cs" />
     <Compile Include="Controls\DoubleClickSelectorItem.cs" />
+    <Compile Include="Controls\EventAgregator.cs" />
     <Compile Include="Controls\FormPanel\FormGroup.cs" />
     <Compile Include="Controls\FormPanel\FormGroupHost.cs" />
     <Compile Include="Controls\FormPanel\FormPanel.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Forms\Start.xaml.cs">
       <DependentUpon>Start.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ViewManager.cs" />
     <Compile Include="Model\LootItem.cs" />
     <Compile Include="ViewModel\ClipboardVm.cs" />
     <Compile Include="Controls\CommandHandler.cs" />
@@ -136,20 +138,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Forms\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Forms\LogWindow.xaml.cs">
       <DependentUpon>LogWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Page Include="Forms\Start.xaml">
       <SubType>Designer</SubType>

@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using LiteDB;
 using NDde.Client;
 using UrlExtractor.Model;
+using UrlExtractor.Wpf.Controls;
 using UrlExtractor.Wpf.ViewModel;
 
 namespace UrlExtractor.Wpf.Forms
@@ -23,25 +24,30 @@ namespace UrlExtractor.Wpf.Forms
     /// </summary>
     public partial class Start : Window
     {
-        LogWindow formLogWindow = new LogWindow();
-        ListView formListView = new ListView();
-        DetailsView formDetailsView = new DetailsView();
+        //LogWindow formLogWindow = new LogWindow();
+        //ListView formListView = new ListView();
+        //DetailsView formDetailsView = new DetailsView();
 
         public Start()
         {
             InitializeComponent();
+        }
 
-           //this.Reques
+        private void EventHandler(CloseWindowMessage closeWindowMessage)
+        {
+            App.ViewManager.ShowPrevious();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            formLogWindow.Show();
+            //formLogWindow.Show();
+            App.ViewManager.Show<LogWindow>();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            formListView.Show();
+            //formListView.Show();
+            App.ViewManager.Show<ListView>();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -52,8 +58,9 @@ namespace UrlExtractor.Wpf.Forms
                 post = repo.Query<ClipboardPost>().ToList().LastOrDefault();
             }
 
-            formDetailsView.Data = new ClipboardVm(post);
-            formDetailsView.Show();
+            var details = App.ViewManager.Show<DetailsView>();
+            details.Data = new ClipboardVm(post);
+            //formDetailsView.Show();
 
         }
 
@@ -69,6 +76,12 @@ namespace UrlExtractor.Wpf.Forms
                     repo.Delete<ClipboardPost>(post.Id);
                 }
             }
+        }
+
+        private void windowStart_Loaded(object sender, RoutedEventArgs e)
+        {
+            App.Events.RegisterHandler<CloseWindowMessage>(EventHandler);
+            //App.ViewManager.
         }
     }
 }
