@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using LiteDB;
 using UrlExtractor.Model;
 using UrlExtractor.Wpf.Controls;
 using UrlExtractor.Wpf.ViewModel;
@@ -84,5 +85,27 @@ namespace UrlExtractor.Wpf.Forms
         }
 
 
+        private void Save(object sender, ExecutedRoutedEventArgs e)
+        {
+            using (var repo = new LiteRepository("test.db"))
+            {
+                var post = repo.FirstOrDefault<ClipboardPost>(x=> x.Id == Data.Id);
+                Data.UpdateModel(post);
+                repo.Update(post);
+            }
+        }
+        private void Cancel(object sender, ExecutedRoutedEventArgs e)
+        {
+            App.ViewManager.Close(this.Owner);
+        }
+
+        private void CanSave(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void CanCancel(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
     }
 }

@@ -50,18 +50,32 @@ namespace UrlExtractor.Wpf.Forms
             //dataGrid.ItemsSource = Items;//attempting to bind the list to a datagrid
         }
 
-        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        //private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (dataGrid.SelectedItem == null) return;
+        //    ClipboardVm data = dataGrid.SelectedItem as ClipboardVm;
+
+        //    DataGridRow row = sender as DataGridRow;
+        //    //var clipboardVm = new ClipboardVm(data);
+
+        //    DetailsView view = new DetailsView();
+        //    view.Data = data;
+        //    view.SwitchView();
+        //}
+
+        private void dataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (dataGrid.SelectedItem == null) return;
-            ClipboardVm data = dataGrid.SelectedItem as ClipboardVm;
+            // Check if the user double-clicked a grid row and not something else
+            if (e.OriginalSource == null) return;
+            var row = ItemsControl.ContainerFromElement((DataGrid)sender, e.OriginalSource as DependencyObject) as DataGridRow;
 
-            DataGridRow row = sender as DataGridRow;
-            //var clipboardVm = new ClipboardVm(data);
-
-            DetailsView view = new DetailsView();
-            view.Data = data;
-            view.Show();
-            // Some operations with this row
+            // If so, go ahead and do my thing
+            if (row != null)
+            {
+                var item = (ClipboardVm)dataGrid.Items[row.GetIndex()];
+                var view = App.ViewManager.OpenNew<DetailsView>();
+                view.Data = item;
+            }
         }
     }
 

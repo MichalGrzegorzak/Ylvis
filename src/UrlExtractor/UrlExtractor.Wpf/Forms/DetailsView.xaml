@@ -4,22 +4,37 @@
         xmlns:formPanel="clr-namespace:UrlExtractor.Wpf.Controls.FormPanel"
         xmlns:c="clr-namespace:UrlExtractor.Wpf.Controls" x:Class="UrlExtractor.Wpf.Forms.DetailsView"
         Title="Details view" Width="700" MinHeight="250" SizeToContent="Height">
+    <Window.CommandBindings>
+        <!--<CommandBinding Command="ApplicationCommands.Open" Executed="CommandBinding_Open" />-->
+        <CommandBinding Command="c:Commands.Save" Executed="Save" CanExecute="CanSave" />
+        <CommandBinding Command="c:Commands.Cancel" Executed="Cancel" CanExecute="CanCancel" />
+    </Window.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <DockPanel Margin="10" x:Name="pnlDock" VerticalAlignment="Top" Grid.Row="0">
+            <formPanel:FormPanel Margin="10" x:Name="frmPanel" DockPanel.Dock="Top">
+                <TextBlock Text="From:"/>
+                <c:TextWithButton Text="{Binding Url}"/>
+                <TextBlock Text="Pass:"/>
+                <c:TextWithButton Text="{Binding Pass}"/>
+                <TextBlock Text="DlKey:"/>
+                <c:TextWithButton Text="{Binding DlKey}"/>
+                <TextBlock Text="Prev:"/>
+                <c:TextWithButton/>
+            </formPanel:FormPanel>
 
-    <DockPanel Margin="10" x:Name="pnlDock" VerticalAlignment="Top">
-        <formPanel:FormPanel Margin="10" x:Name="frmPanel" DockPanel.Dock="Top">
-            <TextBlock Text="From:"/>
-            <c:TextWithButton Text="{Binding Url}"/>
-            <TextBlock Text="Pass:"/>
-            <c:TextWithButton Text="{Binding Pass}"/>
-            <TextBlock Text="DlKey:"/>
-            <c:TextWithButton Text="{Binding DlKey}"/>
-            <TextBlock Text="Prev:"/>
-            <c:TextWithButton/>
-        </formPanel:FormPanel>
-
-        <!--<GroupBox Header="Comments">
+            <!--<GroupBox Header="Comments">
             <TextBox TextWrapping="Wrap" Margin="5" Text="{Binding Downloads}"/>
         </GroupBox>-->
-    </DockPanel>
+        </DockPanel>
+        <StackPanel x:Name="pnlBottom" Orientation="Horizontal" HorizontalAlignment="Right" Width="250" Grid.Row="1">
+            <Button Content="Save" MinWidth="100"  Margin="10" Command="Save" CommandTarget="{type: Window}" IsEnabled="True"/>
+            <Button Content="Cancel" MinWidth="100" Margin="10" Command="Close" IsEnabled="True"></Button>
+        </StackPanel>
+    </Grid>
+
 </Window>
 

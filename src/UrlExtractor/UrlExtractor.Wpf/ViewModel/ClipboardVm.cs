@@ -36,6 +36,17 @@ namespace UrlExtractor.Wpf.ViewModel
             Created = post.Created.ToShortDateString();
             Id = post.Id;
         }
+        public void UpdateModel(ClipboardPost post)
+        {
+            post.FromUrl = Url;
+            post.Pass = Pass;
+            post.DlKey = DlKey;
+            post.Downloads = Downloads;
+            post.Previews = Previews;
+            post.Mirrors = Mirrors;
+            //post.Created.ToShortDateString() = Created;
+            //post.Id = Id;
+        }
 
         public string Url { get; set; }
         //public string Text { get; set; }

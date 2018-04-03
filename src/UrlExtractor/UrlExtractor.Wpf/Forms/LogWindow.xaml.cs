@@ -63,11 +63,11 @@ namespace UrlExtractor.Wpf
         //public bool CanExecuteNavigateDownCommand => true;
         //public void ExecutedNavigateDownCommand(object sender, RoutedEventArgs e)
         //{
-        //    MessageBox.Show("Custom Command Executed");
+        //    MessageBox.SwitchView("Custom Command Executed");
         //}
         //public void NavigateDownCommand(object sender, RoutedEventArgs e)
         //{
-        //    MessageBox.Show("Custom Command Executed");
+        //    MessageBox.SwitchView("Custom Command Executed");
         //}
 
 

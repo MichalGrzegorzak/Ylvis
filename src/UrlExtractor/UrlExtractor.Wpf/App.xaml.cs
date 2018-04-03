@@ -14,7 +14,7 @@ namespace UrlExtractor.Wpf
 
         public App()
         {
-            ViewManager.Show<Start>();
+            ViewManager.SwitchView<Start>();
         }
     }
 }

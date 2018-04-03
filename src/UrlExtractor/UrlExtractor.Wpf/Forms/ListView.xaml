@@ -27,7 +27,7 @@
 
 
     <Grid d:DataContext="{StaticResource mockViewModel}" >
-        <DataGrid x:Name="dataGrid" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Items}" RowDetailsVisibilityMode="Visible">
+        <DataGrid x:Name="dataGrid" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Items}" RowDetailsVisibilityMode="Visible" MouseDoubleClick="dataGrid_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Date" Binding="{Binding Created}"></DataGridTextColumn>

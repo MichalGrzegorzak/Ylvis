@@ -40,14 +40,14 @@ namespace UrlExtractor.Wpf.Forms
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //formLogWindow.Show();
-            App.ViewManager.Show<LogWindow>();
+            //formLogWindow.SwitchView();
+            App.ViewManager.SwitchView<LogWindow>();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            //formListView.Show();
-            App.ViewManager.Show<ListView>();
+            //formListView.SwitchView();
+            App.ViewManager.SwitchView<ListView>();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -58,9 +58,9 @@ namespace UrlExtractor.Wpf.Forms
                 post = repo.Query<ClipboardPost>().ToList().LastOrDefault();
             }
 
-            var details = App.ViewManager.Show<DetailsView>();
+            var details = App.ViewManager.SwitchView<DetailsView>();
             details.Data = new ClipboardVm(post);
-            //formDetailsView.Show();
+            //formDetailsView.SwitchView();
 
         }
 

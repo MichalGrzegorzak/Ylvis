@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using UrlExtractor.Wpf.Controls;
 using UrlExtractor.Wpf.Forms;
@@ -7,6 +8,8 @@ namespace UrlExtractor.Wpf
 {
     public class ViewManager
     {
+        private List<Window> allWindows = new List<Window>();
+
         DetailsView details = new DetailsView();
         ListView list = new ListView();
         LogWindow log = new LogWindow();
@@ -38,17 +41,32 @@ namespace UrlExtractor.Wpf
             App.Events.PostMessage(new CloseWindowMessage() {CurrentWindow = wind});
         }
 
-        public T Show<T>() where T : Window
+        public T SwitchView<T>() where T : Window
         {
             if (typeof(T) == typeof(Start))
                 return SwitchView<T>(start, list);
             if (typeof(T) == typeof(DetailsView))
-                return SwitchView<T>(details, list);
+            {
+                return OpenNew<T>();
+            }
+
             if (typeof(T) == typeof(ListView))
                 return SwitchView<T>(list, details);
             if (typeof(T) == typeof(LogWindow))
                 return SwitchView<T>(log, start);
             return null;
+        }
+
+        public T OpenNew<T>() where T : Window
+        {
+            var window = Activator.CreateInstance<T>();
+            window.Show();
+            return window;
+        }
+
+        public void Close(Window win)
+        {
+            win.Close();
         }
 
         public void ShowNext()
@@ -68,7 +86,7 @@ namespace UrlExtractor.Wpf
             current = now;
             this.next = next;
             //
-            if(previous != null)
+            if(previous != null && previous.GetType() != typeof(Start))
                 previous.Visibility = Visibility.Hidden;
             current.Show();
             return (T)now;
