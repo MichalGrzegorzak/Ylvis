@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Watcher.Core</RootNamespace>
     <AssemblyName>Watcher.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -47,11 +49,11 @@
     <Compile Include="Settings\AppSettings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Ylvis.DataManipulation\Ylvis.DataManipulation.csproj">
-      <Project>{FE4977D5-64B5-4E8C-8FDD-508FCF743129}</Project>
+    <ProjectReference Include="..\..\Ylvis\Ylvis.DataManipulation\Ylvis.DataManipulation.csproj">
+      <Project>{fe4977d5-64b5-4e8c-8fdd-508fcf743129}</Project>
       <Name>Ylvis.DataManipulation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Ylvis.Utils\Ylvis.Utils.csproj">
+    <ProjectReference Include="..\..\Ylvis\Ylvis.Utils\Ylvis.Utils.csproj">
       <Project>{224B2A16-0109-43BC-A2CE-16ECF5DBA6E3}</Project>
       <Name>Ylvis.Utils</Name>
     </ProjectReference>

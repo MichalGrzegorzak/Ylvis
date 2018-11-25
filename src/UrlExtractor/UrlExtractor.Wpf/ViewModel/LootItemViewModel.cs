@@ -12,7 +12,7 @@ namespace UrlExtractor.Wpf.ViewModel
     [AddINotifyPropertyChangedInterface]
     public class LootItemViewModel
     {
-        private ClipboardPost Item { get; }
+        public ClipboardPost Item { get; }
 
         public LootItemViewModel(string rawItemText)
         {
@@ -33,10 +33,9 @@ namespace UrlExtractor.Wpf.ViewModel
             int count = 0;
             using (var repo = new LiteRepository("test.db"))
             {
-                //var allPosts = .ToList();
+                var before = repo.Query<ClipboardPost>().Count();
                 repo.Insert(Item);
-                count = repo.Query<ClipboardPost>().Count();
-
+                var after = repo.Query<ClipboardPost>().Count();
             }
 
             ItemPriceFromWeb = await Task.FromResult($"SAVED count:{count}"); // result;

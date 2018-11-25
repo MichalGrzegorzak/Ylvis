@@ -41,9 +41,6 @@
     <Reference Include="LiteDB, Version=4.1.2.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
       <HintPath>..\..\packages\LiteDB.4.1.2\lib\net40\LiteDB.dll</HintPath>
     </Reference>
-    <Reference Include="NDde, Version=2.1.563.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NDde.2.01.0563\lib\NDde.dll</HintPath>
-    </Reference>
     <Reference Include="PropertyChanged, Version=2.2.10.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\..\packages\PropertyChanged.Fody.2.2.10\lib\net452\PropertyChanged.dll</HintPath>
     </Reference>
@@ -194,9 +191,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="FodyWeavers.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="NDde.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\Fody.2.5.0\build\Fody.targets" Condition="Exists('..\..\packages\Fody.2.5.0\build\Fody.targets')" />

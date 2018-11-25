@@ -18,23 +18,24 @@ using UrlExtractor.Wpf.ViewModel;
 
 namespace UrlExtractor.Wpf.Forms
 {
-    
+    public interface IRefresh
+    {
+        void Refresh();
+    }
     /// <summary>
     /// Interaction logic for ListView.xaml
     /// </summary>
-    public partial class ListView : Window
+    public partial class ListView : Window, IRefresh
     {
         public ObservableCollection<ClipboardVm> Items { get; set; } = new ObservableCollection<ClipboardVm>();
 
         public ListView()
         {
             InitializeComponent();
-
             dataGrid.RowDetailsVisibilityMode = DataGridRowDetailsVisibilityMode.VisibleWhenSelected;
-            dataGrid.ItemsSource = Items;
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        public void Refresh()
         {
             List<ClipboardPost> posts;
             using (var repo = new LiteRepository("test.db"))
@@ -42,12 +43,20 @@ namespace UrlExtractor.Wpf.Forms
                 posts = repo.Query<ClipboardPost>().ToList();
             }
 
+            Items = new ObservableCollection<ClipboardVm>();
             foreach (ClipboardPost post in posts)
             {
                 Items.Add(new ClipboardVm(post));
             }
 
+            
+            dataGrid.ItemsSource = Items;
             //dataGrid.ItemsSource = Items;//attempting to bind the list to a datagrid
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //Refresh();
         }
 
         //private void Row_DoubleClick(object sender, MouseButtonEventArgs e)

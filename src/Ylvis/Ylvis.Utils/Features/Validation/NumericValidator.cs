@@ -7,8 +7,7 @@ namespace Ylvis.Utils.Features.Validation
 {
     public class NumericValidator : PropertyValidator
     {
-        public NumericValidator()
-            : base((Expression<Func<string>>)(() => "Musi byc liczba"))
+        public NumericValidator() : base("Musi byc liczba")
         {
         }
 

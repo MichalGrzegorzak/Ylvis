@@ -7,8 +7,7 @@ namespace Ylvis.Utils.Features.Validation
 {
     public class IbanValidator : PropertyValidator
     {
-        public IbanValidator()
-            : base((Expression<Func<string>>)(() => "Nie prawidlowy Iban"))
+        public IbanValidator() : base("Nie prawidlowy Iban")
         {
         }
 
@@ -18,8 +17,8 @@ namespace Ylvis.Utils.Features.Validation
             var status = Iban.CheckIban(iban, true);
             
             bool result = status.IsValid;
-            if(!result)
-                ErrorMessageSource = (IStringSource)new StaticStringSource(status.Message);
+            //if(!result)
+            //    ErrorMessageSource = (IStringSource)new StaticStringSource(status.Message);
             return result;
         }
     }

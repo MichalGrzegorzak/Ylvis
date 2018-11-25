@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using UrlExtractor.Wpf.Forms;
@@ -14,6 +15,7 @@ namespace UrlExtractor.Wpf
     public partial class LogWindow : Window
     {
         public ItemLogViewModel Items = new ItemLogViewModel();
+        //public bool MonitoringEnabled { get; set; }
 
         public void NavigateAction()
         {
@@ -74,8 +76,22 @@ namespace UrlExtractor.Wpf
         //NavigateDownCommand
         public void CommandBinding_OnExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            NavigateAction();
+            //NavigateAction();
             DetailsView details = new DetailsView();
+
+            var itm = e.OriginalSource as LootItemViewModel;
+            var post = Items.Last().Item;
+            ClipboardVm vm = new ClipboardVm(post);
+            details.Data = vm;
+            details.Show();
+
+            CaptureClipboard = false;
+            Ctx.Events.RegisterHandler<DetailsViewClosedEvent>(handler => { CaptureClipboard = true; });
         }
+    }
+
+    public class DetailsViewClosedEvent
+    {
+
     }
 }

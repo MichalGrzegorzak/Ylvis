@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Knapcode.TorSharp.Tests</RootNamespace>
     <AssemblyName>Knapcode.TorSharp.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />

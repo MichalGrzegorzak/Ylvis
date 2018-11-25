@@ -88,8 +88,16 @@ namespace UrlExtractor.Wpf
             //
             if(previous != null && previous.GetType() != typeof(Start))
                 previous.Visibility = Visibility.Hidden;
+
+            (now as IRefresh)?.Refresh();
+
             current.Show();
             return (T)now;
         }
+    }
+
+    public static class Ctx
+    {
+        public static EventAggregator Events { get; set; } = new EventAggregator();
     }
 }

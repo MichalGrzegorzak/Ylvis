@@ -84,8 +84,10 @@ namespace UrlExtractor.Wpf.Forms
             }
         }
 
+        //public ICommand SaveCmd = new RoutedUICommand("Save", "Save", typeof(DetailsView));
+        //public ICommand CancelCmd = new RoutedUICommand();
 
-        private void Save(object sender, ExecutedRoutedEventArgs e)
+        protected void Save(object sender, ExecutedRoutedEventArgs e)
         {
             using (var repo = new LiteRepository("test.db"))
             {
@@ -93,17 +95,27 @@ namespace UrlExtractor.Wpf.Forms
                 Data.UpdateModel(post);
                 repo.Update(post);
             }
+
+            Closing();
         }
-        private void Cancel(object sender, ExecutedRoutedEventArgs e)
+        protected void Cancel(object sender, ExecutedRoutedEventArgs e)
         {
-            App.ViewManager.Close(this.Owner);
+            Closing();
+            //this.Owner
         }
 
-        private void CanSave(object sender, CanExecuteRoutedEventArgs e)
+        protected void Closing()
+        {
+            App.ViewManager.Close(this);
+            DetailsViewClosedEvent evt = new DetailsViewClosedEvent();
+            Ctx.Events.PostMessage(evt);
+        }
+
+        protected void CanSave(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
         }
-        private void CanCancel(object sender, CanExecuteRoutedEventArgs e)
+        protected void CanCancel(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
         }
